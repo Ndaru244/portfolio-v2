@@ -3,13 +3,21 @@ import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ProjectClientView from "@/components/views/ProjectClientView";
-import { PROJECTS_DATA as projects } from "@/lib/seed-data";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
-// 2. Gunakan data lokal agar build deterministik (selalu berhasil)
-export async function generateStaticParams() {
-  return projects.map((project) => ({
-    id: project.id.toString(),
-  }));
+// Tambahkan Type Return Explicit agar TypeScript senang
+export async function generateStaticParams(): Promise<{ id: string }[]> {
+  try {
+    const querySnapshot = await getDocs(collection(db, "projects"));
+    
+    return querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+    }));
+  } catch (error) {
+    console.error("Error generating params:", error);
+    return []; 
+  }
 }
 
 interface PageProps {

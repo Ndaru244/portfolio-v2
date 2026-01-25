@@ -57,6 +57,7 @@ export interface Project {
   client: string;
   role: string;
   status: string;
+  order: number;
 
   overview_label: string;
   overview_desc: string;

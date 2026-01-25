@@ -78,11 +78,18 @@ export const getSkills = async (): Promise<Skill[]> => {
 
 export const getExperience = async (): Promise<Experience[]> => {
   try {
-    const q = query(collection(db, "experience"), orderBy("order", "asc"));
+    const experienceRef = collection(db, "experience");
+    // Tetap gunakan orderBy untuk efisiensi awal
+    const q = query(experienceRef, orderBy("order", "asc"));
     const snap = await getDocs(q);
-    return snap.docs.map(
-      (doc) => ({ id: doc.id, ...doc.data() }) as Experience,
-    );
+
+    const data = snap.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    })) as Experience[];
+
+    return data.sort((a, b) => Number(a.order) - Number(b.order));
+    
   } catch (error) {
     console.error("Error fetching experience:", error);
     return [];

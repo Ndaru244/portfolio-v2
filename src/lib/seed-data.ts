@@ -68,40 +68,39 @@ import { Project } from "@/types/portfolio";
 //   { name: "Flutter", category: "tech", order: 6 },
 // ];
 
-export const EXPERIENCE_DATA = [
-  {
-    company: "PT. Bhinneka Alam Nusantara",
-    role: "UI/UX Designer",
-    period: "Sep 2022 - Oct 2024",
-    description:
-      "Designed mobile UI patterns, created interactive prototypes, and conducted usability testing which improved task completion by 25%. Led the design system scalability.",
-    type: "work",
-    order: 1,
-  },
-  {
-    company: "Crooked Indonesia",
-    role: "Web Developer Intern",
-    period: "Mar 2022 - Aug 2022",
-    description:
-      "Developed responsive catalog website using PHP (CodeIgniter) and Bootstrap. Zero critical downtime during the 6-month contract.",
-    type: "internship",
-    order: 2,
-  },
-];
+// export const EXPERIENCE_DATA = [
+//   {
+//     company: "PT. Bhinneka Alam Nusantara",
+//     role: "UI/UX Designer",
+//     period: "Sep 2022 - Oct 2024",
+//     description:
+//       "Designed mobile UI patterns, created interactive prototypes, and conducted usability testing which improved task completion by 25%. Led the design system scalability.",
+//     type: "work",
+//     order: 1,
+//   },
+//   {
+//     company: "Crooked Indonesia",
+//     role: "Web Developer Intern",
+//     period: "Mar 2022 - Aug 2022",
+//     description:
+//       "Developed responsive catalog website using PHP (CodeIgniter) and Bootstrap. Zero critical downtime during the 6-month contract.",
+//     type: "internship",
+//     order: 2,
+//   },
+// ];
 
 export const PROJECTS_DATA: { id: string; data: Project }[] = [
-  // --- 1. SIALAM (UI/UX Case Study) ---
   {
     id: "sialam-app",
     data: {
       id: "sialam-app",
       title: "SIALAM App",
-      category: "UI/UX Case Study",
+      category: "UI/UX",
 
       client: "PT. Bhinneka Alam Nusantara",
-      role: "Lead UI/UX Designer",
-      status: "Shipped & Live",
-
+      role: "UI/UX Designer",
+      status: "Completed",
+      order: 2,
       overview_label: "Executive Summary",
       overview_desc: `SIALAM adalah inisiatif transformasi digital untuk meningkatkan standar keselamatan pendakian di Indonesia.
 
@@ -115,14 +114,14 @@ Proyek ini menjembatani kesenjangan informasi antara pengelola taman nasional da
             {
               label: "Phase 1: Discovery & Strategy",
               badge: "Sep 2022 - Mei 2023",
-              value: `• Memimpin sesi Requirement Gathering bersama Product Owner & Business Analyst.
+              value: `• Sesi Requirement Gathering bersama Product Owner & Business Analyst.
 • Merumuskan Design System dan Guidelines untuk menjaga konsistensi visual.
 • Mengembangkan High-Fidelity Prototype untuk validasi konsep awal.`,
             },
             {
               label: "Phase 2: Web Ecosystem",
               badge: "Mei 2023 - Jul 2023",
-              value: `• Ekspansi desain ke platform Web (Landing Page & Admin Dashboard).
+              value: `• Ekspansi desain ke platform Web (Landing Page).
 • Menyusun dokumentasi "Design Handoff" yang komprehensif untuk tim Developer.
 • Melakukan Design QA (Quality Assurance) untuk memastikan implementasi sesuai piksel.`,
             },
@@ -130,26 +129,24 @@ Proyek ini menjembatani kesenjangan informasi antara pengelola taman nasional da
               label: "Phase 3: Iteration & Scale",
               badge: "Sep 2023 - Jul 2024",
               value: `• Refactoring Design System untuk skalabilitas jangka panjang.
-• Peningkatan Usability (UX) berdasarkan data feedback pengguna nyata.
+• Peningkatan Usability (UX) berdasarkan sample data uji joba.
 • Optimasi alur navigasi untuk mengurangi cognitive load pengguna.`,
             },
           ],
         },
       ],
 
-      tech_stack: ["Figma", "Whimsical", "Maze", "Prototyping"],
+      tech_stack: ["Figma", "Design System", "Prototyping", "Mobile Apps"],
       thumbnail: "/assets/img/preview/Sialam.png",
       gallery: [
-        "/assets/img/preview/Sialam.png",
         "/assets/img/preview/Sialam-Preview-Flow.png",
         "/assets/img/preview/Sialam-Preview-Product.png",
-      ], // Isi jika ada link gambar tambahan
+      ],
       demo_url: null,
       repo_url: null,
     },
   },
 
-  // --- 2. OMHUT PARKOPI (Web Development) ---
   {
     id: "omhut-parkopi",
     data: {
@@ -158,9 +155,9 @@ Proyek ini menjembatani kesenjangan informasi antara pengelola taman nasional da
       category: "Self-Service Web App",
 
       client: "Omhut Parkopi",
-      role: "Fullstack Developer",
-      status: "In Production", // Menandakan sistem aktif digunakan
-
+      role: "Web Developer",
+      status: "Completed",
+      order: 4,
       overview_label: "Project Context",
       overview_desc: `Solusi digital untuk mengatasi inefisiensi operasional pada kedai kopi konvensional.
 
@@ -194,7 +191,7 @@ Sistem ini mentransformasi proses pemesanan manual menjadi pengalaman "Self-Serv
         },
       ],
 
-      tech_stack: ["PHP", "CodeIgniter", "MySQL", "Bootstrap"],
+      tech_stack: ["PHP", "CodeIgniter", "MySQL", "Javascript (AJAX)"],
       thumbnail: "/assets/img/preview/Omhut.png",
       gallery: [
         "/assets/img/preview/Omhut.png",
@@ -206,19 +203,18 @@ Sistem ini mentransformasi proses pemesanan manual menjadi pengalaman "Self-Serv
     },
   },
 
-  // --- 3. CROOKED INDONESIA (E-Commerce) ---
   {
     id: "crooked-indonesia",
     data: {
       id: "crooked-indonesia",
       title: "Crooked Indonesia",
-      category: "E-Commerce Catalog",
+      category: "E-Catalog Website",
 
       client: "Crooked Indonesia",
-      role: "Backend Specialist",
-      status: "Archived", // Lebih halus daripada "Connection Lost"
-
-      overview_label: "Legacy Overview",
+      role: "Web Developer",
+      status: "Archived",
+      order: 5,
+      overview_label: "Project Overview",
       overview_desc: `Platform katalog digital untuk brand fashion lokal yang dirancang untuk skalabilitas produk tinggi.
 
 Fokus utama pengembangan adalah menciptakan infrastruktur backend yang mampu menangani manajemen inventaris dinamis, filtering produk yang kompleks, dan integrasi API yang mulus ke sisi Frontend.`,
@@ -235,9 +231,11 @@ Fokus utama pengembangan adalah menciptakan infrastruktur backend yang mampu men
                 "Merancang skema database relasional dan logic server-side untuk memastikan performa query produk yang cepat dan akurat.",
             },
             {
-              label: "API Integration",
+              label: "Technical Design Sync",
               value:
-                "Membangun RESTful API endpoints untuk konsumsi data oleh tim Frontend, termasuk dokumentasi endpoint standar.",
+                `• Melakukan sinkronisasi struktur data desain dengan kebutuhan tim Frontend.
+• Menyiapkan spesifikasi komponen dan aset visual yang siap diimplementasikan langsung ke dalam kode.
+• Memastikan Information Architecture (IA) selaras dengan alur navigasi aplikasi.`,
             },
             {
               label: "System Maintenance",
@@ -248,7 +246,7 @@ Fokus utama pengembangan adalah menciptakan infrastruktur backend yang mampu men
         },
       ],
 
-      tech_stack: ["PHP Native", "MySQL", "REST API", "E-Commerce"],
+      tech_stack: ["PHP", "CodeIgniter", "MySQL"],
       thumbnail: "/assets/img/preview/crooked-1.png",
       gallery: [
         "/assets/img/preview/crooked-1.png",
@@ -258,6 +256,67 @@ Fokus utama pengembangan adalah menciptakan infrastruktur backend yang mampu men
       ],
       demo_url: null,
       repo_url: "https://github.com/Ndaru244/crooked",
+    },
+  },
+
+  {
+    id: "solvera-revamp",
+    data: {
+      id: "solvera-revamp",
+      title: "Solvera Corporate Revamp",
+      category: "UI/UX",
+
+      client: "PT Solvera Global Teknologi",
+      role: "UI/UX Designer",
+      status: "Completed",
+      order: 1,
+      overview_label: "Project Overview",
+      overview_desc: `Proyek ini bertujuan untuk mentransformasi identitas digital Solvera.id agar selaras dengan posisinya sebagai mitra teknologi global. 
+
+Fokus utama saya adalah melakukan audit terhadap User Interface yang lama, merumuskan bahasa visual baru yang lebih modern, serta memastikan Information Architecture (IA) yang optimal untuk meningkatkan konversi prospek bisnis.`,
+
+      sections: [
+        {
+          title: "Design Process",
+          type: "timeline",
+          items: [
+            {
+              label: "Heuristic Evaluation & Audit",
+              badge: "Oct 2025",
+              value:
+                `• Menganalisis kelemahan pada desain web lama melalui evaluasi heuristik.
+• Mengidentifikasi masalah pada konsistensi navigasi dan keterbacaan (typography).
+• Menyusun moodboard untuk menentukan arah visual baru yang profesional.`,
+            },
+            {
+              label: "Visual Revamp & Components",
+              badge: "Nov 2025",
+              value:
+                `• Merancang ulang UI komponen (buttons, cards, inputs) dengan fokus pada kebersihan visual.
+• Menerapkan grid sistem yang presisi untuk memastikan responsivitas antar perangkat.
+• Membuat High-Fidelity mockup untuk halaman utama dan layanan utama.`,
+            },
+            {
+              label: "Handoff & Documentation",
+              badge: "Dec 2025",
+              value: `• Menyiapkan dokumentasi Design Handoff yang detail di Figma untuk tim Developer.
+• Menyusun panduan gaya (Style Guide) termasuk palet warna dan tipografi korporat.
+• Melakukan peninjauan akhir (Design QA) guna memastikan implementasi sesuai dengan rancangan desain.`,
+            },
+          ],
+        },
+      ],
+
+      tech_stack: ["Figma", "Design System", "Prototyping", "Heuristic Evaluation", "Responsive Design"],
+      thumbnail: "/assets/img/preview/solvera.png",
+      gallery: [
+        "/assets/img/preview/solvera-preview1.png",
+        "/assets/img/preview/solvera-preview2.png",
+        "/assets/img/preview/solvera-preview3.png",
+        "/assets/img/preview/solvera-userflow.png",
+      ],
+      demo_url: "https://solvera.id",
+      repo_url: null,
     },
   },
 ];

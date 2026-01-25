@@ -1,84 +1,177 @@
 "use client";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
 
-const loadingTexts = [
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useMemo } from "react";
+
+// Configuration
+const LOADING_TEXTS = [
   "INITIALIZING SYSTEM...",
   "FETCHING PORTFOLIO DATA...",
   "PREPARING ASSETS...",
   "SYNCHRONIZING...",
-];
+] as const;
 
+const TEXT_INTERVAL_MS = 1500;
+
+// Animation variants (reusable, more performant)
+const logoVariants = {
+  hidden: { opacity: 0, scale: 0.5 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.5 }
+  }
+};
+
+const textVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: { y: 0, opacity: 1 },
+  exit: { y: -20, opacity: 0 }
+};
+
+const pulseVariants = {
+  pulse: {
+    opacity: [0.5, 1, 0.5],
+    transition: { duration: 2, repeat: Infinity }
+  }
+};
+
+const rotateVariants = {
+  spin: {
+    rotate: 360,
+    transition: { duration: 2, repeat: Infinity }
+  }
+};
+
+const progressVariants = {
+  animate: {
+    x: ["0%", "200%"],
+    transition: {
+      duration: 1.5,
+      repeat: Infinity,
+      repeatDelay: 0.2,
+    }
+  }
+};
+
+// Subcomponents
+function LogoSpinner() {
+  return (
+    <motion.div
+      variants={logoVariants}
+      initial="hidden"
+      animate="visible"
+      className="relative mb-8"
+    >
+      <div className="relative w-20 h-20 bg-primary/10 rounded-2xl flex items-center justify-center border border-primary/20 shadow-[0_0_50px_rgba(37,99,235,0.2)]">
+        {/* Rotating border */}
+        <motion.div
+          className="absolute inset-0 rounded-2xl border-t-2 border-primary"
+          variants={rotateVariants}
+          animate="spin"
+          aria-hidden="true"
+        />
+
+        {/* Logo text */}
+        <motion.span
+          className="text-primary font-black text-2xl tracking-tighter"
+          variants={pulseVariants}
+          animate="pulse"
+        >
+          ND
+        </motion.span>
+      </div>
+    </motion.div>
+  );
+}
+
+function ProgressBar() {
+  return (
+    <div
+      className="w-64 h-1.5 bg-muted rounded-full overflow-hidden relative mb-4"
+      role="progressbar"
+      aria-label="Loading progress"
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-valuenow={50}
+    >
+      {/* Animated bar */}
+      <motion.div
+        className="absolute h-full w-1/2 bg-primary"
+        variants={progressVariants}
+        animate="animate"
+        style={{ x: "-100%" }}
+      />
+
+      {/* Shimmer overlay */}
+      <div
+        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none"
+        aria-hidden="true"
+      />
+    </div>
+  );
+}
+
+interface LoadingTextProps {
+  text: string;
+  index: number;
+}
+
+function LoadingText({ text, index }: LoadingTextProps) {
+  return (
+    <motion.p
+      key={index}
+      variants={textVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      transition={{ duration: 0.3, ease: "easeInOut" }}
+      className="text-[10px] font-bold tracking-[0.2em] text-muted-foreground text-center absolute inset-0 flex items-center justify-center"
+    >
+      {text}
+    </motion.p>
+  );
+}
+
+// Main component
 export default function Loader() {
   const [textIndex, setTextIndex] = useState(0);
 
-  // Efek ganti teks setiap 800ms agar user tidak bosan menunggu
+  // Memoize current text to prevent unnecessary re-renders
+  const currentText = useMemo(
+    () => LOADING_TEXTS[textIndex],
+    [textIndex]
+  );
+
   useEffect(() => {
     const interval = setInterval(() => {
-      setTextIndex((prev) => (prev + 1) % loadingTexts.length);
-    }, 1500);
+      setTextIndex((prev) => (prev + 1) % LOADING_TEXTS.length);
+    }, TEXT_INTERVAL_MS);
+
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-background text-foreground">
-      {/* 1. Logo Animation (Pulse & Glow) */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        className="relative mb-8"
-      >
-        <div className="relative w-20 h-20 bg-primary/10 rounded-2xl flex items-center justify-center border border-primary/20 shadow-[0_0_50px_rgba(37,99,235,0.2)]">
-          {/* Rotating Border Effect */}
-          <motion.div
-            className="absolute inset-0 rounded-2xl border-t-2 border-primary"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-          />
+    <div
+      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-background text-foreground"
+      role="status"
+      aria-live="polite"
+      aria-label="Loading portfolio"
+    >
+      <LogoSpinner />
+      <ProgressBar />
 
-          <motion.span
-            className="text-primary font-black text-2xl tracking-tighter"
-            animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            ND
-          </motion.span>
-        </div>
-      </motion.div>
-
-      {/* 2. Custom Progress Bar */}
-      <div className="w-64 h-1.5 bg-muted rounded-full overflow-hidden relative mb-4">
-        <motion.div
-          className="h-full bg-primary"
-          initial={{ x: "-100%" }}
-          animate={{ x: "100%" }}
-          transition={{
-            duration: 1.5,
-            repeat: Infinity,
-            ease: "easeInOut", // Lebih natural daripada linear
-            repeatDelay: 0.2,
-          }}
-        />
-        {/* Shimmer overlay pada bar */}
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-      </div>
-
-      {/* 3. Cycling Text (Micro-interaction) */}
-      <div className="h-6 overflow-hidden relative">
+      {/* Text container with fixed height */}
+      <div className="h-6 relative w-64">
         <AnimatePresence mode="wait">
-          <motion.p
-            key={textIndex}
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -20, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="text-[10px] font-bold tracking-[0.2em] text-muted-foreground text-center min-w-[200px]"
-          >
-            {loadingTexts[textIndex]}
-          </motion.p>
+          <LoadingText text={currentText} index={textIndex} />
         </AnimatePresence>
       </div>
+
+      {/* Screen reader announcement */}
+      <span className="sr-only">
+        Loading portfolio data, please wait
+      </span>
     </div>
   );
 }

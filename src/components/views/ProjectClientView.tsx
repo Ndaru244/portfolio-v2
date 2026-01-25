@@ -39,12 +39,15 @@ const itemVariants = {
 const getStatusColor = (status: string) => {
   const s = (status || "").toLowerCase();
   if (s.includes("live") || s.includes("production") || s.includes("shipped")) {
-    return "text-emerald-600 bg-emerald-500/10 border-emerald-500/20";
+    return "text-emerald-500 bg-emerald-500/10 border-emerald-500/20";
   }
   if (s.includes("archived") || s.includes("lost")) {
-    return "text-amber-600 bg-amber-500/10 border-amber-500/20";
+    return "text-amber-500 bg-amber-500/10 border-amber-500/20";
   }
-  return "text-blue-600 bg-blue-500/10 border-blue-500/20";
+  if (s.includes("completed") || s.includes("finished")) {
+    return "text-blue-500 bg-blue-500/10 border-blue-500/20";
+  }
+  return "text-blue-500 bg-blue-500/10 border-blue-500/20";
 };
 
 export default function ProjectClientView({ project }: Props) {
@@ -85,7 +88,7 @@ export default function ProjectClientView({ project }: Props) {
       <motion.div variants={itemVariants} className="mb-12">
         <div className="space-y-4">
           <span className="inline-block px-3 py-2 rounded-full border border-primary/20 bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest shadow-sm">
-            Case Study
+            {project.category}
           </span>
           <h1 className="text-4xl md:text-6xl font-black tracking-tight leading-[1.1] text-balance">
             {project.title}
@@ -232,8 +235,8 @@ export default function ProjectClientView({ project }: Props) {
                       >
                         <div
                           className={`bento-card p-5 bg-muted/20 border-border/60 relative ${isTimeline
-                              ? "before:absolute before:top-6 before:-left-2 before:w-3 before:h-3 before:bg-muted/20 before:rotate-45 before:border-l before:border-b before:border-border/60"
-                              : ""
+                            ? "before:absolute before:top-6 before:-left-2 before:w-3 before:h-3 before:bg-muted/20 before:rotate-45 before:border-l before:border-b before:border-border/60"
+                            : ""
                             }`}
                         >
                           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-3 relative z-10">
