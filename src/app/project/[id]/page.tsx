@@ -3,20 +3,21 @@ import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ProjectClientView from "@/components/views/ProjectClientView";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "@/lib/firebase";
+import { PROJECTS_DATA as projects } from "@/lib/seed-data";
 
+// 2. Gunakan data lokal agar build deterministik (selalu berhasil)
 export async function generateStaticParams() {
-  const querySnapshot = await getDocs(collection(db, "projects"));
-  return querySnapshot.docs.map((doc) => ({
-    id: doc.id,
+  return projects.map((project) => ({
+    id: project.id.toString(),
   }));
 }
+
 interface PageProps {
   params: Promise<{ id: string }>;
 }
 
-export const revalidate = 3600;
+// 3. HAPUS baris revalidate ini karena dilarang di 'output: export'
+// export const revalidate = 3600; 
 
 export async function generateMetadata({ params }: PageProps) {
   const { id } = await params;
@@ -38,6 +39,7 @@ export async function generateMetadata({ params }: PageProps) {
 export default async function ProjectDetailPage({ params }: PageProps) {
   const { id } = await params;
 
+  // Promise.all tetap aman digunakan di sini
   const [project, profiles] = await Promise.all([
     getProjectById(id),
     getProfileData()
@@ -56,9 +58,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   return (
     <div className="min-h-screen font-sans text-foreground selection:bg-primary selection:text-white overflow-x-hidden relative">
       <Header profile={profile} />
-
       <ProjectClientView project={project} />
-
       <Footer profile={profile} />
     </div>
   );
