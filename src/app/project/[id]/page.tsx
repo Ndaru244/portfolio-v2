@@ -3,7 +3,15 @@ import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ProjectClientView from "@/components/views/ProjectClientView";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
+export async function generateStaticParams() {
+  const querySnapshot = await getDocs(collection(db, "projects"));
+  return querySnapshot.docs.map((doc) => ({
+    id: doc.id,
+  }));
+}
 interface PageProps {
   params: Promise<{ id: string }>;
 }
