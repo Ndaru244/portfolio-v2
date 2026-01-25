@@ -15,9 +15,10 @@ const SOCIAL_ICONS: Partial<Record<keyof Socials, any>> = {
 
 const FOOTER_SOCIALS: (keyof Socials)[] = ["linkedin", "github", "dribbble"];
 
-const formatPhoneNumber = (link: string) => {
-  const cleanNumber = link.replace(/\D/g, ""); 
+const formatPhoneNumber = (link: string | undefined | null) => {
+  if (!link) return ""; 
 
+  const cleanNumber = link.replace(/\D/g, ""); 
   const match = cleanNumber.match(/^(62)(\d{3})(\d{4})(\d+)$/);
 
   if (match) {
@@ -28,21 +29,16 @@ const formatPhoneNumber = (link: string) => {
 };
 
 export default function Footer({ profile }: Props) {
-  const actualProfile = 
-    profile?.data?.profile || 
-    profile?.profile || 
-    profile || 
-    {};
+  const actualProfile = profile?.data?.profile || profile?.profile || profile || {};
 
   const socials = actualProfile?.socials || {};
 
   const safeName = actualProfile?.name || "Ndaru L Santosa";
-  const safeEmailLink = socials.email;
-  const safePhoneLink = socials.phone;
+  const safeEmailLink = socials.email || "";
+  const safePhoneLink = socials.phone || "";
 
-  const displayEmail = safeEmailLink.replace("mailto:", "");
-  const displayPhone = formatPhoneNumber(safePhoneLink);
-
+  const displayEmail = safeEmailLink ? safeEmailLink.replace("mailto:", "") : "Email tidak tersedia";
+  const displayPhone = safePhoneLink ? formatPhoneNumber(safePhoneLink) : "Telepon tidak tersedia";
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });

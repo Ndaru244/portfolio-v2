@@ -18,16 +18,11 @@ const SOCIAL_CONFIG: Partial<Record<keyof Socials, { icon: any; color: string; l
 const HEADER_ITEMS: (keyof Socials)[] = ["github", "dribbble", "linkedin"];
 
 export default function Header({ profile }: Props) {
-  const nestedProfile = profile?.data?.profile;
-  
-  const directProfile = profile?.profile;
-  
-  const flatProfile = profile;
 
-  const actualProfile = nestedProfile || directProfile || flatProfile;
+  const actualProfile = profile?.data?.profile || profile?.profile || profile || {};
   const socials = actualProfile?.socials;
 
-  const contactEmail = socials?.email || "mailto:ndarulanggeng110@gmail.com";
+  const contactEmail = socials?.email?.replace("mailto:", "") || "ndarulanggeng110@gmail.com";
 
   return (
     <motion.header
