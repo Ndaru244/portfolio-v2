@@ -15,6 +15,7 @@ import {
   Activity,
   Check,
   Tag,
+  Sparkles
 } from "lucide-react";
 import ImageWithFallback from "@/components/ui/ImageWithFallback";
 import { Project, ProjectSection } from "@/types/portfolio";
@@ -105,8 +106,8 @@ export default function ProjectClientView({ project }: Props) {
           <ImageWithFallback
             src={project.thumbnail}
             alt={project.title}
-            width={1920}
-            height={1080}
+            width={1000}
+            height={562}
             className="w-full h-full object-cover"
             priority
             fallbackText="Project Thumbnail"
@@ -190,11 +191,8 @@ export default function ProjectClientView({ project }: Props) {
           {/* DYNAMIC SECTIONS */}
           {project.sections?.map((section: ProjectSection, idx: number) => (
             <motion.section key={idx} variants={itemVariants} className="mb-12">
-              <h3 className="text-xl font-bold flex items-center gap-3 mb-8 border-b border-border pb-4">
-                <span className="text-primary font-mono text-sm">
-                  0{idx + 1}.
-                </span>{" "}
-                {section.title}
+              <h3 className="text-xl font-bold flex items-center gap-3 mb-6 border-b border-border pb-4">
+                <Sparkles className="w-5 h-5 text-primary" />{section.title}
               </h3>
 
               <div
@@ -277,7 +275,7 @@ export default function ProjectClientView({ project }: Props) {
                     initial="initial"
                     whileHover="hover"
                     className={`
-                      relative rounded-2xl overflow-hidden border border-border/50 bg-muted h-full w-full
+                      relative rounded-2xl overflow-hidden border border-border/50 bg-muted w-full
                       ${idx === 0 ? "md:col-span-2 md:row-span-2" : ""}
                       ${idx === 3 ? "md:col-span-2" : ""}
                     `}
@@ -303,9 +301,9 @@ export default function ProjectClientView({ project }: Props) {
                         <ImageWithFallback
                           src={img}
                           alt={`Gallery ${idx + 1}`}
-                          width={1200}
-                          height={800}
-                          className="w-full h-full object-cover"
+                          fill
+                          className="object-cover transition-transform duration-500"
+                          loading="lazy"
                           fallbackText="Image Unavailable"
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         />
@@ -378,7 +376,7 @@ export default function ProjectClientView({ project }: Props) {
             {/* Tech Stack Card */}
             <div className="bento-card p-6">
               <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-6 flex items-center gap-2">
-                <Cpu className="w-4 h-4" /> Technologies
+                <Cpu className="w-4 h-4" /> {project.category === "UI/UX" ? "Design Stack" : "Tech Stack"}
               </h4>
               <div className="flex flex-wrap gap-2">
                 {project.tech_stack?.map((tech) => (

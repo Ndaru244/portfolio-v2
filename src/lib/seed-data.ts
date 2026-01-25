@@ -18,7 +18,7 @@ import { Project } from "@/types/portfolio";
 //       phone: "tel:+6285693784773",
 //     },
 //     resume_url: "/cv.pdf",
-//     avatar_url: "/assets/img/My-Avatar.png",
+//     avatar_url: "/assets/img/My-Avatar.webp",
 //   },
 // };
 
@@ -137,10 +137,10 @@ Proyek ini menjembatani kesenjangan informasi antara pengelola taman nasional da
       ],
 
       tech_stack: ["Figma", "Design System", "Prototyping", "Mobile Apps"],
-      thumbnail: "/assets/img/preview/Sialam.png",
+      thumbnail: "/assets/img/preview/Sialam.webp",
       gallery: [
-        "/assets/img/preview/Sialam-Preview-Flow.png",
-        "/assets/img/preview/Sialam-Preview-Product.png",
+        "/assets/img/preview/Sialam-Preview-Flow.webp",
+        "/assets/img/preview/Sialam-Preview-Product.webp",
       ],
       demo_url: null,
       repo_url: null,
@@ -192,11 +192,11 @@ Sistem ini mentransformasi proses pemesanan manual menjadi pengalaman "Self-Serv
       ],
 
       tech_stack: ["PHP", "CodeIgniter", "MySQL", "Javascript (AJAX)"],
-      thumbnail: "/assets/img/preview/Omhut.png",
+      thumbnail: "/assets/img/preview/Omhut.webp",
       gallery: [
-        "/assets/img/preview/Omhut.png",
-        "/assets/img/preview/Omhut-Preview-1.png",
-        "/assets/img/preview/Omhut-Preview-2.png",
+        "/assets/img/preview/Omhut.webp",
+        "/assets/img/preview/Omhut-Preview-1.webp",
+        "/assets/img/preview/Omhut-Preview-2.webp",
       ],
       demo_url: null,
       repo_url: "https://github.com/Ndaru244/omhut",
@@ -247,12 +247,12 @@ Fokus utama pengembangan adalah menciptakan infrastruktur backend yang mampu men
       ],
 
       tech_stack: ["PHP", "CodeIgniter", "MySQL"],
-      thumbnail: "/assets/img/preview/crooked-1.png",
+      thumbnail: "/assets/img/preview/crooked-1.webp",
       gallery: [
-        "/assets/img/preview/crooked-1.png",
-        "/assets/img/preview/crooked-2.png",
-        "/assets/img/preview/crooked-3.png",
-        "/assets/img/preview/crooked-admin-1.png",
+        "/assets/img/preview/crooked-1.webp",
+        "/assets/img/preview/crooked-2.webp",
+        "/assets/img/preview/crooked-3.webp",
+        "/assets/img/preview/crooked-admin-1.webp",
       ],
       demo_url: null,
       repo_url: "https://github.com/Ndaru244/crooked",
@@ -308,15 +308,77 @@ Fokus utama saya adalah melakukan audit terhadap User Interface yang lama, merum
       ],
 
       tech_stack: ["Figma", "Design System", "Prototyping", "Heuristic Evaluation", "Responsive Design"],
-      thumbnail: "/assets/img/preview/solvera.png",
+      thumbnail: "/assets/img/preview/solvera.webp",
       gallery: [
-        "/assets/img/preview/solvera-preview1.png",
-        "/assets/img/preview/solvera-preview2.png",
-        "/assets/img/preview/solvera-preview3.png",
-        "/assets/img/preview/solvera-userflow.png",
+        "/assets/img/preview/solvera-preview1.webp",
+        "/assets/img/preview/solvera-preview2.webp",
+        "/assets/img/preview/solvera-preview3.webp",
+        "/assets/img/preview/solvera-userflow.webp",
       ],
       demo_url: "https://solvera.id",
       repo_url: null,
     },
   },
+
+  {
+  id: "konter-print-helper",
+  data: {
+    id: "konter-print-helper",
+    title: "Konter Print Helper",
+    category: "Mobile App",
+
+    client: "PPOB & Counter Owners",
+    role: "Lead Developer & UI/UX Designer",
+    status: "Live",
+    order: 5,
+    overview_label: "Project Overview",
+    overview_desc: `Konter Print Helper adalah aplikasi utilitas cerdas yang dirancang khusus untuk pemilik konter pulsa dan PPOB. Aplikasi ini menjembatani celah antara bukti transaksi digital (E-Wallet) dengan kebutuhan struk fisik yang profesional.
+
+Masalah utama yang diselesaikan adalah rendahnya kualitas cetak gambar (blur) dan pemborosan kertas pada layout standar Android. Dengan mengimplementasikan teknologi OCR (Optical Character Recognition), aplikasi ini mampu mengekstraksi data teks dari screenshot secara presisi dan memformat ulang ke dalam layout thermal 58mm yang padat dan hemat biaya.`,
+
+    sections: [
+      {
+        title: "Development Path",
+        type: "grid",
+        items: [
+          {
+            label: "Smart OCR & Parser Engine",
+            badge: "Phase 1",
+            value:
+              `• Mengintegrasikan Google ML Kit untuk ekstraksi teks dari screenshot E-Wallet dengan akurasi tinggi.
+• Membangun sistem Auto-Parser untuk memisahkan data sensitif (Nominal, Penerima) dari teks sampah secara otomatis.
+• Mengimplementasikan fitur Editable Struk untuk koreksi manual sebelum proses pencetakan.`,
+          },
+          {
+            label: "Native Integration & Hardware",
+            badge: "Phase 2",
+            value:
+              `• Mengembangkan Android Share Intent (Method Channel) agar aplikasi dapat menerima data langsung dari tombol "Share" aplikasi pihak ketiga (DANA, GoPay, SeaBank).
+• Mengintegrasikan protokol Bluetooth ESC/POS guna mendukung berbagai merek printer thermal Bluetooth universal.
+• Melakukan optimasi layout khusus kertas 58mm & 80mm untuk meminimalkan whitespace.`,
+          },
+        ],
+      },
+    ],
+
+    tech_stack: [
+      "Flutter",
+      "Dart",
+      "Google ML Kit",
+      "Android Method Channel",
+      "Bluetooth ESC/POS",
+      "Provider (State Management)"
+    ],
+    thumbnail: "/assets/img/preview/konter-print.webp", 
+    gallery: [
+      "/assets/img/preview/home.webp",
+      "/assets/img/preview/scan.webp",
+      "/assets/img/preview/setting.webp",
+      "/assets/img/preview/preview.webp",
+      "/assets/img/preview/hasil.webp",
+    ],
+    demo_url: null,
+    repo_url: "https://github.com/Ndaru244/konter-print-helper",
+  },
+},
 ];

@@ -66,6 +66,7 @@ function ProfileCard({ profile }: ProfileCardProps) {
               className="object-cover"
               priority
               sizes="80px"
+              quality={90}
             />
           </motion.div>
         </motion.div>
@@ -306,14 +307,14 @@ export default function ProfileSection({ profile, skills = [] }: Props) {
         <UXProficiency skills={uxSkills} />
 
         <SkillBadges
-          title="Design Modules"
+          title="Design Skills"
           icon={<Palette className="w-4 h-4" />}
           skills={designTools}
           colorScheme="purple"
         />
 
         <SkillBadges
-          title="Logic Core"
+          title="Code Skills"
           icon={<Code2 className="w-4 h-4" />}
           skills={techStack}
           colorScheme="blue"
