@@ -22,7 +22,7 @@ export default function Header({ profile }: Props) {
   const actualProfile = profile?.data?.profile || profile?.profile || profile || {};
   const socials = actualProfile?.socials;
 
-  const contactEmail = socials?.email?.replace("mailto:", "") || "ndarulanggeng110@gmail.com";
+  const contactEmail = socials?.email;
 
   return (
     <motion.header
