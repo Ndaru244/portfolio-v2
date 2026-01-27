@@ -1,258 +1,242 @@
 @import "tailwindcss";
 
-/* --- 1. CONFIGURATION --- */
 @theme {
-    --color-background: var(--background);
-    --color-foreground: var(--foreground);
-    --color-card: var(--card);
-    --color-card-foreground: var(--card-foreground);
-    --color-primary: var(--primary);
-    --color-primary-foreground: var(--primary-foreground);
-    --color-muted: var(--muted);
-    --color-muted-foreground: var(--muted-foreground);
-    --color-border: var(--border);
-    --radius-xl: var(--radius);
-    --font-sans: var(--font-modern);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --radius-xl: var(--radius);
+  --font-sans: var(--font-modern);
 }
 
 :root {
-    /* LIGHT MODE (Clean Zinc + Subtle Blue Haze) */
-    --background: #fafafa;
-    --foreground: #18181b;
+  /* LIGHT MODE */
+  --background: #fafafa;
+  --foreground: #18181b;
+  --card: rgba(255, 255, 255, 0.85);
+  --card-foreground: #18181b;
+  --primary: #2563eb;
+  --primary-foreground: #ffffff;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+  --border: #e4e4e7;
+  --radius: 1.5rem;
+  --font-modern: "Inter", system-ui, sans-serif;
 
-    --card: rgba(255, 255, 255, 0.8); /* Sedikit transparan untuk efek gloss */
-    --card-foreground: #18181b;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+  --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.05), 0 8px 10px -6px rgb(0 0 0 / 0.01);
 
-    --primary: #2563eb;
-    --primary-foreground: #ffffff;
-
-    --muted: #f4f4f5;
-    --muted-foreground: #71717a;
-
-    --border: #e4e4e7;
-    --radius: 1.5rem;
-    --font-modern: "Inter", system-ui, sans-serif;
-
-    /* Modern Shadows */
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow-md:
-        0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
-    --shadow-lg:
-        0 20px 25px -5px rgb(0 0 0 / 0.05), 0 8px 10px -6px rgb(0 0 0 / 0.01);
-
-    /* Gradient Blobs Colors (Light) */
-    --blob-1: #e0f2fe; /* Light Blue */
-    --blob-2: #f3e8ff; /* Light Purple */
-    --blob-3: #f5f5f4; /* Warm Grey */
+  --blob-1: #e0f2fe;
+  --blob-2: #f3e8ff;
+  --blob-3: #f5f5f4;
 }
 
 .dark {
-    /* DARK MODE (Deep Space + Aurora) */
-    --background: #09090b;
-    --foreground: #fafafa;
+  /* DARK MODE */
+  --background: #09090b;
+  --foreground: #fafafa;
+  --card: rgba(24, 24, 27, 0.75);
+  --card-foreground: #fafafa;
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+  --muted: #27272a;
+  --muted-foreground: #a1a1aa;
+  --border: #27272a;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5);
 
-    --card: rgba(24, 24, 27, 0.6); /* Lebih transparan di dark mode */
-    --card-foreground: #fafafa;
-
-    --primary: #3b82f6;
-    --primary-foreground: #ffffff;
-
-    --muted: #27272a;
-    --muted-foreground: #a1a1aa;
-
-    --border: #27272a;
-
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5);
-
-    /* Gradient Blobs Colors (Dark) */
-    --blob-1: #172554; /* Deep Blue */
-    --blob-2: #1e1b4b; /* Deep Indigo */
-    --blob-3: #000000; /* Black anchor */
+  --blob-1: #172554;
+  --blob-2: #1e1b4b;
+  --blob-3: #000000;
 }
 
-/* --- 2. DYNAMIC BACKGROUND --- */
 body {
-    background-color: var(--background);
-    color: var(--foreground);
-    font-family: var(--font-sans);
-    overflow-x: hidden;
-    position: relative;
-    transition:
-        background-color 0.5s ease,
-        color 0.5s ease;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  position: relative;
 }
 
-/* Layer Gradient Bergerak */
 body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -1; /* Wajib di belakang */
-    background-image:
-        radial-gradient(at 0% 0%, var(--blob-1) 0px, transparent 50%),
-        radial-gradient(at 100% 0%, var(--blob-2) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, var(--blob-1) 0px, transparent 50%),
-        radial-gradient(at 0% 100%, var(--blob-2) 0px, transparent 50%);
-    background-size: 180% 180%; /* Zoom in agar blur halus */
-    filter: blur(80px); /* Kunci efek "Aurora" */
-    opacity: 0.6; /* Transparansi agar tidak nabrak teks */
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background-image:
+    radial-gradient(at 0% 0%, var(--blob-1) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, var(--blob-2) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, var(--blob-1) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, var(--blob-2) 0px, transparent 50%);
+  background-size: 150% 150%;
+  opacity: 0.6;
+  
+  transform: translateZ(0); 
+  will-change: background-position;
+}
+
+@media (min-width: 768px) {
+  body::before {
+    filter: blur(60px);
     animation: mesh-move 20s ease-in-out infinite alternate;
+  }
+}
+
+@media (max-width: 767px) {
+  body::before {
+    filter: blur(20px);
+    background-size: 100% 100%;
+  }
 }
 
 @keyframes mesh-move {
-    0% {
-        background-position: 0% 0%;
-    }
-    100% {
-        background-position: 100% 100%;
-    }
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
 }
 
-/* --- 3. GLOSSY BENTO CARD --- */
 .bento-card {
-    background-color: var(--color-card);
-    backdrop-filter: blur(10px); /* Efek kaca buram */
+  background-color: var(--color-card);
+  
+  border: 1px solid var(--color-border);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  color: var(--color-card-foreground);
+
+  position: relative;
+  overflow: hidden;
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  
+  /* GPU Layer */
+  transform: translateZ(0);
+}
+
+@media (min-width: 768px) {
+  .bento-card {
+    backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-
-    border: 1px solid var(--color-border);
-    border-top: 1px solid rgba(255, 255, 255, 0.5); /* Highlight atas (Light) */
-
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-sm);
-    color: var(--color-card-foreground);
-
-    position: relative;
-    overflow: hidden;
-    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
 }
 
 .dark .bento-card {
-    border-top: 1px solid rgba(255, 255, 255, 0.08); /* Highlight atas (Dark) */
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .bento-card:hover {
-    transform: translateY(-5px) scale(1.01);
-    box-shadow: var(--shadow-lg);
-    border-color: var(--color-primary);
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-primary);
 }
 
-/* Efek Kilau (Sheen) saat hover */
 .bento-card::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.2),
-        /* Kilau putih halus */ transparent
-    );
-    transform: skewX(-20deg);
-    transition: left 0.5s;
-    pointer-events: none;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transform: skewX(-20deg);
+  pointer-events: none;
 }
 
 .dark .bento-card::after {
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.05),
-        /* Kilau lebih redup di dark mode */ transparent
-    );
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.05),
+    transparent
+  );
 }
 
 .bento-card:hover::after {
-    left: 150%;
-    transition: left 1s ease-in-out;
+  left: 150%;
+  transition: left 0.7s ease-in-out;
 }
 
-/* --- 4. NAVIGATION GLASS --- */
 .glass {
-    background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.7);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+@media (min-width: 768px) {
+  .glass {
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  }
 }
 
 .dark .glass {
-    background: rgba(9, 9, 11, 0.6);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(9, 9, 11, 0.7);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* --- 5. ANIMATIONS & UTILS --- */
-
 .badge {
-    display: inline-flex;
-    align-items: center;
-    border-radius: 9999px;
-    padding: 0.35rem 0.85rem; /* Sedikit lebih besar agar lega */
-    font-size: 0.75rem;
-    font-weight: 600;
-    background-color: var(--color-muted);
-    color: var(--color-muted-foreground);
-    border: 1px solid rgba(0, 0, 0, 0.02);
-    transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background-color: var(--color-muted);
+  color: var(--color-muted-foreground);
+  border: 1px solid rgba(0, 0, 0, 0.02);
+  transition: background-color 0.2s, color 0.2s, transform 0.2s;
 }
 
 .badge:hover {
-    background-color: var(--color-primary);
-    color: var(--color-primary-foreground);
-    transform: scale(1.05);
+  background-color: var(--color-primary);
+  color: var(--color-primary-foreground);
+  transform: scale(1.05);
 }
 
-/* Smooth Entry Animation */
-.animate-enter {
-    opacity: 0;
-    animation: enter-up 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-}
-
-@keyframes enter-up {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-        filter: blur(5px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-        filter: blur(0);
-    }
-}
-
-/* Skeleton Loading dengan Shimmer Halus */
 .skeleton {
-    background: linear-gradient(
-        90deg,
-        var(--color-muted) 25%,
-        rgba(255, 255, 255, 0.5) 50%,
-        var(--color-muted) 75%
-    );
-    background-size: 200% 100%;
-    animation: shimmer 2s infinite linear;
-    border-radius: 0.5rem;
+  background: linear-gradient(
+    90deg,
+    var(--color-muted) 25%,
+    var(--color-background) 50%,
+    var(--color-muted) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite linear;
+  border-radius: 0.5rem;
+  will-change: background-position;
 }
 
 .dark .skeleton {
-    background: linear-gradient(
-        90deg,
-        var(--color-muted) 25%,
-        rgba(255, 255, 255, 0.05) 50%,
-        var(--color-muted) 75%
-    );
+  background: linear-gradient(
+    90deg,
+    var(--color-muted) 25%,
+    rgba(255, 255, 255, 0.05) 50%,
+    var(--color-muted) 75%
+  );
 }
 
 @keyframes shimmer {
-    0% {
-        background-position: -200% 0;
-    }
-    100% {
-        background-position: 200% 0;
-    }
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
