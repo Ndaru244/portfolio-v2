@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import { ThemeProvider } from "@/components/providers";
 import "./globals.css";
 
 // 1. Load Fonts
@@ -52,13 +53,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html 
-      lang="en" 
+    <html
+      lang="en"
       className={`${inter.variable} ${jetbrains.variable}`}
       suppressHydrationWarning // Mencegah mismatch error saat menggunakan Theme Provider
     >
       <body className="antialiased pt-24 transition-colors duration-500 ease-in-out">
-        {children}
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
