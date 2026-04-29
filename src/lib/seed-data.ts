@@ -1,93 +1,94 @@
 import { Project } from "@/types/portfolio";
-// export const PROFILE_DATA = {
-//   id: "main_profile",
-//   data: {
-//     name: "Ndaru L Santosa",
-//     role: "UI/UX Designer & Web Developer",
-//     location: "Tangerang, Indonesia",
-//     status: "Available for Hire",
-//     bio_short:
-//       "Bridging the gap between creative design (Figma) and technical feasibility (Code).",
-//     bio_long:
-//       "I love digging into tough user problems with solid research and real data. Because I've been full-stack myself, I can design beautiful intuitive interfaces that actually make sense to build—clean handoffs, scalable systems, and faster delivery.",
-//     socials: {
-//       github: "https://github.com/Ndaru244",
-//       linkedin: "https://linkedin.com/in/ndaru-langgeng-santosa-2b926b1a6/",
-//       dribbble: "https://dribbble.com/ndaru244",
-//       email: "mailto:ndarulanggeng110@gmail.com",
-//       phone: "tel:+6285693784773",
-//     },
-//     resume_url: "/cv.pdf",
-//     avatar_url: "/assets/img/My-Avatar.webp",
-//   },
-// };
 
-// export const SKILLS_DATA = [
-//   // UX Proficiency (With Percentage)
-//   {
-//     name: "Prototyping",
-//     category: "ux",
-//     percentage: 98,
-//     level: "Master",
-//     order: 1,
-//   },
-//   {
-//     name: "Wireframing",
-//     category: "ux",
-//     percentage: 90,
-//     level: "Expert",
-//     order: 2,
-//   },
-//   {
-//     name: "User Research",
-//     category: "ux",
-//     percentage: 80,
-//     level: "Advanced",
-//     order: 3,
-//   },
-//   {
-//     name: "Usability Testing",
-//     category: "ux",
-//     percentage: 67,
-//     level: "Intermediate",
-//     order: 4,
-//   },
+export const PROFILE_DATA = {
+  id: "main_profile",
+  data: {
+    name: "Ndaru L Santosa",
+    role: "UI/UX Designer & Web Developer",
+    location: "Tangerang, Indonesia",
+    status: "Available for Hire",
+    bio_short:
+      "Bridging the gap between creative design (Figma) and technical feasibility (Code).",
+    bio_long:
+      "I love digging into tough user problems with solid research and real data. Because I've been full-stack myself, I can design beautiful intuitive interfaces that actually make sense to build—clean handoffs, scalable systems, and faster delivery.",
+    socials: {
+      github: "https://github.com/Ndaru244",
+      linkedin: "https://linkedin.com/in/ndaru-langgeng-santosa-2b926b1a6/",
+      dribbble: "https://dribbble.com/ndaru244",
+      email: "mailto:ndarulanggeng110@gmail.com",
+      phone: "tel:+6285693784773",
+    },
+    resume_url: "/cv.pdf",
+    avatar_url: "/assets/img/My-Avatar.webp",
+  },
+};
 
-//   // Design Modules
-//   { name: "Figma", category: "design", order: 1 },
-//   { name: "UI Design", category: "design", order: 2 },
-//   { name: "Design System", category: "design", order: 3 },
-//   { name: "Interaction Design", category: "design", order: 4 },
+export const SKILLS_DATA = [
+  // UX Proficiency (With Percentage)
+  {
+    name: "Prototyping",
+    category: "ux",
+    percentage: 98,
+    level: "Master",
+    order: 1,
+  },
+  {
+    name: "Wireframing",
+    category: "ux",
+    percentage: 90,
+    level: "Expert",
+    order: 2,
+  },
+  {
+    name: "User Research",
+    category: "ux",
+    percentage: 80,
+    level: "Advanced",
+    order: 3,
+  },
+  {
+    name: "Usability Testing",
+    category: "ux",
+    percentage: 67,
+    level: "Intermediate",
+    order: 4,
+  },
 
-//   // Logic Core
-//   { name: "HTML/CSS", category: "tech", order: 1 },
-//   { name: "Next.js", category: "tech", order: 2 },
-//   { name: "PHP", category: "tech", order: 3 },
-//   { name: "CodeIgniter", category: "tech", order: 4 },
-//   { name: "MySQL", category: "tech", order: 5 },
-//   { name: "Flutter", category: "tech", order: 6 },
-// ];
+  // Design Modules
+  { name: "Figma", category: "design", order: 1 },
+  { name: "UI Design", category: "design", order: 2 },
+  { name: "Design System", category: "design", order: 3 },
+  { name: "Interaction Design", category: "design", order: 4 },
 
-// export const EXPERIENCE_DATA = [
-//   {
-//     company: "PT. Bhinneka Alam Nusantara",
-//     role: "UI/UX Designer",
-//     period: "Sep 2022 - Oct 2024",
-//     description:
-//       "Designed mobile UI patterns, created interactive prototypes, and conducted usability testing which improved task completion by 25%. Led the design system scalability.",
-//     type: "work",
-//     order: 1,
-//   },
-//   {
-//     company: "Crooked Indonesia",
-//     role: "Web Developer Intern",
-//     period: "Mar 2022 - Aug 2022",
-//     description:
-//       "Developed responsive catalog website using PHP (CodeIgniter) and Bootstrap. Zero critical downtime during the 6-month contract.",
-//     type: "internship",
-//     order: 2,
-//   },
-// ];
+  // Logic Core
+  { name: "HTML/CSS", category: "tech", order: 1 },
+  { name: "Next.js", category: "tech", order: 2 },
+  { name: "PHP", category: "tech", order: 3 },
+  { name: "CodeIgniter", category: "tech", order: 4 },
+  { name: "MySQL", category: "tech", order: 5 },
+  { name: "Flutter", category: "tech", order: 6 },
+];
+
+export const EXPERIENCE_DATA = [
+  {
+    company: "PT. Bhinneka Alam Nusantara",
+    role: "UI/UX Designer",
+    period: "Sep 2022 - Oct 2024",
+    description:
+      "Designed mobile UI patterns, created interactive prototypes, and conducted usability testing which improved task completion by 25%. Led the design system scalability.",
+    type: "work",
+    order: 1,
+  },
+  {
+    company: "Crooked Indonesia",
+    role: "Web Developer Intern",
+    period: "Mar 2022 - Aug 2022",
+    description:
+      "Developed responsive catalog website using PHP (CodeIgniter) and Bootstrap. Zero critical downtime during the 6-month contract.",
+    type: "internship",
+    order: 2,
+  },
+];
 
 export const PROJECTS_DATA: { id: string; data: Project }[] = [
   {
@@ -102,9 +103,9 @@ export const PROJECTS_DATA: { id: string; data: Project }[] = [
       status: "Completed",
       order: 2,
       overview_label: "Executive Summary",
-      overview_desc: `SIALAM adalah inisiatif transformasi digital untuk meningkatkan standar keselamatan pendakian di Indonesia.
+      overview_desc: `SIALAM merupakan aplikasi pendaftaran pendakian gunung yang mempermudah proses administrasi bagi pendaki dan pengelola.
 
-Proyek ini menjembatani kesenjangan informasi antara pengelola taman nasional dan pendaki melalui ekosistem aplikasi mobile yang intuitif, fitur pelacakan darurat (SOS), dan navigasi offline.`,
+Aplikasi ini memungkinkan pengguna untuk membuat dan mengelola regu pendakian secara efisien, termasuk menambahkan anggota tanpa perlu input data manual. Penambahan anggota dapat dilakukan melalui fitur undangan (invite) kepada sesama pengguna SIALAM yang sudah terverifikasi, sehingga proses menjadi lebih cepat, akurat, dan terintegrasi.`,
 
       sections: [
         {
@@ -217,7 +218,7 @@ Sistem ini mentransformasi proses pemesanan manual menjadi pengalaman "Self-Serv
       overview_label: "Project Overview",
       overview_desc: `Platform katalog digital untuk brand fashion lokal yang dirancang untuk skalabilitas produk tinggi.
 
-Fokus utama pengembangan adalah menciptakan infrastruktur backend yang mampu menangani manajemen inventaris dinamis, filtering produk yang kompleks, dan integrasi API yang mulus ke sisi Frontend.`,
+Fokus utama pengembangan adalah menciptakan infrastruktur backend yang mampu menangani manajemen inventaris dinamis, filtering produk yang kompleks, and integrasi API yang mulus ke sisi Frontend.`,
 
       sections: [
         {
@@ -321,64 +322,64 @@ Fokus utama saya adalah melakukan audit terhadap User Interface yang lama, merum
   },
 
   {
-  id: "konter-print-helper",
-  data: {
     id: "konter-print-helper",
-    title: "Konter Print Helper",
-    category: "Mobile App",
+    data: {
+      id: "konter-print-helper",
+      title: "Konter Print Helper",
+      category: "Mobile App",
 
-    client: "PPOB & Counter Owners",
-    role: "Lead Developer & UI/UX Designer",
-    status: "Live",
-    order: 5,
-    overview_label: "Project Overview",
-    overview_desc: `Konter Print Helper adalah aplikasi utilitas cerdas yang dirancang khusus untuk pemilik konter pulsa dan PPOB. Aplikasi ini menjembatani celah antara bukti transaksi digital (E-Wallet) dengan kebutuhan struk fisik yang profesional.
+      client: "PPOB & Counter Owners",
+      role: "Lead Developer & UI/UX Designer",
+      status: "Live",
+      order: 5,
+      overview_label: "Project Overview",
+      overview_desc: `Konter Print Helper adalah aplikasi utilitas cerdas yang dirancang khusus untuk pemilik konter pulsa dan PPOB. Aplikasi ini menjembatani celah antara bukti transaksi digital (E-Wallet) dengan kebutuhan struk fisik yang profesional.
 
 Masalah utama yang diselesaikan adalah rendahnya kualitas cetak gambar (blur) dan pemborosan kertas pada layout standar Android. Dengan mengimplementasikan teknologi OCR (Optical Character Recognition), aplikasi ini mampu mengekstraksi data teks dari screenshot secara presisi dan memformat ulang ke dalam layout thermal 58mm yang padat dan hemat biaya.`,
 
-    sections: [
-      {
-        title: "Development Path",
-        type: "grid",
-        items: [
-          {
-            label: "Smart OCR & Parser Engine",
-            badge: "Phase 1",
-            value:
-              `• Mengintegrasikan Google ML Kit untuk ekstraksi teks dari screenshot E-Wallet dengan akurasi tinggi.
+      sections: [
+        {
+          title: "Development Path",
+          type: "grid",
+          items: [
+            {
+              label: "Smart OCR & Parser Engine",
+              badge: "Phase 1",
+              value:
+                `• Mengintegrasikan Google ML Kit untuk ekstraksi teks dari screenshot E-Wallet dengan akurasi tinggi.
 • Membangun sistem Auto-Parser untuk memisahkan data sensitif (Nominal, Penerima) dari teks sampah secara otomatis.
 • Mengimplementasikan fitur Editable Struk untuk koreksi manual sebelum proses pencetakan.`,
-          },
-          {
-            label: "Native Integration & Hardware",
-            badge: "Phase 2",
-            value:
-              `• Mengembangkan Android Share Intent (Method Channel) agar aplikasi dapat menerima data langsung dari tombol "Share" aplikasi pihak ketiga (DANA, GoPay, SeaBank).
+            },
+            {
+              label: "Native Integration & Hardware",
+              badge: "Phase 2",
+              value:
+                `• Mengembangkan Android Share Intent (Method Channel) agar aplikasi dapat menerima data langsung dari tombol "Share" aplikasi pihak ketiga (DANA, GoPay, SeaBank).
 • Mengintegrasikan protokol Bluetooth ESC/POS guna mendukung berbagai merek printer thermal Bluetooth universal.
 • Melakukan optimasi layout khusus kertas 58mm & 80mm untuk meminimalkan whitespace.`,
-          },
-        ],
-      },
-    ],
+            },
+          ],
+        },
+      ],
 
-    tech_stack: [
-      "Flutter",
-      "Dart",
-      "Google ML Kit",
-      "Android Method Channel",
-      "Bluetooth ESC/POS",
-      "Provider (State Management)"
-    ],
-    thumbnail: "/assets/img/preview/konter-print.webp", 
-    gallery: [
-      "/assets/img/preview/home.webp",
-      "/assets/img/preview/scan.webp",
-      "/assets/img/preview/setting.webp",
-      "/assets/img/preview/preview.webp",
-      "/assets/img/preview/hasil.webp",
-    ],
-    demo_url: null,
-    repo_url: "https://github.com/Ndaru244/konter-print-helper",
+      tech_stack: [
+        "Flutter",
+        "Dart",
+        "Google ML Kit",
+        "Android Method Channel",
+        "Bluetooth ESC/POS",
+        "Provider (State Management)"
+      ],
+      thumbnail: "/assets/img/preview/konter-print.webp",
+      gallery: [
+        "/assets/img/preview/home.webp",
+        "/assets/img/preview/scan.webp",
+        "/assets/img/preview/setting.webp",
+        "/assets/img/preview/preview.webp",
+        "/assets/img/preview/hasil.webp",
+      ],
+      demo_url: null,
+      repo_url: "https://github.com/Ndaru244/konter-print-helper",
+    },
   },
-},
 ];

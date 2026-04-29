@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "mv src/app/admin src/.admin-temp 2>/dev/null || true; next build; mv src/.admin-temp src/app/admin 2>/dev/null || true",
     "start": "next start",
     "lint": "eslint"
   },

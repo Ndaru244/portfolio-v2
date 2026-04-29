@@ -8,12 +8,6 @@
     ],
     "cleanUrls": true,
     "trailingSlash": false,
-    "errorPage": "/404.html",
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
+    "errorPage": "/404.html"
   }
 }

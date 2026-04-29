@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import HomeClientView from "@/components/views/HomeClientView";
 
-// --- SEO METADATA (Profesional) ---
 export const metadata: Metadata = {
   title: "Ndaru Langgeng | UI/UX Designer & Web Dev ",
   description:
