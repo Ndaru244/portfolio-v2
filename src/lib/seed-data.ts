@@ -10,7 +10,7 @@ export const PROFILE_DATA = {
     bio_short:
       "Bridging the gap between creative design (Figma) and technical feasibility (Code).",
     bio_long:
-      "I love digging into tough user problems with solid research and real data. Because I've been full-stack myself, I can design beautiful intuitive interfaces that actually make sense to build—clean handoffs, scalable systems, and faster delivery.",
+      "Bridging the gap between user-centric design and robust software engineering. With a background in full-stack development, I create beautiful, intuitive interfaces rooted in research and optimized for performance. I don't just design visuals; I build scalable systems that make sense to execute.",
     socials: {
       github: "https://github.com/Ndaru244",
       linkedin: "https://linkedin.com/in/ndaru-langgeng-santosa-2b926b1a6/",
@@ -71,13 +71,31 @@ export const SKILLS_DATA = [
 
 export const EXPERIENCE_DATA = [
   {
+    company: "SDN Sunter Agung 12 PG",
+    role: "Web Developer",
+    period: "Des 2025 - Jan 2026",
+    description:
+      "Engineered an integrated school information system (Sadulas) featuring a public portal and a secure admin dashboard. Developed scalable modules for dynamic content management, digital letter processing, and student record tracking (Klapper), significantly optimizing administrative workflows and reducing cognitive load for staff.",
+    type: "Contract",
+    order: 0,
+  },
+  {
+    company: "PT. Solvera Global Teknologi",
+    role: "UI/UX Designer",
+    period: "Oct 2025 - Dec 2025",
+    description:
+      "Executed a comprehensive revamp of the solvera.id corporate website. Modernized the visual identity, optimized mobile responsiveness, and improved information architecture to enhance user engagement and site performance.",
+    type: "work",
+    order: 1,
+  },
+  {
     company: "PT. Bhinneka Alam Nusantara",
     role: "UI/UX Designer",
     period: "Sep 2022 - Oct 2024",
     description:
       "Designed mobile UI patterns, created interactive prototypes, and conducted usability testing which improved task completion by 25%. Led the design system scalability.",
     type: "work",
-    order: 1,
+    order: 2,
   },
   {
     company: "Crooked Indonesia",
@@ -86,11 +104,90 @@ export const EXPERIENCE_DATA = [
     description:
       "Developed responsive catalog website using PHP (CodeIgniter) and Bootstrap. Zero critical downtime during the 6-month contract.",
     type: "internship",
-    order: 2,
+    order: 3,
   },
 ];
 
 export const PROJECTS_DATA: { id: string; data: Project }[] = [
+  {
+    id: "sadulas",
+    data: {
+      id: "sadulas",
+      title: "Sadulas",
+      category: "School Information System (SIS)",
+      client: "SDN Sunter Agung 12 PG",
+      role: "Web Developer",
+      status: "Completed",
+      order: 0,
+      overview_label: "Executive Summary",
+      overview_desc: `Sadulas adalah sistem informasi sekolah terintegrasi yang mencakup portal publik dan dashboard admin. Platform ini dirancang untuk mendigitalkan manajemen konten, persuratan administrasi, dan arsip data induk siswa (Klapper), sehingga mengurangi beban kognitif staf dan mengoptimalkan efisiensi operasional harian.`,
+
+      sections: [
+        {
+          title: "Core Modules",
+          type: "list",
+          items: [
+            {
+              label: "Public Portal & Company Profile",
+              value: "Portal representasi digital yang menyajikan informasi profil sekolah, fasilitas, dan berita/artikel terkini kepada publik."
+            },
+            {
+              label: "Admin Dashboard (CMS)",
+              value: "Pusat kendali dengan antarmuka intuitif untuk mengelola informasi website secara dinamis tanpa perlu intervensi kode."
+            },
+            {
+              label: "Manajemen Surat",
+              value: "Modul digitalisasi alur persuratan (masuk/keluar) yang memudahkan staf tata usaha dalam pelacakan dan pengarsipan dokumen."
+            },
+            {
+              label: "Klapper Siswa",
+              value: "Sistem arsip data induk siswa yang scalable, mempercepat pencarian data historis dan meminimalisir redundansi data administratif."
+            }
+          ],
+        },
+        {
+          title: "Development Workflow",
+          type: "timeline",
+          items: [
+            {
+              label: "Phase 1: Architecture & Database",
+              badge: "Planning",
+              value: `• Analisis kebutuhan administratif (Requirement Gathering) bersama SDN Sunter Agung 12 PG.
+• Merancang skema database relasional untuk modul Surat dan Klapper.
+• Konfigurasi arsitektur MVC menggunakan CodeIgniter 4.`,
+            },
+            {
+              label: "Phase 2: Core Engineering",
+              badge: "Development",
+              value: `• Membangun fungsionalitas Admin Dashboard untuk manajemen alur kerja sistem dan pengolahan data administratif secara terpusat.
+• Implementasi modul CRUD untuk Artikel, Profil, dan Data Siswa.
+• Menerapkan validasi input dan manajemen sesi (Authentication).`,
+            },
+            {
+              label: "Phase 3: Security & Deployment",
+              badge: "Release",
+              value: `• Audit keamanan jaringan (implementasi CSP & optimasi HSTS).
+• Pengujian (QA) untuk memastikan responsivitas UI dan fungsionalitas di berbagai perangkat.
+• Konfigurasi teknis SEO untuk meningkatkan visibilitas dan indeksasi portal sekolah pada mesin pencari.
+• Deployment ke production server (Niagahoster) dan optimasi caching .htaccess.`,
+            },
+          ],
+        },
+      ],
+
+      tech_stack: ["CodeIgniter 4", "PHP", "MySQL", "Tailwind", "JavaScript"],
+      thumbnail: "/assets/img/preview/Sadulas-Public.webp",
+      gallery: [
+        "/assets/img/preview/Sadulas-Public.webp",
+        "/assets/img/preview/Sadulas-Dashboard.webp",
+        "/assets/img/preview/Sadulas-Klapper.webp",
+        "/assets/img/preview/Sadulas-SuratKeluar.webp",
+        "/assets/img/preview/Sadulas-SuratMasuk.webp",
+      ],
+      demo_url: "https://sdnsunteragung12pg.sch.id/",
+      repo_url: null,
+    },
+  },
   {
     id: "sialam-app",
     data: {

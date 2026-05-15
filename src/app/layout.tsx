@@ -58,7 +58,7 @@ export default function RootLayout({
       className={`${inter.variable} ${jetbrains.variable}`}
       suppressHydrationWarning // Mencegah mismatch error saat menggunakan Theme Provider
     >
-      <body className="antialiased pt-24 transition-colors duration-500 ease-in-out">
+      <body className="antialiased transition-colors duration-500 ease-in-out">
         <ThemeProvider>
           {children}
         </ThemeProvider>
