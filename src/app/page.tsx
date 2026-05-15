@@ -19,9 +19,24 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Ndaru Langgeng Santosa - Portfolio",
     description: "High-performance web development and modern UI/UX design by Ndaru Langgeng Santosa.",
+    url: "https://ndaru-portfolio.web.app",
+    siteName: "Ndaru Langgeng Santosa Portfolio",
+    images: [
+      {
+        url: "/assets/img/My-Avatar.webp", // Memastikan gambar ini yang muncul, bukan thumbnail proyek
+        width: 540,
+        height: 540,
+        alt: "Ndaru Langgeng Santosa Portfolio Preview",
+      },
+    ],
     type: "website",
     locale: "id_ID",
-    siteName: "Ndaru Langgeng Santosa Portfolio",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Ndaru Langgeng Santosa | Portfolio",
+    description: "Creative Technologist & UI/UX Designer based in Indonesia.",
+    images: ["/assets/img/preview/preview.webp"],
   },
 };
 
