@@ -34,18 +34,20 @@ interface SectionHeaderProps {
   iconColor?: string;
 }
 
+const ICON_MAP = {
+  experience: Briefcase,
+  project: FolderGit2,
+  skill: Sparkles,
+  default: Hash,
+};
+
 function SectionHeader({ title, iconColor = "text-primary" }: SectionHeaderProps) {
-  const getIcon = () => {
-    const t = title.toLowerCase();
-
-    if (t.includes("experience")) return Briefcase;
-    if (t.includes("project")) return FolderGit2;
-    if (t.includes("skill")) return Sparkles;
-
-    return Hash;
-  };
-
-  const IconComponent = getIcon();
+  const t = title.toLowerCase();
+  const IconComponent = 
+    t.includes("experience") ? ICON_MAP.experience :
+    t.includes("project") ? ICON_MAP.project :
+    t.includes("skill") ? ICON_MAP.skill :
+    ICON_MAP.default;
 
   return (
     <h2 className="text-sm font-bold text-muted-foreground uppercase tracking-widest mb-4 flex items-center gap-2">

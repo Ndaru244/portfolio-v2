@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import ProfileSection from "@/components/ProfileSection";
 import BentoGrid from "@/components/BentoGrid";
 import Loader from "@/components/ui/Loader";
+import JsonLd from "@/components/JsonLd";
 import { usePortfolioData } from "@/hooks/usePortfolioData";
 
 export default function HomeClientView() {
@@ -13,6 +14,7 @@ export default function HomeClientView() {
 
   return (
     <div className="min-h-screen font-sans text-foreground selection:bg-primary selection:text-white relative overflow-x-hidden">
+      {data?.profile && <JsonLd profile={data.profile} />}
       <AnimatePresence mode="wait">
         {(loading || !data) && (
           <motion.div
@@ -37,7 +39,7 @@ export default function HomeClientView() {
         )}
       </AnimatePresence>
 
-      <Header profile={data?.profile} />
+      <Header profile={data?.profile ?? null} />
 
       {data && (
         <motion.main
@@ -51,7 +53,7 @@ export default function HomeClientView() {
         </motion.main>
       )}
 
-      {data && <Footer profile={data?.profile} />}
+      {data && <Footer profile={data?.profile ?? null} />}
     </div>
   );
 }

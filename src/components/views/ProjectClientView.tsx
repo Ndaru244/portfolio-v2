@@ -18,6 +18,7 @@ import {
   Sparkles
 } from "lucide-react";
 import ImageWithFallback from "@/components/ui/ImageWithFallback";
+import ProjectJsonLd from "@/components/ProjectJsonLd";
 import { Project, ProjectSection } from "@/types/portfolio";
 
 interface Props {
@@ -68,12 +69,14 @@ export default function ProjectClientView({ project }: Props) {
   const safeLabel = project.overview_label || "Project Overview";
 
   return (
-    <motion.main
-      className="max-w-7xl mx-auto px-6 pt-32 pb-20"
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-    >
+    <>
+      <ProjectJsonLd project={project} />
+      <motion.main
+        className="max-w-7xl mx-auto px-6 pt-32 pb-20"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
       {/* TOP NAVIGATION */}
       <motion.div variants={itemVariants} className="mb-8">
         <Link
@@ -393,5 +396,6 @@ export default function ProjectClientView({ project }: Props) {
         </motion.aside>
       </div>
     </motion.main>
+    </>
   );
 }

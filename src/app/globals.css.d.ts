@@ -1,2 +1,2 @@
-declare const content: {};
+declare const content: Record<string, string>;
 export default content;

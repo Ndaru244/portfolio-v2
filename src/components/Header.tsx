@@ -1,15 +1,15 @@
 "use client";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Github, Linkedin, Mail, Dribbble } from "lucide-react";
+import { Github, Linkedin, Mail, Dribbble, LucideIcon } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
-import { Socials } from "@/types/portfolio";
+import { Socials, Profile } from "@/types/portfolio";
 
 interface Props {
-  profile: any;
+  profile: Profile | null;
 }
 
-const SOCIAL_CONFIG: Partial<Record<keyof Socials, { icon: any; color: string; label: string }>> = {
+const SOCIAL_CONFIG: Partial<Record<keyof Socials, { icon: LucideIcon; color: string; label: string }>> = {
   github: { icon: Github, color: "hover:text-foreground", label: "Github" },
   dribbble: { icon: Dribbble, color: "hover:text-pink-500", label: "Dribbble" },
   linkedin: { icon: Linkedin, color: "hover:text-blue-600", label: "LinkedIn" },
@@ -18,10 +18,7 @@ const SOCIAL_CONFIG: Partial<Record<keyof Socials, { icon: any; color: string; l
 const HEADER_ITEMS: (keyof Socials)[] = ["github", "dribbble", "linkedin"];
 
 export default function Header({ profile }: Props) {
-
-  const actualProfile = profile?.data?.profile || profile?.profile || profile || {};
-  const socials = actualProfile?.socials;
-
+  const socials = profile?.socials || {} as Socials;
   const contactEmail = socials?.email;
 
   return (

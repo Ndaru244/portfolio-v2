@@ -2,25 +2,26 @@ import type { Metadata } from "next";
 import HomeClientView from "@/components/views/HomeClientView";
 
 export const metadata: Metadata = {
-  title: "Ndaru Langgeng | UI/UX Designer & Web Dev ",
+  title: "Ndaru Langgeng Santosa | UI/UX Designer & Web Developer",
   description:
-    "Portfolio of Ndaru Langgeng Santosa. Specializing in high-performance web development, modern UI/UX design, and scalable frontend architecture.",
+    "Explore the portfolio of Ndaru Langgeng Santosa, a professional UI/UX Designer and Web Developer based in Tangerang. Expertise in Next.js, React, and creating exceptional digital experiences.",
   keywords: [
+    "Ndaru Langgeng Santosa",
+    "Ndaru Langgeng",
     "UI/UX Designer",
     "Frontend Developer",
-    "Next.js",
-    "React",
-    "PHP",
-    "Portfolio",
+    "Next.js Portfolio",
+    "Web Design Portfolio",
     "Tangerang",
+    "Indonesia",
   ],
-  authors: [{ name: "Ndaru Langgeng" }],
+  authors: [{ name: "Ndaru Langgeng Santosa" }],
   openGraph: {
-    title: "Ndaru Langgeng - Portfolio",
-    description: "Creative Technologist & UI/UX Designer based in Indonesia.",
+    title: "Ndaru Langgeng Santosa - Portfolio",
+    description: "High-performance web development and modern UI/UX design by Ndaru Langgeng Santosa.",
     type: "website",
     locale: "id_ID",
-    siteName: "Ndaru Langgeng Portfolio",
+    siteName: "Ndaru Langgeng Santosa Portfolio",
   },
 };
 

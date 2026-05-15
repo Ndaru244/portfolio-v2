@@ -1,13 +1,13 @@
 "use client";
-import { ArrowUp, Github, Linkedin, Mail, Dribbble, Phone } from "lucide-react";
+import { ArrowUp, Github, Linkedin, Mail, Dribbble, Phone, LucideIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import { Profile, Socials } from "@/types/portfolio";
 
 interface Props {
-  profile: any;
+  profile: Profile | null;
 }
 
-const SOCIAL_ICONS: Partial<Record<keyof Socials, any>> = {
+const SOCIAL_ICONS: Partial<Record<keyof Socials, LucideIcon>> = {
   linkedin: Linkedin,
   github: Github,
   dribbble: Dribbble,
@@ -29,13 +29,11 @@ const formatPhoneNumber = (link: string | undefined | null) => {
 };
 
 export default function Footer({ profile }: Props) {
-  const actualProfile = profile?.data?.profile || profile?.profile || profile || {};
+  const socials = profile?.socials || {} as Socials;
 
-  const socials = actualProfile?.socials || {};
-
-  const safeName = actualProfile?.name || "Ndaru L Santosa";
-  const safeEmailLink = socials.email || "";
-  const safePhoneLink = socials.phone || "";
+  const safeName = profile?.name || "Ndaru L Santosa";
+  const safeEmailLink = socials?.email || "";
+  const safePhoneLink = socials?.phone || "";
 
   const displayEmail = safeEmailLink ? safeEmailLink.replace("mailto:", "") : "Email tidak tersedia";
   const displayPhone = safePhoneLink ? formatPhoneNumber(safePhoneLink) : "Telepon tidak tersedia";
