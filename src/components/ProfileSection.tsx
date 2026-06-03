@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { Download, MapPin, Briefcase, Zap, Palette, Code2 } from "lucide-react";
-import { motion } from "framer-motion";
+import { Download, MapPin, Briefcase, Zap, Palette, Code2, X, Layers, Terminal } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import { Profile, Skill } from "@/types/portfolio";
 
 interface Props {
@@ -34,12 +35,164 @@ const badgeVariants = {
   visible: { opacity: 1, scale: 1 },
 };
 
+// Modal CV pilihan
+const cvOptions = [
+  {
+    key: "uiux",
+    label: "UI/UX Designer",
+    description: "UI Design, User Research & Prototyping",
+    href: "/cv-ui.pdf",
+    icon: <Layers className="w-5 h-5" />,
+    accent: "from-purple-500 to-pink-500",
+    hoverBorder: "hover:border-purple-400/60",
+    hoverBg: "hover:bg-purple-500/10",
+    iconColor: "text-purple-400",
+  },
+  {
+    key: "dev",
+    label: "Software Engineer",
+    description: "Full-stack development, architecture & tech stack",
+    href: "/cv-dev.pdf",
+    icon: <Terminal className="w-5 h-5" />,
+    accent: "from-blue-500 to-cyan-400",
+    hoverBorder: "hover:border-blue-400/60",
+    hoverBg: "hover:bg-blue-500/10",
+    iconColor: "text-blue-400",
+  },
+] as const;
+
+const modalVariants = {
+  hidden: { opacity: 0, scale: 0.95, y: 10 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { duration: 0.25, ease: [0.22, 1, 0.36, 1] as const },
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.95,
+    y: 10,
+    transition: { duration: 0.15, ease: "easeIn" as const },
+  },
+};
+
+const backdropVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.2 } },
+  exit: { opacity: 0, transition: { duration: 0.15 } },
+};
+
+interface CVModalProps {
+  open: boolean;
+  onClose: () => void;
+}
+
+function CVModal({ open, onClose }: CVModalProps) {
+  return (
+    <AnimatePresence>
+      {open && (
+        <>
+          {/* Backdrop */}
+          <motion.div
+            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
+            variants={backdropVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            onClick={onClose}
+            aria-hidden="true"
+          />
+
+          {/* Modal */}
+          <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="cv-modal-title"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none"
+          >
+            <motion.div
+              className="relative w-full max-w-sm bento-card p-6 pointer-events-auto"
+              variants={modalVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+            >
+              {/* Close button */}
+              <button
+                onClick={onClose}
+                className="absolute top-4 right-4 p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                aria-label="Tutup modal"
+              >
+                <X className="w-4 h-4" />
+              </button>
+
+              {/* Header */}
+              <div className="mb-5">
+                <h3
+                  id="cv-modal-title"
+                  className="text-sm font-black uppercase tracking-[0.15em] text-foreground"
+                >
+                  Download Resume
+                </h3>
+                <p className="text-[11px] text-muted-foreground mt-1">
+                  Choose the CV version that best suits your needs
+                </p>
+              </div>
+
+              {/* Options */}
+              <div className="flex flex-col gap-3">
+                {cvOptions.map((opt) => (
+                  <motion.a
+                    key={opt.key}
+                    href={opt.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`group flex items-center gap-4 p-4 rounded-xl border border-border bg-muted/30 transition-all duration-200 ${opt.hoverBorder} ${opt.hoverBg}`}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={onClose}
+                  >
+                    {/* Icon circle */}
+                    <div
+                      className={`shrink-0 w-10 h-10 rounded-xl bg-gradient-to-br ${opt.accent} flex items-center justify-center text-white shadow-md`}
+                    >
+                      {opt.icon}
+                    </div>
+
+                    {/* Text */}
+                    <div className="flex-1 min-w-0">
+                      <p className="text-[13px] font-bold text-foreground leading-tight">
+                        {opt.label}
+                      </p>
+                      <p className="text-[10px] text-muted-foreground mt-0.5 leading-snug">
+                        {opt.description}
+                      </p>
+                    </div>
+
+                    {/* Download arrow */}
+                    <Download
+                      className={`w-4 h-4 shrink-0 ${opt.iconColor} opacity-0 group-hover:opacity-100 group-hover:translate-y-0.5 transition-all duration-200`}
+                      aria-hidden="true"
+                    />
+                  </motion.a>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+}
+
 // Subcomponents
 interface ProfileCardProps {
   profile: Profile;
 }
 
 function ProfileCard({ profile }: ProfileCardProps) {
+  const [cvModalOpen, setCvModalOpen] = useState(false);
   return (
     <motion.div
       className="md:col-span-4 bento-card p-8 flex flex-col h-full relative overflow-hidden group/card"
@@ -157,19 +310,20 @@ function ProfileCard({ profile }: ProfileCardProps) {
       </motion.div>
 
       {/* CTA */}
-      <motion.a
+      <motion.button
         variants={itemVariants}
-        href="/cv.pdf"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group relative w-full py-3.5 bg-foreground text-background text-[10px] font-black tracking-[0.1em] rounded-xl overflow-hidden flex justify-center items-center gap-2 shadow-lg hover:shadow-xl transition-all"
+        onClick={() => setCvModalOpen(true)}
+        className="group relative w-full py-3.5 bg-foreground text-background text-[10px] font-black tracking-[0.1em] rounded-xl overflow-hidden flex justify-center items-center gap-2 shadow-lg hover:shadow-xl transition-all cursor-pointer"
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
+        aria-haspopup="dialog"
       >
         <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent z-10" />
-        <Download className="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform duration-300" />
+        <Download className="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform duration-300" aria-hidden="true" />
         <span className="relative z-20 uppercase">See Full Resume</span>
-      </motion.a>
+      </motion.button>
+
+      <CVModal open={cvModalOpen} onClose={() => setCvModalOpen(false)} />
     </motion.div >
   );
 }
