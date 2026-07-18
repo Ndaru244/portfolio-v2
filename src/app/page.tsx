@@ -1,44 +1,19 @@
 import type { Metadata } from "next";
-import HomeClientView from "@/components/views/HomeClientView";
+import HomeClientView from "@/components/portfolio/views/HomeClientView";
+import { SEO_DATA } from "@/lib/seed-data";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ndaru-portfolio.web.app"),
-
+  metadataBase: new URL(SEO_DATA.canonicalBase),
   title: {
-    default: "Ndaru Langgeng Santosa | UI/UX Designer & Web Developer",
-    template: "%s | Ndaru Langgeng Santosa",
+    default: SEO_DATA.title,
+    template: `%s | ${SEO_DATA.siteName}`,
   },
-
-  description:
-    "Explore the portfolio of Ndaru Langgeng Santosa, a professional UI/UX Designer and Web Developer based in Tangerang. Expertise in Next.js, React, and creating exceptional digital experiences.",
-
-  keywords: [
-    "Ndaru Langgeng Santosa",
-    "Ndaru Langgeng",
-    "UI/UX Designer",
-    "Frontend Developer",
-    "Next.js Portfolio",
-    "Web Design Portfolio",
-    "Tangerang",
-    "Indonesia",
-    "UI UX Indonesia",
-    "Web Developer Tangerang"
-  ],
-
-  authors: [{ name: "Ndaru Langgeng Santosa", url: "https://ndaru-portfolio.web.app" }],
+  description: SEO_DATA.description,
+  keywords: SEO_DATA.keywords,
+  authors: [{ name: "Ndaru Langgeng Santosa", url: SEO_DATA.canonicalBase }],
   creator: "Ndaru Langgeng Santosa",
   publisher: "Ndaru Langgeng Santosa",
-
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
-
-  alternates: {
-    canonical: "/",
-  },
-
+  alternates: { canonical: "/" },
   robots: {
     index: true,
     follow: true,
@@ -50,37 +25,22 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-
   openGraph: {
-    title: "Ndaru Langgeng Santosa - Portfolio",
-    description: "Explore the portfolio of Ndaru Langgeng Santosa, a professional UI/UX Designer and Web Developer based in Tangerang. Expertise in Next.js, React, and creating exceptional digital experiences.",
-    url: "https://ndaru-portfolio.web.app",
-    siteName: "Ndaru Langgeng Santosa Portfolio",
-    images: [
-      {
-        url: "/assets/img/My-Avatar.webp",
-        width: 540,
-        height: 540,
-        alt: "Ndaru Langgeng Santosa Portfolio Preview",
-      },
-    ],
+    title: SEO_DATA.title,
+    description: SEO_DATA.description,
+    url: SEO_DATA.canonicalBase,
+    siteName: SEO_DATA.siteName,
+    images: [{ url: SEO_DATA.ogImage, width: 1200, height: 630, alt: SEO_DATA.siteName }],
     type: "website",
-    locale: "id_ID",
+    locale: SEO_DATA.locale || "id_ID",
   },
-
   twitter: {
-    card: "summary",
-    title: "Ndaru Langgeng Santosa | UI/UX Designer & Web Developer",
-    description: "Explore the portfolio of Ndaru Langgeng Santosa, a professional UI/UX Designer and Web Developer based in Tangerang. Expertise in Next.js, React, and creating exceptional digital experiences.",
-    images: ["/assets/img/My-Avatar.webp"],
+    card: "summary_large_image",
+    title: SEO_DATA.title,
+    description: SEO_DATA.description,
+    images: [SEO_DATA.ogImage],
+    creator: SEO_DATA.twitterHandle,
   },
-
-  // 6. Icons: Memastikan Favicon di tab browser dan shortcut di HP muncul dengan benar
-  // icons: {
-  //   icon: "/favicon.ico", 
-  //   shortcut: "/favicon-16x16.png",
-  //   apple: "/apple-touch-icon.png",
-  // },
 };
 
 export default function HomePage() {

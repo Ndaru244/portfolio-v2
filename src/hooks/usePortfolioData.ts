@@ -5,18 +5,35 @@ import {
   getProfile,
   getProjects,
   getSkills,
-  getExperience,
-} from "@/services/firestore";
-import { Profile, Project, Skill, Experience } from "@/types/portfolio";
+  getExperiences,
+  getCertificates,
+  getNavigation,
+  getSettings,
+} from "@/repositories";
+import {
+  Profile,
+  Project,
+  Skill,
+  Experience,
+  Certificate,
+  Navigation,
+  Settings,
+} from "@/types";
+import {
+  CACHE_KEY,
+  subscribePortfolioCacheInvalidation,
+} from "@/lib/portfolio-cache";
 
-const CACHE_KEY = "portfolio_data_v1";
-const EXPIRATION_TIME = 3600 * 1000; // 1 Jam
+const EXPIRATION_TIME = 3600 * 1000;
 
-interface PortfolioData {
+export interface PortfolioData {
   profile: Profile | null;
   projects: Project[];
   skills: Skill[];
   experience: Experience[];
+  certificates: Certificate[];
+  navigation: Navigation | null;
+  settings: Settings | null;
 }
 
 interface CacheStructure {
@@ -24,85 +41,114 @@ interface CacheStructure {
   timestamp: number;
 }
 
+function readCache(): CacheStructure | null {
+  try {
+    const raw = localStorage.getItem(CACHE_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw) as CacheStructure;
+  } catch {
+    return null;
+  }
+}
+
+function writeCache(data: PortfolioData) {
+  try {
+    const payload: CacheStructure = { data, timestamp: Date.now() };
+    localStorage.setItem(CACHE_KEY, JSON.stringify(payload));
+  } catch {
+    // ignore
+  }
+}
+
 export function usePortfolioData() {
   const [data, setData] = useState<PortfolioData | null>(null);
   const [loading, setLoading] = useState(true);
   const [isRefetching, setIsRefetching] = useState(false);
-
-  // Ref untuk melacak apakah data sudah ada (menghindari dependency 'data' di useEffect)
   const hasDataRef = useRef(false);
+  const fetchingRef = useRef(false);
 
-  // 1. Stable Fetch Function (Tidak bergantung pada state 'data')
-  // Kita tambahkan parameter 'isBackground' untuk mengontrol loading state UI
   const fetchData = useCallback(async (isBackground = false) => {
+    if (fetchingRef.current && isBackground) return;
+    fetchingRef.current = true;
+
     try {
       if (isBackground) setIsRefetching(true);
 
-      const [profile, projects, skills, experience] = await Promise.all([
-        getProfile(),
-        getProjects(),
-        getSkills(),
-        getExperience(),
-      ]);
+      const [profile, projects, skills, experience, certificates, navigation, settings] =
+        await Promise.all([
+          getProfile(),
+          getProjects(),
+          getSkills(),
+          getExperiences(),
+          getCertificates(),
+          getNavigation(),
+          getSettings(),
+        ]);
 
-      const newData = { profile, projects, skills, experience };
-
-      // Simpan ke Local Storage
-      const cachePayload: CacheStructure = {
-        data: newData,
-        timestamp: Date.now(),
+      const newData: PortfolioData = {
+        profile,
+        projects,
+        skills,
+        experience,
+        certificates,
+        navigation,
+        settings,
       };
-      localStorage.setItem(CACHE_KEY, JSON.stringify(cachePayload));
 
+      writeCache(newData);
       setData(newData);
-      hasDataRef.current = true; // Update ref
+      hasDataRef.current = true;
     } catch (error) {
       console.error("Gagal mengambil data:", error);
     } finally {
       setLoading(false);
       setIsRefetching(false);
+      fetchingRef.current = false;
     }
-  }, []); // Dependency kosong agar fungsi ini STABIL (tidak dibuat ulang setiap render)
+  }, []);
 
-  // 2. Initial Load Effect (Hanya jalan 1x saat mount)
   useEffect(() => {
-    const cached = localStorage.getItem(CACHE_KEY);
-
-    if (cached) {
-      const parsed: CacheStructure = JSON.parse(cached);
-      const age = Date.now() - parsed.timestamp;
-
-      if (age < EXPIRATION_TIME) {
-        // HIT CACHE: Gunakan data lokal
-        setData(parsed.data);
+    const timeout = window.setTimeout(() => {
+      const cached = readCache();
+      if (cached && Date.now() - cached.timestamp < EXPIRATION_TIME) {
+        setData(cached.data);
         hasDataRef.current = true;
         setLoading(false);
-        console.log("⚡ Menggunakan Data Cache LocalStorage");
-      } else {
-        // STALE CACHE: Data ada tapi lama -> Fetch baru
-        console.log("⌛ Cache Kadaluarsa, mengambil data baru...");
-        fetchData(false);
+        void fetchData(true);
+        return;
       }
-    } else {
-      // NO CACHE: Ambil baru
-      fetchData(false);
-    }
+      void fetchData(false);
+    }, 0);
+
+    return () => window.clearTimeout(timeout);
   }, [fetchData]);
 
-  // 3. Interval Check (Jalan setiap 1 menit)
+  useEffect(() => {
+    return subscribePortfolioCacheInvalidation(() => {
+      fetchData(true);
+    });
+  }, [fetchData]);
+
+  useEffect(() => {
+    const onFocus = () => {
+      if (document.visibilityState === "visible") {
+        fetchData(true);
+      }
+    };
+    window.addEventListener("focus", onFocus);
+    document.addEventListener("visibilitychange", onFocus);
+    return () => {
+      window.removeEventListener("focus", onFocus);
+      document.removeEventListener("visibilitychange", onFocus);
+    };
+  }, [fetchData]);
+
   useEffect(() => {
     const interval = setInterval(() => {
-      const currentCache = localStorage.getItem(CACHE_KEY);
-      if (currentCache) {
-        const parsed: CacheStructure = JSON.parse(currentCache);
-        if (Date.now() - parsed.timestamp > EXPIRATION_TIME) {
-          console.log("♻️ Auto-refresh: Data sudah > 1 jam");
-          // Panggil dengan isBackground = true agar user tidak melihat full loader
-          fetchData(true);
-        }
+      if (document.visibilityState === "visible") {
+        fetchData(true);
       }
-    }, 60000);
-
+    }, 30000);
     return () => clearInterval(interval);
   }, [fetchData]);
 

@@ -45,6 +45,8 @@ firestore-debug.log*
 /coverage
 .vercel
 *.pem
+/audit-evidence/
+/graphify-out/
 
 # 7. DEVELOPMENT/UTILITY ROUTES
 /src/app/admin/
