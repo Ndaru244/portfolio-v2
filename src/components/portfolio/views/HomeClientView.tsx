@@ -26,21 +26,24 @@ export default function HomeClientView() {
   const { data, loading, isRefetching } = usePortfolioData();
   const { locale } = useLanguage();
   const reduceMotion = useReducedMotion();
-  const showCerts = data?.settings?.showCertificates !== false;
-  const showTech = data?.settings?.showTechStack !== false;
-  const profile = data?.profile ? localizeProfile(data.profile, locale) : null;
-  const projects =
-    data?.projects.map((project) => localizeProject(project, locale)) ?? [];
-  const experience =
-    data?.experience.map((item) => localizeExperience(item, locale)) ?? [];
-  const certificates =
-    data?.certificates.map((item) => localizeCertificate(item, locale)) ?? [];
+  const showCerts = data.settings?.showCertificates !== false;
+  const showTech = data.settings?.showTechStack !== false;
+  const profile = data.profile ? localizeProfile(data.profile, locale) : null;
+  const projects = data.projects.map((project) =>
+    localizeProject(project, locale),
+  );
+  const experience = data.experience.map((item) =>
+    localizeExperience(item, locale),
+  );
+  const certificates = data.certificates.map((item) =>
+    localizeCertificate(item, locale),
+  );
 
   return (
     <div className="min-h-screen font-sans text-foreground selection:bg-primary selection:text-white relative overflow-x-hidden">
       {profile && <JsonLd profile={profile} />}
       <AnimatePresence mode="wait">
-        {(loading || !data) && (
+        {loading && !profile && (
           <motion.div
             key="loader"
             exit={
@@ -56,11 +59,11 @@ export default function HomeClientView() {
         )}
       </AnimatePresence>
 
-      {isRefetching && data && (
+      {isRefetching && (
         <div className="fixed top-0 left-0 w-full h-0.5 z-[100] bg-primary origin-left animate-pulse" />
       )}
 
-      <Header profile={profile} navigation={data?.navigation ?? null} />
+      <Header profile={profile} navigation={data.navigation} />
 
       {profile && (
         <motion.main
@@ -80,14 +83,14 @@ export default function HomeClientView() {
             <AboutSection profile={profile} />
           </div>
           <ExperienceSection experience={experience} />
-          <SkillsSection skills={data?.skills ?? []} />
+          <SkillsSection skills={data.skills} />
           {showCerts && <CertificatesSection certificates={certificates} />}
           {showTech && <TechStackSection projects={projects} />}
           <ContactSection profile={profile} />
         </motion.main>
       )}
 
-      {data && <Footer profile={profile} />}
+      <Footer profile={profile} />
     </div>
   );
 }

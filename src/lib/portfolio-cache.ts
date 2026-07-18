@@ -23,7 +23,9 @@ export function subscribePortfolioCacheInvalidation(onInvalidate: () => void) {
   if (typeof window === "undefined") return () => {};
 
   const onStorage = (event: StorageEvent) => {
-    if (event.key === BUST_KEY || event.key === CACHE_KEY) {
+    // Only react to explicit bust signals. Listening to CACHE_KEY writes
+    // caused cross-tab refetch loops whenever a tab saved fresh data.
+    if (event.key === BUST_KEY) {
       onInvalidate();
     }
   };
