@@ -10,12 +10,19 @@ import {
   addDoc,
 } from "firebase/firestore";
 import { Experience } from "@/types";
+import { stripSensitiveFields } from "@/lib/sanitize-firestore";
 
 export async function getExperiences(): Promise<Experience[]> {
   try {
     const q = query(collection(db, "experiences"), orderBy("order", "asc"));
     const snap = await getDocs(q);
-    const data = snap.docs.map((d) => ({ id: d.id, ...d.data() }) as Experience);
+    const data = snap.docs.map(
+      (d) =>
+        ({
+          id: d.id,
+          ...stripSensitiveFields(d.data()),
+        }) as Experience,
+    );
     return data.sort((a, b) => Number(a.order) - Number(b.order));
   } catch (error) {
     console.error("Error fetching experiences:", error);

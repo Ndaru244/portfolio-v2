@@ -1,4 +1,5 @@
 import { Project } from "@/types";
+import { toSafeJsonLd } from "@/lib/sanitize-firestore";
 
 interface ProjectJsonLdProps {
   project: Project;
@@ -29,7 +30,7 @@ export default function ProjectJsonLd({ project }: ProjectJsonLdProps) {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: toSafeJsonLd(schema) }}
     />
   );
 }

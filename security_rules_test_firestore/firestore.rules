@@ -1,0 +1,61 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ===============================================================
+    // Assumed Data Model (public portfolio — read-only for clients)
+    // ===============================================================
+    //
+    // Collections (public read):
+    //   profile/{id}, projects/{id}, skills/{id}, experiences/{id},
+    //   experience/{id} (legacy), certificates/{id}, services/{id},
+    //   testimonials/{id}, blogs/{id}, media/{id}, navigation/{id},
+    //   settings/{id}, seo/{id}, resume/{id}
+    //
+    // Writes:
+    //   - FireCMS users (custom claim fireCMSUser), OR
+    //   - Verified owner email (local CMS bootstrap; email_verified required)
+    // Never trust document fields like adminKey for authorization.
+    //
+    // ===============================================================
+
+    function isFireCmsAdmin() {
+      return request.auth != null
+        && request.auth.token.fireCMSUser == true;
+    }
+
+    function isOwnerAdmin() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email == 'ndarulanggeng110@gmail.com';
+    }
+
+    function canWritePortfolio() {
+      return isFireCmsAdmin() || isOwnerAdmin();
+    }
+
+    function isPublicPortfolioCollection(name) {
+      return name in [
+        'profile',
+        'projects',
+        'skills',
+        'experiences',
+        'experience',
+        'certificates',
+        'services',
+        'testimonials',
+        'blogs',
+        'media',
+        'navigation',
+        'settings',
+        'seo',
+        'resume'
+      ];
+    }
+
+    match /{collection}/{document=**} {
+      allow read: if isPublicPortfolioCollection(collection);
+      allow write: if isPublicPortfolioCollection(collection)
+        && canWritePortfolio();
+    }
+  }
+}

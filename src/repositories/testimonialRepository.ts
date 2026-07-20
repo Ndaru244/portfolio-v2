@@ -10,12 +10,19 @@ import {
   addDoc,
 } from "firebase/firestore";
 import { Testimonial } from "@/types";
+import { stripSensitiveFields } from "@/lib/sanitize-firestore";
 
 export async function getTestimonials(): Promise<Testimonial[]> {
   try {
     const q = query(collection(db, "testimonials"), orderBy("order", "asc"));
     const snap = await getDocs(q);
-    return snap.docs.map((d) => ({ id: d.id, ...d.data() }) as Testimonial);
+    return snap.docs.map(
+      (d) =>
+        ({
+          id: d.id,
+          ...stripSensitiveFields(d.data()),
+        }) as Testimonial,
+    );
   } catch (error) {
     console.error("Error fetching testimonials:", error);
     return [];

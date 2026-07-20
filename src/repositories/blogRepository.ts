@@ -10,12 +10,19 @@ import {
   addDoc,
 } from "firebase/firestore";
 import { BlogPost } from "@/types";
+import { stripSensitiveFields } from "@/lib/sanitize-firestore";
 
 export async function getBlogPosts(): Promise<BlogPost[]> {
   try {
     const q = query(collection(db, "blogs"), orderBy("order", "asc"));
     const snap = await getDocs(q);
-    return snap.docs.map((d) => ({ id: d.id, ...d.data() }) as BlogPost);
+    return snap.docs.map(
+      (d) =>
+        ({
+          id: d.id,
+          ...stripSensitiveFields(d.data()),
+        }) as BlogPost,
+    );
   } catch (error) {
     console.error("Error fetching blogs:", error);
     return [];

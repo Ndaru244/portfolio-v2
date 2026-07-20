@@ -1,26 +1,27 @@
 # Ndarul Portfolio
 
-A bilingual (English and Indonesian) portfolio for presenting selected product design and software engineering case studies. It includes a Firebase-backed content system, local fallback data, project galleries, resume selection, dark/light themes, and an internal admin panel.
+Portfolio bilingual (EN/ID) untuk case study product design dan software engineering. Data dari Firebase Firestore dengan fallback seed lokal. Static export Next.js, di-host di Firebase Hosting.
 
 ## Stack
 
-- Next.js 16, React 19, and TypeScript
-- Tailwind CSS 4 and Framer Motion
-- Firebase Firestore and Storage
+- Next.js 16, React 19, TypeScript
+- Tailwind CSS 4, Framer Motion
+- Firebase Firestore + Hosting
 
-## Local development
+## Setup
 
 ```bash
 npm install
 cp .env.example .env.local
+# isi NEXT_PUBLIC_FIREBASE_* di .env.local
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). The content manager is available at `/admin` during local development.
+Buka [http://localhost:3000](http://localhost:3000).
 
-## Environment variables
+## Environment
 
-Configure the following values in `.env.local`:
+Salin dari `.env.example` ke `.env.local` (file ini di-gitignore):
 
 ```env
 NEXT_PUBLIC_FIREBASE_API_KEY=
@@ -29,18 +30,29 @@ NEXT_PUBLIC_FIREBASE_PROJECT_ID=
 NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=
 NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
 NEXT_PUBLIC_FIREBASE_APP_ID=
-ADMIN_KEY=
 ```
+
+`NEXT_PUBLIC_*` memang ter-bundle ke client (bukan secret server). Jangan commit service account / `.env.local`.
 
 ## Commands
 
 ```bash
-npm run dev        # Start the development server
-npm run build      # Create a static export in /out
-npm run start      # Serve the static /out folder
-npm run lint       # Run ESLint
-npm run typecheck  # Check TypeScript
-npm run seed       # Seed Firestore from local portfolio data
+npm run dev             # Dev server
+npm run build           # Static export → /out
+npm run start           # Serve /out
+npm run lint
+npm run typecheck
+npm run seed            # Seed Firestore (butuh Auth/Admin privileges)
+npm run test:rules      # Unit test Security Rules (emulator)
+npm run deploy:rules    # Deploy firestore.rules
+npm run deploy:hosting  # Deploy Hosting (jalankan build dulu)
+npm run deploy          # build + deploy hosting
 ```
 
-This project uses Next.js static export (`output: "export"`), so production preview serves the generated `out` directory instead of `next start`.
+Produksi memakai `output: "export"` — preview lewat `npm run start`, bukan `next start`.
+
+## Security notes
+
+- Firestore: public **read** untuk koleksi portfolio; **write** hanya FireCMS claim atau owner Auth terverifikasi (lihat `firestore.rules`).
+- Admin CMS lokal (`src/app/admin`) di-gitignore dan dikeluarkan dari `npm run build`.
+- Jangan simpan secret di dokumen Firestore atau di Security Rules sebagai field data.

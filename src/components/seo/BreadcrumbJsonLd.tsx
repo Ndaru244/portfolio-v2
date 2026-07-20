@@ -1,3 +1,5 @@
+import { toSafeJsonLd } from "@/lib/sanitize-firestore";
+
 interface Crumb {
   name: string;
   url: string;
@@ -18,7 +20,7 @@ export default function BreadcrumbJsonLd({ items }: { items: Crumb[] }) {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: toSafeJsonLd(schema) }}
     />
   );
 }

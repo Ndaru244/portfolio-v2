@@ -10,12 +10,19 @@ import {
   addDoc,
 } from "firebase/firestore";
 import { Certificate } from "@/types";
+import { stripSensitiveFields } from "@/lib/sanitize-firestore";
 
 export async function getCertificates(): Promise<Certificate[]> {
   try {
     const q = query(collection(db, "certificates"), orderBy("order", "asc"));
     const snap = await getDocs(q);
-    return snap.docs.map((d) => ({ id: d.id, ...d.data() }) as Certificate);
+    return snap.docs.map(
+      (d) =>
+        ({
+          id: d.id,
+          ...stripSensitiveFields(d.data()),
+        }) as Certificate,
+    );
   } catch (error) {
     console.error("Error fetching certificates:", error);
     return [];

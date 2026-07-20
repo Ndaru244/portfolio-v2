@@ -36,13 +36,6 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-const ADMIN_KEY = process.env.ADMIN_KEY;
-
-if (!ADMIN_KEY) {
-  console.error("ADMIN_KEY not found in .env.local");
-  process.exit(1);
-}
-
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
@@ -61,19 +54,19 @@ async function seedCollection<T extends Record<string, unknown>>(
   await clearCollection(name);
   console.log(`Seeding ${name}...`);
   for (const item of items) {
-    await addDoc(collection(db, name), { ...item, adminKey: ADMIN_KEY });
+    await addDoc(collection(db, name), item);
   }
 }
 
 async function seed() {
   console.log("Starting Firestore Seeding...");
+  console.log(
+    "Note: Security Rules deny unauthenticated writes. This script only works with Admin SDK / FireCMS claim / temporary elevated rules.",
+  );
 
   try {
     console.log("Seeding Profile...");
-    await setDoc(doc(db, "profile", PROFILE_DATA.id), {
-      ...PROFILE_DATA.data,
-      adminKey: ADMIN_KEY,
-    });
+    await setDoc(doc(db, "profile", PROFILE_DATA.id), PROFILE_DATA.data);
 
     await seedCollection("skills", SKILLS_DATA);
     await clearCollection("experience");
@@ -87,30 +80,21 @@ async function seed() {
     await clearCollection("projects");
     console.log("Seeding projects...");
     for (const project of PROJECTS_DATA) {
-      await setDoc(doc(db, "projects", project.id), {
-        ...project.data,
-        adminKey: ADMIN_KEY,
-      });
+      await setDoc(doc(db, "projects", project.id), project.data);
     }
 
     console.log("Seeding singleton docs...");
-    await setDoc(doc(db, "navigation", "main"), {
-      ...NAVIGATION_DATA,
-      adminKey: ADMIN_KEY,
-    });
-    await setDoc(doc(db, "settings", "main"), {
-      ...SETTINGS_DATA,
-      adminKey: ADMIN_KEY,
-    });
-    await setDoc(doc(db, "seo", "main"), { ...SEO_DATA, adminKey: ADMIN_KEY });
-    await setDoc(doc(db, "resume", "main"), {
-      ...RESUME_DATA,
-      adminKey: ADMIN_KEY,
-    });
+    await setDoc(doc(db, "navigation", "main"), NAVIGATION_DATA);
+    await setDoc(doc(db, "settings", "main"), SETTINGS_DATA);
+    await setDoc(doc(db, "seo", "main"), SEO_DATA);
+    await setDoc(doc(db, "resume", "main"), RESUME_DATA);
 
     console.log("Seeding Completed Successfully!");
   } catch (error) {
     console.error("Seeding Failed:", error);
+    console.error(
+      "If permission-denied: use Firebase Console, FireCMS (fireCMSUser claim), or firebase-admin with a service account.",
+    );
     process.exit(1);
   }
 }

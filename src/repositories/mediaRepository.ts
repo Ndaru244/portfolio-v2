@@ -8,11 +8,18 @@ import {
   addDoc,
 } from "firebase/firestore";
 import { MediaItem } from "@/types";
+import { stripSensitiveFields } from "@/lib/sanitize-firestore";
 
 export async function getMediaItems(): Promise<MediaItem[]> {
   try {
     const snap = await getDocs(collection(db, "media"));
-    return snap.docs.map((d) => ({ id: d.id, ...d.data() }) as MediaItem);
+    return snap.docs.map(
+      (d) =>
+        ({
+          id: d.id,
+          ...stripSensitiveFields(d.data()),
+        }) as MediaItem,
+    );
   } catch (error) {
     console.error("Error fetching media:", error);
     return [];

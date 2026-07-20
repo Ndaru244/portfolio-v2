@@ -11,6 +11,7 @@ import {
 } from "firebase/firestore";
 import { Project } from "@/types";
 import { PROJECTS_DATA } from "@/lib/seed-data";
+import { stripSensitiveFields } from "@/lib/sanitize-firestore";
 
 function getSeedProjects(): Project[] {
   return PROJECTS_DATA.map((p) => p.data);
@@ -24,7 +25,13 @@ export async function getProjects(): Promise<Project[]> {
   try {
     const q = query(collection(db, "projects"), orderBy("order", "asc"));
     const snap = await getDocs(q);
-    const projects = snap.docs.map((d) => ({ id: d.id, ...d.data() }) as Project);
+    const projects = snap.docs.map(
+      (d) =>
+        ({
+          id: d.id,
+          ...stripSensitiveFields(d.data()),
+        }) as Project,
+    );
     if (projects.length) return projects;
   } catch (error) {
     console.error("Error fetching projects:", error);
@@ -35,7 +42,12 @@ export async function getProjects(): Promise<Project[]> {
 export async function getProjectById(id: string): Promise<Project | null> {
   try {
     const snap = await getDoc(doc(db, "projects", id));
-    if (snap.exists()) return { id: snap.id, ...snap.data() } as Project;
+    if (snap.exists()) {
+      return {
+        id: snap.id,
+        ...stripSensitiveFields(snap.data()),
+      } as Project;
+    }
   } catch (error) {
     console.error("Error fetching project:", error);
   }

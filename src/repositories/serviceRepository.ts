@@ -10,12 +10,19 @@ import {
   addDoc,
 } from "firebase/firestore";
 import { Service } from "@/types";
+import { stripSensitiveFields } from "@/lib/sanitize-firestore";
 
 export async function getServices(): Promise<Service[]> {
   try {
     const q = query(collection(db, "services"), orderBy("order", "asc"));
     const snap = await getDocs(q);
-    return snap.docs.map((d) => ({ id: d.id, ...d.data() }) as Service);
+    return snap.docs.map(
+      (d) =>
+        ({
+          id: d.id,
+          ...stripSensitiveFields(d.data()),
+        }) as Service,
+    );
   } catch (error) {
     console.error("Error fetching services:", error);
     return [];

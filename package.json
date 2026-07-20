@@ -12,7 +12,11 @@
     "start": "npx --yes serve@latest out",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "seed": "tsx scripts/seed.ts"
+    "seed": "tsx scripts/seed.ts",
+    "test:rules": "npm --prefix security_rules_test_firestore test",
+    "deploy:rules": "npx -y firebase-tools@latest deploy --only firestore:rules --project ndaru-portfolio",
+    "deploy:hosting": "npx -y firebase-tools@latest deploy --only hosting --project ndaru-portfolio",
+    "deploy": "npm run build && npm run deploy:hosting"
   },
   "dependencies": {
     "clsx": "^2.1.1",

@@ -1,4 +1,5 @@
 import { Profile } from "@/types";
+import { toSafeJsonLd } from "@/lib/sanitize-firestore";
 
 interface JsonLdProps {
   profile: Profile;
@@ -38,11 +39,11 @@ export default function JsonLd({ profile }: JsonLdProps) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        dangerouslySetInnerHTML={{ __html: toSafeJsonLd(personSchema) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        dangerouslySetInnerHTML={{ __html: toSafeJsonLd(websiteSchema) }}
       />
     </>
   );

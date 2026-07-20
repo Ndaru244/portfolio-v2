@@ -15,26 +15,28 @@
 next-env.d.ts
 *.tsbuildinfo
 
-# 3. FIREBASE SPECIFIC (Crucial for Hosting)
-# Abaikan folder cache dan log debug
+# 3. FIREBASE
 .firebase/
 *-debug.log
 firebase-debug.log*
 firestore-debug.log*
+/security_rules_test_firestore/node_modules/
+/security_rules_test_firestore/firestore-debug.log
+/security_rules_test_firestore/.firebase/
 
-# 4. ENVIRONMENT VARIABLES (Security)
-# Wajib diabaikan agar API Key Firebase tidak bocor
+# 4. ENVIRONMENT / SECRETS
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-*.env.local
+.env.*
+!.env.example
+*.pem
+*credentials*.json
+*serviceAccount*.json
 
 # 5. OS & IDE
 .DS_Store
 .vscode/
 .idea/
+.cursor/settings.json
 *.suo
 *.ntvs
 *.njsproj
@@ -44,9 +46,9 @@ firestore-debug.log*
 # 6. MISC
 /coverage
 .vercel
-*.pem
 /audit-evidence/
 /graphify-out/
 
-# 7. DEVELOPMENT/UTILITY ROUTES
+# 7. LOCAL-ONLY CMS (not part of public static site)
 /src/app/admin/
+/src/.admin-temp/
