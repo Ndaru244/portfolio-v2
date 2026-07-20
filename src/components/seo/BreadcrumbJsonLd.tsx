@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect } from "react";
 import { toSafeJsonLd } from "@/lib/sanitize-firestore";
 
 interface Crumb {
@@ -6,21 +9,30 @@ interface Crumb {
 }
 
 export default function BreadcrumbJsonLd({ items }: { items: Crumb[] }) {
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: items.map((item, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      name: item.name,
-      item: item.url,
-    })),
-  };
+  useEffect(() => {
+    const schema = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: items.map((item, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: item.name,
+        item: item.url,
+      })),
+    };
 
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: toSafeJsonLd(schema) }}
-    />
-  );
+    const id = "json-ld-breadcrumb";
+    document.getElementById(id)?.remove();
+    const el = document.createElement("script");
+    el.id = id;
+    el.type = "application/ld+json";
+    el.text = toSafeJsonLd(schema);
+    document.head.appendChild(el);
+
+    return () => {
+      el.remove();
+    };
+  }, [items]);
+
+  return null;
 }

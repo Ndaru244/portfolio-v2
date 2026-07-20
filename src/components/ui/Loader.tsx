@@ -15,18 +15,18 @@ const LOADING_KEYS: MessageKey[] = [
 const TEXT_INTERVAL_MS = 1500;
 
 const logoVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.5 },
+  hidden: { opacity: 0, scale: 0.92 },
   visible: {
     opacity: 1,
     scale: 1,
-    transition: { duration: 0.5 },
+    transition: { duration: 0.35 },
   },
 };
 
 const textVariants: Variants = {
-  hidden: { y: 20, opacity: 0 },
+  hidden: { y: 12, opacity: 0 },
   visible: { y: 0, opacity: 1 },
-  exit: { y: -20, opacity: 0 },
+  exit: { y: -12, opacity: 0 },
 };
 
 function LogoSpinner({ reduceMotion }: { reduceMotion: boolean }) {
@@ -35,24 +35,18 @@ function LogoSpinner({ reduceMotion }: { reduceMotion: boolean }) {
       variants={reduceMotion ? undefined : logoVariants}
       initial={reduceMotion ? false : "hidden"}
       animate={reduceMotion ? undefined : "visible"}
-      className="relative mb-8"
+      className="relative mb-8 flex h-20 w-20 items-center justify-center"
     >
-      <div className="relative w-20 h-20 bg-primary/10 rounded-2xl flex items-center justify-center border border-primary/20 shadow-[0_0_50px_rgba(37,99,235,0.2)]">
-        {!reduceMotion && (
-          <motion.div
-            className="absolute inset-0 rounded-2xl"
-            style={{
-              borderTop: "3px solid hsl(var(--primary))",
-              borderBottom: "3px solid hsl(var(--primary))",
-              borderLeft: "3px solid hsl(var(--primary))",
-              borderRight: "3px solid transparent",
-            }}
-            animate={{ rotate: 360 }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-            aria-hidden="true"
-          />
-        )}
-        <span className="text-primary font-black text-2xl tracking-tighter relative z-10">
+      {!reduceMotion && (
+        <motion.div
+          className="absolute inset-0 rounded-full border-2 border-transparent border-t-foreground border-r-foreground/30"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 1.1, repeat: Infinity, ease: "linear" }}
+          aria-hidden="true"
+        />
+      )}
+      <div className="relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl border border-border bg-muted">
+        <span className="text-foreground font-bold text-xl tracking-tight">
           ND
         </span>
       </div>
@@ -69,17 +63,17 @@ function ProgressBar({
 }) {
   return (
     <div
-      className="w-64 h-1.5 bg-muted rounded-full overflow-hidden relative mb-4"
+      className="w-56 h-1 bg-muted rounded-full overflow-hidden relative mb-4"
       role="progressbar"
       aria-label={label}
     >
       {reduceMotion ? (
-        <div className="absolute inset-y-0 left-0 w-1/2 bg-primary" />
+        <div className="absolute inset-y-0 left-0 w-1/2 bg-foreground" />
       ) : (
         <motion.div
-          className="absolute h-full w-1/2 bg-primary"
+          className="absolute h-full w-1/2 bg-foreground"
           animate={{ x: ["-100%", "200%"] }}
-          transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 0.2 }}
+          transition={{ duration: 1.4, repeat: Infinity, repeatDelay: 0.15 }}
         />
       )}
     </div>
@@ -92,7 +86,7 @@ export default function Loader() {
   const [textIndex, setTextIndex] = useState(0);
 
   const currentText = useMemo(
-    () => t(LOADING_KEYS[textIndex]).toUpperCase(),
+    () => t(LOADING_KEYS[textIndex]),
     [t, textIndex],
   );
 
@@ -105,7 +99,11 @@ export default function Loader() {
   }, [reduceMotion]);
 
   return (
-    <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-background text-foreground">
+    <div
+      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-background text-foreground"
+      role="status"
+      aria-live="polite"
+    >
       <LogoSpinner reduceMotion={!!reduceMotion} />
       <ProgressBar
         label={t("loadingProgress")}
@@ -114,7 +112,7 @@ export default function Loader() {
 
       <div className="h-6 relative w-64">
         {reduceMotion ? (
-          <p className="text-[10px] font-bold tracking-[0.2em] text-muted-foreground text-center absolute inset-0 flex items-center justify-center">
+          <p className="text-xs font-medium tracking-wide text-muted-foreground text-center absolute inset-0 flex items-center justify-center">
             {currentText}
           </p>
         ) : (
@@ -125,8 +123,8 @@ export default function Loader() {
               initial="hidden"
               animate="visible"
               exit="exit"
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="text-[10px] font-bold tracking-[0.2em] text-muted-foreground text-center absolute inset-0 flex items-center justify-center"
+              transition={{ duration: 0.25, ease: "easeInOut" }}
+              className="text-xs font-medium tracking-wide text-muted-foreground text-center absolute inset-0 flex items-center justify-center"
             >
               {currentText}
             </motion.p>

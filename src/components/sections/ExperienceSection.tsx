@@ -20,32 +20,32 @@ export default function ExperienceSection({ experience }: Props) {
   if (!experience.length) return null;
 
   return (
-    <section id="experience" className="mb-24">
-      <p className="section-label mb-4">{t("experience")}</p>
-      <h2 className="text-3xl font-semibold tracking-tight mb-8">
-        {t("experienceTitle")}
-      </h2>
-      <div className="space-y-4">
+    <section id="experience" className="section-spacing">
+      <p className="section-label mb-3">{t("experience")}</p>
+      <h2 className="section-title mb-8">{t("experienceTitle")}</h2>
+      <div className="space-y-3">
         {experience.map((exp, i) => (
           <motion.article
             key={exp.id}
-            initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{
-              delay: reduceMotion ? 0 : i * 0.06,
-              duration: reduceMotion ? 0.01 : 0.35,
+              delay: reduceMotion ? 0 : i * 0.05,
+              duration: reduceMotion ? 0.01 : 0.3,
             }}
-            className="rounded-2xl border border-border bg-card/40 p-6 md:p-7 flex flex-col md:flex-row gap-5"
+            className="surface p-5 md:p-6 flex flex-col md:flex-row gap-4 md:gap-5"
           >
             <div className="p-2.5 bg-muted rounded-xl h-fit shrink-0">
-              <Briefcase className="w-4 h-4" aria-hidden />
+              <Briefcase className="w-4 h-4 text-muted-foreground" aria-hidden />
             </div>
-            <div className="flex-1 space-y-2">
-              <div className="flex flex-wrap items-baseline justify-between gap-2">
-                <h3 className="font-semibold text-lg">{exp.company}</h3>
+            <div className="flex-1 space-y-2 min-w-0">
+              <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+                <h3 className="font-semibold text-lg leading-snug">
+                  {exp.company}
+                </h3>
                 <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
-                  <Calendar className="w-3 h-3" aria-hidden />
+                  <Calendar className="w-3.5 h-3.5" aria-hidden />
                   {exp.period}
                 </span>
               </div>
@@ -53,7 +53,7 @@ export default function ExperienceSection({ experience }: Props) {
               <p className="text-sm text-muted-foreground leading-relaxed max-w-[65ch]">
                 {exp.description}
               </p>
-              <span className="badge mt-2">
+              <span className="badge mt-1">
                 {formatExperienceType(exp.type)}
               </span>
             </div>

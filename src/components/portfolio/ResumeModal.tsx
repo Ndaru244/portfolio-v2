@@ -36,7 +36,7 @@ export default function ResumeModal({ open, onClose }: Props) {
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
+          className="fixed inset-0 z-[200] flex items-center justify-center bg-black/55 p-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -51,7 +51,7 @@ export default function ResumeModal({ open, onClose }: Props) {
             aria-modal="true"
             aria-labelledby="resume-title"
             aria-describedby="resume-description"
-            className="soft-glass w-full max-w-md bg-background/95 p-5 sm:p-6"
+            className="surface w-full max-w-md p-5 sm:p-6"
             initial={
               reduceMotion ? { opacity: 0 } : { opacity: 0, y: 16, scale: 0.97 }
             }
@@ -91,7 +91,7 @@ export default function ResumeModal({ open, onClose }: Props) {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={onClose}
-                  className="group flex items-center gap-4 rounded-2xl border border-border bg-card/60 p-4 transition-colors hover:border-primary/40 hover:bg-muted/60"
+                  className="group flex items-center gap-4 rounded-xl border border-border bg-muted/40 p-4 transition-colors hover:bg-muted"
                 >
                   <span className="rounded-xl bg-muted p-2.5 text-primary">
                     <Icon className="h-5 w-5" aria-hidden />

@@ -24,16 +24,20 @@ const LanguageContext = createContext<LanguageContextValue | null>(null);
 const STORAGE_KEY = "portfolio_locale";
 
 function readStoredLocale(): Locale {
-  if (typeof window === "undefined") return "en";
   const saved = localStorage.getItem(STORAGE_KEY);
   return saved === "en" || saved === "id" ? saved : "en";
 }
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>(readStoredLocale);
+  const [locale, setLocaleState] = useState<Locale>("en");
   const [isSwitching, setIsSwitching] = useState(false);
   const timeouts = useRef<ReturnType<typeof setTimeout>[]>([]);
   const reduceMotion = useReducedMotion();
+
+  useEffect(() => {
+    const stored = readStoredLocale();
+    if (stored !== "en") setLocaleState(stored);
+  }, []);
 
   useEffect(() => {
     document.documentElement.lang = locale;

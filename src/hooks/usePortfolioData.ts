@@ -115,10 +115,6 @@ function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
 }
 
 function getInitialData(): PortfolioData {
-  const cached = readCache();
-  if (cached && Date.now() - cached.timestamp < EXPIRATION_TIME) {
-    return cached.data;
-  }
   return getSeedPortfolioData();
 }
 
@@ -129,6 +125,14 @@ export function usePortfolioData() {
   const fetchingRef = useRef(false);
   const requestIdRef = useRef(0);
   const lastFetchAtRef = useRef(0);
+
+  useEffect(() => {
+    const cached = readCache();
+    if (cached && Date.now() - cached.timestamp < EXPIRATION_TIME) {
+      setData(cached.data);
+      lastFetchAtRef.current = cached.timestamp;
+    }
+  }, []);
 
   const fetchData = useCallback(async (isBackground = false) => {
     if (fetchingRef.current && isBackground) return;

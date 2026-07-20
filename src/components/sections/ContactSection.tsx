@@ -17,21 +17,21 @@ export default function ContactSection({ profile }: Props) {
   return (
     <motion.section
       id="contact"
-      className="mb-8"
-      initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+      className="mb-4"
+      initial={reduceMotion ? false : { opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: reduceMotion ? 0.01 : 0.35 }}
+      transition={{ duration: reduceMotion ? 0.01 : 0.3 }}
     >
-      <div className="soft-glass p-8 md:p-12 text-center space-y-6">
+      <div className="surface p-8 md:p-12 text-center space-y-5">
         <p className="section-label">{t("contact")}</p>
-        <h2 className="text-3xl md:text-4xl font-semibold tracking-tight max-w-xl mx-auto">
+        <h2 className="section-title max-w-xl mx-auto text-3xl md:text-4xl">
           {t("contactTitle")}
         </h2>
-        <p className="text-muted-foreground max-w-md mx-auto">
+        <p className="text-muted-foreground max-w-md mx-auto leading-relaxed">
           {t("contactDescription")}
         </p>
-        <div className="flex flex-wrap justify-center gap-3">
+        <div className="flex flex-wrap justify-center gap-3 pt-1">
           {profile.socials.email && (
             <Button href={profile.socials.email} variant="primary" size="lg">
               <Mail className="w-4 h-4" aria-hidden />

@@ -11,9 +11,8 @@ service cloud.firestore {
     //   testimonials/{id}, blogs/{id}, media/{id}, navigation/{id},
     //   settings/{id}, seo/{id}, resume/{id}
     //
-    // Writes:
-    //   - FireCMS users (custom claim fireCMSUser), OR
-    //   - Verified owner email (local CMS bootstrap; email_verified required)
+    // Writes from clients: FireCMS users only (custom claim fireCMSUser).
+    // Local CMS / seed use Firebase Admin SDK (bypasses Security Rules).
     // Never trust document fields like adminKey for authorization.
     //
     // ===============================================================
@@ -21,16 +20,6 @@ service cloud.firestore {
     function isFireCmsAdmin() {
       return request.auth != null
         && request.auth.token.fireCMSUser == true;
-    }
-
-    function isOwnerAdmin() {
-      return request.auth != null
-        && request.auth.token.email_verified == true
-        && request.auth.token.email == 'ndarulanggeng110@gmail.com';
-    }
-
-    function canWritePortfolio() {
-      return isFireCmsAdmin() || isOwnerAdmin();
     }
 
     function isPublicPortfolioCollection(name) {
@@ -55,7 +44,7 @@ service cloud.firestore {
     match /{collection}/{document=**} {
       allow read: if isPublicPortfolioCollection(collection);
       allow write: if isPublicPortfolioCollection(collection)
-        && canWritePortfolio();
+        && isFireCmsAdmin();
     }
   }
 }

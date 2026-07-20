@@ -15,15 +15,14 @@ export default function AboutSection({ profile }: Props) {
   return (
     <motion.section
       id="about"
-      initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+      className="section-spacing"
+      initial={reduceMotion ? false : { opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: reduceMotion ? 0.01 : 0.55 }}
+      transition={{ duration: reduceMotion ? 0.01 : 0.45 }}
     >
-      <p className="section-label mb-4">{t("about")}</p>
-      <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-6 max-w-3xl">
-        {t("aboutTitle")}
-      </h2>
+      <p className="section-label mb-3">{t("about")}</p>
+      <h2 className="section-title mb-5 max-w-3xl">{t("aboutTitle")}</h2>
       <p className="text-muted-foreground leading-relaxed text-base md:text-lg max-w-[65ch]">
         {profile.bio_long}
       </p>

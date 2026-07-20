@@ -25,12 +25,10 @@ export default function SkillsSection({ skills }: Props) {
   }));
 
   return (
-    <section id="skills" className="mb-24">
-      <p className="section-label mb-4">{t("skills")}</p>
-      <h2 className="text-3xl font-semibold tracking-tight mb-8">
-        {t("capabilities")}
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <section id="skills" className="section-spacing">
+      <p className="section-label mb-3">{t("skills")}</p>
+      <h2 className="section-title mb-8">{t("capabilities")}</h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
         {groups.map(({ cat, items }, gi) =>
           items.length ? (
             <motion.div
@@ -39,15 +37,18 @@ export default function SkillsSection({ skills }: Props) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{
-                delay: reduceMotion ? 0 : gi * 0.08,
-                duration: reduceMotion ? 0.01 : 0.35,
+                delay: reduceMotion ? 0 : gi * 0.06,
+                duration: reduceMotion ? 0.01 : 0.3,
               }}
-              className="soft-glass p-6 space-y-4"
+              className="surface p-5 md:p-6 space-y-4"
             >
-              <h3 className="font-semibold">{labels[cat]}</h3>
-              <ul className="space-y-2.5">
+              <h3 className="font-semibold text-base">{labels[cat]}</h3>
+              <ul className="space-y-2">
                 {items.map((skill) => (
-                  <li key={skill.id} className="text-sm text-foreground/90">
+                  <li
+                    key={skill.id}
+                    className="text-sm text-muted-foreground leading-relaxed"
+                  >
                     {skill.name}
                   </li>
                 ))}

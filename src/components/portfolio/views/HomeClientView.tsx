@@ -24,7 +24,7 @@ import {
 
 export default function HomeClientView() {
   const { data, loading, isRefetching } = usePortfolioData();
-  const { locale } = useLanguage();
+  const { locale, t } = useLanguage();
   const reduceMotion = useReducedMotion();
   const showCerts = data.settings?.showCertificates !== false;
   const showTech = data.settings?.showTechStack !== false;
@@ -40,18 +40,17 @@ export default function HomeClientView() {
   );
 
   return (
-    <div className="min-h-screen font-sans text-foreground selection:bg-primary selection:text-white relative overflow-x-hidden">
+    <div className="min-h-screen font-sans text-foreground selection:bg-primary selection:text-primary-foreground relative overflow-x-hidden">
+      <a href="#main-content" className="skip-link">
+        {t("skipToContent")}
+      </a>
       {profile && <JsonLd profile={profile} />}
       <AnimatePresence mode="wait">
         {loading && !profile && (
           <motion.div
             key="loader"
-            exit={
-              reduceMotion
-                ? { opacity: 0 }
-                : { opacity: 0, filter: "blur(12px)" }
-            }
-            transition={{ duration: reduceMotion ? 0.15 : 0.6 }}
+            exit={reduceMotion ? { opacity: 0 } : { opacity: 0 }}
+            transition={{ duration: reduceMotion ? 0.1 : 0.35 }}
             className="fixed inset-0 z-[9999] bg-background"
           >
             <Loader />
@@ -60,28 +59,31 @@ export default function HomeClientView() {
       </AnimatePresence>
 
       {isRefetching && (
-        <div className="fixed top-0 left-0 w-full h-0.5 z-[100] bg-primary origin-left animate-pulse" />
+        <div
+          className="fixed top-0 left-0 w-full h-0.5 z-[100] bg-primary origin-left animate-pulse"
+          role="status"
+          aria-label={t("loadingProgress")}
+        />
       )}
 
       <Header profile={profile} navigation={data.navigation} />
 
       {profile && (
         <motion.main
-          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+          id="main-content"
+          initial={reduceMotion ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
-            duration: reduceMotion ? 0.01 : 0.8,
+            duration: reduceMotion ? 0.01 : 0.5,
             ease: [0.25, 1, 0.5, 1],
           }}
-          className="max-w-7xl mx-auto px-6 pt-28 pb-12 relative z-10"
+          className="max-w-7xl mx-auto px-4 sm:px-6 pt-24 sm:pt-28 pb-12 relative z-10"
         >
-          <div className="mb-24">
+          <div className="section-spacing">
             <HeroSection profile={profile} />
           </div>
           <ProjectsSection projects={projects} />
-          <div className="mb-24">
-            <AboutSection profile={profile} />
-          </div>
+          <AboutSection profile={profile} />
           <ExperienceSection experience={experience} />
           <SkillsSection skills={data.skills} />
           {showCerts && <CertificatesSection certificates={certificates} />}

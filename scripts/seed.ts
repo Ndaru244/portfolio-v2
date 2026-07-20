@@ -1,13 +1,3 @@
-import { initializeApp } from "firebase/app";
-import {
-  getFirestore,
-  doc,
-  setDoc,
-  collection,
-  addDoc,
-  getDocs,
-  deleteDoc,
-} from "firebase/firestore";
 import * as dotenv from "dotenv";
 import {
   PROFILE_DATA,
@@ -24,49 +14,49 @@ import {
   SEO_DATA,
   RESUME_DATA,
 } from "../src/lib/seed-data";
+import { getAdminDb } from "../src/lib/firebase-admin";
 
 dotenv.config({ path: ".env.local" });
 
-const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
 async function clearCollection(collectionName: string) {
-  const snap = await getDocs(collection(db, collectionName));
+  const db = getAdminDb();
+  const snap = await db.collection(collectionName).get();
   console.log(`Clearing collection: ${collectionName} (${snap.size} docs)`);
+  const batchSize = 400;
+  let batch = db.batch();
+  let count = 0;
   for (const d of snap.docs) {
-    await deleteDoc(doc(db, collectionName, d.id));
+    batch.delete(d.ref);
+    count++;
+    if (count >= batchSize) {
+      await batch.commit();
+      batch = db.batch();
+      count = 0;
+    }
   }
+  if (count > 0) await batch.commit();
 }
 
 async function seedCollection<T extends Record<string, unknown>>(
   name: string,
   items: T[],
 ) {
+  const db = getAdminDb();
   await clearCollection(name);
   console.log(`Seeding ${name}...`);
   for (const item of items) {
-    await addDoc(collection(db, name), item);
+    await db.collection(name).add(item);
   }
 }
 
 async function seed() {
-  console.log("Starting Firestore Seeding...");
-  console.log(
-    "Note: Security Rules deny unauthenticated writes. This script only works with Admin SDK / FireCMS claim / temporary elevated rules.",
-  );
+  console.log("Starting Firestore Seeding (Admin SDK)...");
 
   try {
+    const db = getAdminDb();
+
     console.log("Seeding Profile...");
-    await setDoc(doc(db, "profile", PROFILE_DATA.id), PROFILE_DATA.data);
+    await db.collection("profile").doc(PROFILE_DATA.id).set(PROFILE_DATA.data);
 
     await seedCollection("skills", SKILLS_DATA);
     await clearCollection("experience");
@@ -80,20 +70,20 @@ async function seed() {
     await clearCollection("projects");
     console.log("Seeding projects...");
     for (const project of PROJECTS_DATA) {
-      await setDoc(doc(db, "projects", project.id), project.data);
+      await db.collection("projects").doc(project.id).set(project.data);
     }
 
     console.log("Seeding singleton docs...");
-    await setDoc(doc(db, "navigation", "main"), NAVIGATION_DATA);
-    await setDoc(doc(db, "settings", "main"), SETTINGS_DATA);
-    await setDoc(doc(db, "seo", "main"), SEO_DATA);
-    await setDoc(doc(db, "resume", "main"), RESUME_DATA);
+    await db.collection("navigation").doc("main").set(NAVIGATION_DATA);
+    await db.collection("settings").doc("main").set(SETTINGS_DATA);
+    await db.collection("seo").doc("main").set(SEO_DATA);
+    await db.collection("resume").doc("main").set(RESUME_DATA);
 
     console.log("Seeding Completed Successfully!");
   } catch (error) {
     console.error("Seeding Failed:", error);
     console.error(
-      "If permission-denied: use Firebase Console, FireCMS (fireCMSUser claim), or firebase-admin with a service account.",
+      "Set FIREBASE_SERVICE_ACCOUNT (JSON) or GOOGLE_APPLICATION_CREDENTIALS in .env.local.",
     );
     process.exit(1);
   }

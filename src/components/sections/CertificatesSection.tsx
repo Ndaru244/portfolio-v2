@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Award, ExternalLink } from "lucide-react";
 import { Certificate } from "@/types";
 import { useLanguage } from "@/components/layout/LanguageProvider";
@@ -11,29 +11,31 @@ interface Props {
 
 export default function CertificatesSection({ certificates }: Props) {
   const { t } = useLanguage();
+  const reduceMotion = useReducedMotion();
   if (!certificates.length) return null;
 
   return (
-    <section id="certificates" className="mb-24">
-      <p className="section-label mb-4">{t("certificates")}</p>
-      <h2 className="text-3xl font-semibold tracking-tight mb-8">
-        {t("credentials")}
-      </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <section id="certificates" className="section-spacing">
+      <p className="section-label mb-3">{t("certificates")}</p>
+      <h2 className="section-title mb-8">{t("credentials")}</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
         {certificates.map((cert, i) => (
           <motion.article
             key={cert.id}
-            initial={{ opacity: 0, y: 16 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.05 }}
-            className="soft-glass p-5 flex gap-4 items-start"
+            transition={{
+              delay: reduceMotion ? 0 : i * 0.04,
+              duration: reduceMotion ? 0.01 : 0.3,
+            }}
+            className="surface p-5 flex gap-4 items-start"
           >
-            <div className="p-2.5 rounded-xl bg-muted">
-              <Award className="w-4 h-4 text-primary" />
+            <div className="p-2.5 rounded-xl bg-muted shrink-0">
+              <Award className="w-4 h-4 text-muted-foreground" aria-hidden />
             </div>
-            <div className="space-y-1 flex-1">
-              <h3 className="font-semibold">{cert.title}</h3>
+            <div className="space-y-1.5 flex-1 min-w-0">
+              <h3 className="font-semibold leading-snug">{cert.title}</h3>
               <p className="text-sm text-muted-foreground">
                 {cert.issuer} · {cert.date}
               </p>
@@ -42,9 +44,10 @@ export default function CertificatesSection({ certificates }: Props) {
                   href={cert.credentialUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-xs text-primary font-medium mt-1"
+                  className="inline-flex items-center gap-1.5 text-sm text-primary font-medium hover:underline underline-offset-2 mt-1"
                 >
-                  {t("verify")} <ExternalLink className="w-3 h-3" />
+                  {t("verify")}
+                  <ExternalLink className="w-3.5 h-3.5" aria-hidden />
                 </a>
               )}
             </div>

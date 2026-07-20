@@ -7,19 +7,19 @@ type ButtonVariant = "primary" | "secondary" | "ghost" | "icon";
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    "bg-foreground text-background font-semibold hover:opacity-90 shadow-sm",
+    "bg-foreground text-background font-semibold hover:opacity-90 active:opacity-80 shadow-sm",
   secondary:
-    "border border-border bg-transparent text-foreground font-semibold hover:bg-muted",
+    "border border-border bg-transparent text-foreground font-semibold hover:bg-muted active:bg-muted/80",
   ghost:
-    "bg-transparent text-muted-foreground font-semibold hover:text-foreground hover:bg-muted/60",
+    "bg-transparent text-muted-foreground font-semibold hover:text-foreground hover:bg-muted active:bg-muted/80",
   icon:
-    "p-2 text-muted-foreground hover:bg-muted hover:text-foreground rounded-full",
+    "h-10 w-10 p-0 text-muted-foreground hover:bg-muted hover:text-foreground active:bg-muted/80 rounded-full",
 };
 
 const sizeClasses = {
-  sm: "px-3.5 py-1.5 text-xs gap-1.5",
-  md: "px-5 py-2.5 text-sm gap-2",
-  lg: "px-6 py-3 text-sm gap-2",
+  sm: "px-3.5 py-2 text-xs gap-1.5 min-h-9",
+  md: "px-5 py-2.5 text-sm gap-2 min-h-10",
+  lg: "px-6 py-3 text-sm gap-2 min-h-11",
 };
 
 type CommonProps = {
@@ -49,7 +49,9 @@ export const Button = forwardRef<
   ref,
 ) {
   const classes = cn(
-    "inline-flex items-center justify-center rounded-full transition-colors focus-visible:outline-none",
+    "inline-flex items-center justify-center rounded-full transition-colors duration-200",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+    "disabled:pointer-events-none disabled:opacity-50",
     variant !== "icon" && sizeClasses[size],
     variantClasses[variant],
     className,

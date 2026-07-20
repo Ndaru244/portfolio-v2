@@ -51,5 +51,5 @@ npm run deploy
 ## Troubleshooting
 
 - Port 8080 dipakai: hentikan emulator lain atau ubah port di `firebase.json` lokal test.
-- Write `permission-denied` di admin lokal: sign in Google dengan owner email terverifikasi, atau pakai FireCMS (`fireCMSUser` claim).
-- Seed gagal: sama — butuh Auth owner / FireCMS / Admin SDK.
+- Write `permission-denied` di admin lokal: pastikan `ADMIN_KEY` + `FIREBASE_SERVICE_ACCOUNT` / `GOOGLE_APPLICATION_CREDENTIALS` di `.env.local`.
+- Seed gagal: sama — butuh Firebase Admin SDK credentials.

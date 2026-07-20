@@ -107,38 +107,38 @@ export default function Header({ profile, navigation }: Props) {
 
   return (
     <motion.header
-      className="fixed top-0 left-0 w-full z-50 glass border-b border-border/40 backdrop-blur-md"
+      className="fixed top-0 left-0 w-full z-50 glass"
       initial={reduceMotion ? false : { y: -100 }}
       animate={{ y: 0 }}
       transition={{
-        duration: reduceMotion ? 0.01 : 0.6,
+        duration: reduceMotion ? 0.01 : 0.5,
         ease: [0.22, 1, 0.36, 1],
       }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-2">
-        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
+        <div className="flex items-center gap-2 sm:gap-4 min-w-0">
           <Link
             href="/"
-            className="flex items-center gap-2 sm:gap-3 min-w-0 rounded-lg"
+            className="flex items-center gap-2.5 min-w-0 rounded-lg"
             onClick={() => setMenuOpen(false)}
           >
             <span className="w-8 h-8 shrink-0 bg-foreground text-background flex items-center justify-center font-bold text-xs rounded-lg">
               ND
             </span>
-            <span className="hidden sm:inline text-sm font-bold tracking-widest hover:text-primary transition-colors">
+            <span className="hidden sm:inline text-sm font-bold tracking-widest text-foreground">
               NDARU.PORTO
             </span>
           </Link>
           {navItems.length > 0 && (
             <nav
-              className="hidden lg:flex items-center gap-4 ml-4"
+              className="hidden lg:flex items-center gap-1 ml-2"
               aria-label={t("menu")}
             >
               {navItems.map((item) => (
                 <a
                   key={item.id}
                   href={item.href}
-                  className="text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
+                  className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors"
                   {...(item.external
                     ? { target: "_blank", rel: "noopener noreferrer" }
                     : {})}
@@ -150,9 +150,9 @@ export default function Header({ profile, navigation }: Props) {
           )}
         </div>
 
-        <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+        <div className="flex items-center gap-1 shrink-0">
           <nav
-            className="hidden md:flex items-center gap-1 border-r border-border pr-2 mr-1"
+            className="hidden md:flex items-center gap-0.5 border-r border-border pr-2 mr-1"
             aria-label={t("connect")}
           >
             {socialLinks.map(({ key, url, config }) => {
@@ -163,10 +163,10 @@ export default function Header({ profile, navigation }: Props) {
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`p-2 text-muted-foreground rounded-full hover:bg-muted transition-colors ${config.color}`}
+                  className={`inline-flex h-10 w-10 items-center justify-center text-muted-foreground rounded-full hover:bg-muted transition-colors ${config.color}`}
                   aria-label={config.label}
                 >
-                  <Icon className="w-4 h-4" />
+                  <Icon className="w-4 h-4" aria-hidden />
                 </a>
               );
             })}
@@ -182,8 +182,8 @@ export default function Header({ profile, navigation }: Props) {
               size="sm"
               className="hidden sm:inline-flex ml-1"
             >
-              <Mail className="w-3 h-3" aria-hidden />
-              <span>{t("contact").toUpperCase()}</span>
+              <Mail className="w-3.5 h-3.5" aria-hidden />
+              <span>{t("contact")}</span>
             </Button>
           )}
 
@@ -219,9 +219,12 @@ export default function Header({ profile, navigation }: Props) {
             animate={{ opacity: 1, y: 0 }}
             exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
             transition={{ duration: reduceMotion ? 0.01 : 0.2 }}
-            className="lg:hidden border-t border-border bg-background/95 backdrop-blur-xl"
+            className="lg:hidden border-t border-border bg-background"
           >
-            <nav className="max-w-7xl mx-auto px-4 sm:px-6 py-4 space-y-1" aria-label={t("menu")}>
+            <nav
+              className="max-w-7xl mx-auto px-4 sm:px-6 py-3 space-y-0.5"
+              aria-label={t("menu")}
+            >
               {navItems.map((item) => (
                 <a
                   key={item.id}
@@ -237,7 +240,7 @@ export default function Header({ profile, navigation }: Props) {
               ))}
             </nav>
             {socialLinks.length > 0 && (
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-4 flex items-center gap-2 border-t border-border pt-3">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-4 flex items-center gap-1 border-t border-border pt-3">
                 {socialLinks.map(({ key, url, config }) => {
                   const Icon = config.icon;
                   return (
@@ -246,10 +249,10 @@ export default function Header({ profile, navigation }: Props) {
                       href={url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 text-muted-foreground rounded-full hover:bg-muted transition-colors"
+                      className="inline-flex h-10 w-10 items-center justify-center text-muted-foreground rounded-full hover:bg-muted transition-colors"
                       aria-label={config.label}
                     >
-                      <Icon className="w-4 h-4" />
+                      <Icon className="w-4 h-4" aria-hidden />
                     </a>
                   );
                 })}
@@ -261,7 +264,7 @@ export default function Header({ profile, navigation }: Props) {
                     className="ml-auto"
                     onClick={() => setMenuOpen(false)}
                   >
-                    <Mail className="w-3 h-3" aria-hidden />
+                    <Mail className="w-3.5 h-3.5" aria-hidden />
                     {t("contact")}
                   </Button>
                 )}

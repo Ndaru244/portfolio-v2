@@ -12,7 +12,7 @@ export default function LanguageSwitcher() {
       type="button"
       onClick={() => setLocale(locale === "en" ? "id" : "en")}
       disabled={isSwitching}
-      className="inline-flex items-center gap-1.5 rounded-full p-2 text-xs font-semibold text-muted-foreground hover:bg-muted hover:text-foreground transition-colors disabled:opacity-70"
+      className="inline-flex h-10 items-center gap-1.5 rounded-full px-2.5 text-xs font-semibold text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-background"
       aria-label={locale === "en" ? "Switch to Indonesian" : "Ganti ke English"}
       title={locale === "en" ? "Bahasa Indonesia" : "English"}
     >
@@ -21,7 +21,7 @@ export default function LanguageSwitcher() {
         transition={{ duration: 0.3, ease: "easeInOut" }}
         className="flex"
       >
-        <Languages className="h-4 w-4" />
+        <Languages className="h-4 w-4" aria-hidden />
       </motion.span>
       <span className="relative w-5 overflow-hidden text-left">
         <AnimatePresence mode="wait" initial={false}>

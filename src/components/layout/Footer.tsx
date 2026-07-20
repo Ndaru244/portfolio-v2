@@ -1,8 +1,8 @@
 "use client";
 import { ArrowUp, Github, Linkedin, Mail, Dribbble, Phone, LucideIcon } from "lucide-react";
-import { motion } from "framer-motion";
 import { Profile, Socials } from "@/types";
 import { useLanguage } from "./LanguageProvider";
+import Button from "@/components/ui/Button";
 
 interface Props {
   profile: Profile | null;
@@ -17,9 +17,9 @@ const SOCIAL_ICONS: Partial<Record<keyof Socials, LucideIcon>> = {
 const FOOTER_SOCIALS: (keyof Socials)[] = ["linkedin", "github", "dribbble"];
 
 const formatPhoneNumber = (link: string | undefined | null) => {
-  if (!link) return ""; 
+  if (!link) return "";
 
-  const cleanNumber = link.replace(/\D/g, ""); 
+  const cleanNumber = link.replace(/\D/g, "");
   const match = cleanNumber.match(/^(62)(\d{3})(\d{4})(\d+)$/);
 
   if (match) {
@@ -31,7 +31,7 @@ const formatPhoneNumber = (link: string | undefined | null) => {
 
 export default function Footer({ profile }: Props) {
   const { t } = useLanguage();
-  const socials = profile?.socials || {} as Socials;
+  const socials = (profile?.socials || {}) as Socials;
 
   const safeName = profile?.name || "Ndaru L Santosa";
   const safeEmailLink = socials?.email || "";
@@ -48,17 +48,12 @@ export default function Footer({ profile }: Props) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const linkVariants = {
-    hover: { x: 5, color: "var(--primary)" },
-    initial: { x: 0, color: "var(--muted-foreground)" },
-  };
-
   return (
-    <footer className="mt-24 border-t border-border bg-card/40 backdrop-blur-sm">
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-          <div className="md:col-span-2 space-y-4">
-            <h2 className="text-lg font-bold tracking-widest text-foreground">
+    <footer className="mt-20 md:mt-24 border-t border-border bg-card">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-14">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
+          <div className="md:col-span-2 space-y-3">
+            <h2 className="text-base font-bold tracking-widest text-foreground">
               NDARU.PORTO
             </h2>
             <p className="text-sm text-muted-foreground max-w-xs leading-relaxed">
@@ -67,10 +62,10 @@ export default function Footer({ profile }: Props) {
           </div>
 
           <div>
-            <h3 className="text-xs font-bold uppercase text-foreground mb-4 tracking-wider">
+            <h3 className="text-xs font-semibold uppercase text-foreground mb-4 tracking-wider">
               {t("connect")}
             </h3>
-            <ul className="space-y-3 text-sm">
+            <ul className="space-y-2.5 text-sm">
               {FOOTER_SOCIALS.map((key) => {
                 const url = socials[key];
                 const Icon = SOCIAL_ICONS[key];
@@ -81,17 +76,14 @@ export default function Footer({ profile }: Props) {
 
                 return (
                   <li key={key}>
-                    <motion.a
+                    <a
                       href={url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 transition-colors"
-                      initial="initial"
-                      whileHover="hover"
-                      variants={linkVariants}
+                      className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
                     >
-                      <Icon className="w-4 h-4" /> {label}
-                    </motion.a>
+                      <Icon className="w-4 h-4" aria-hidden /> {label}
+                    </a>
                   </li>
                 );
               })}
@@ -99,56 +91,55 @@ export default function Footer({ profile }: Props) {
           </div>
 
           <div>
-            <h3 className="text-xs font-bold uppercase text-foreground mb-4 tracking-wider">
+            <h3 className="text-xs font-semibold uppercase text-foreground mb-4 tracking-wider">
               {t("contact")}
             </h3>
-            <ul className="space-y-3 text-sm text-muted-foreground">
+            <ul className="space-y-2.5 text-sm text-muted-foreground">
               <li>
-                <motion.a
-                  href={safeEmailLink}
-                  target="_blank"
-                  className="flex items-center gap-2 break-all"
-                  initial="initial"
-                  whileHover="hover"
-                  variants={linkVariants}
+                <a
+                  href={safeEmailLink || undefined}
+                  className="inline-flex items-center gap-2 break-all hover:text-foreground transition-colors"
+                  {...(safeEmailLink
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : { "aria-disabled": true })}
                 >
-                  <Mail className="w-4 h-4 shrink-0" />{" "}
+                  <Mail className="w-4 h-4 shrink-0" aria-hidden />
                   {displayEmail}
-                </motion.a>
+                </a>
               </li>
               <li>
-                <motion.a
-                  href={safePhoneLink}
-                  target="_blank"
-                  className="flex items-center gap-2"
-                  initial="initial"
-                  whileHover="hover"
-                  variants={linkVariants}
+                <a
+                  href={safePhoneLink || undefined}
+                  className="inline-flex items-center gap-2 hover:text-foreground transition-colors"
+                  {...(safePhoneLink
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : { "aria-disabled": true })}
                 >
-                  <Phone className="w-4 h-4 shrink-0" />{" "}
+                  <Phone className="w-4 h-4 shrink-0" aria-hidden />
                   {displayPhone}
-                </motion.a>
+                </a>
               </li>
             </ul>
           </div>
         </div>
 
         <div className="pt-8 border-t border-border flex flex-col-reverse md:flex-row justify-between items-center gap-4">
-          <p className="text-[10px] text-muted-foreground text-center md:text-left">
+          <p className="text-xs text-muted-foreground text-center md:text-left">
             © {new Date().getFullYear()} {safeName}. Engineered with
-            <span className="text-foreground font-semibold"> Next.js 16</span> &
-            <span className="text-foreground font-semibold"> Tailwind v4</span>.
+            <span className="text-foreground font-medium"> Next.js 16</span> &
+            <span className="text-foreground font-medium"> Tailwind v4</span>.
           </p>
 
-          <motion.button
+          <Button
+            type="button"
+            variant="secondary"
+            size="sm"
             onClick={scrollToTop}
-            className="group flex items-center gap-2 text-xs font-bold text-muted-foreground bg-muted hover:bg-primary hover:text-white px-4 py-2 rounded-full transition-colors shadow-sm"
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.95 }}
+            className="gap-2"
           >
-            {t("backToTop").toUpperCase()}
-            <ArrowUp className="w-3 h-3 group-hover:-translate-y-1 transition-transform duration-300" />
-          </motion.button>
+            {t("backToTop")}
+            <ArrowUp className="w-3.5 h-3.5" aria-hidden />
+          </Button>
         </div>
       </div>
     </footer>

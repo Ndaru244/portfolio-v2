@@ -76,7 +76,7 @@ export default function ProjectGallery({ images, title }: Props) {
     createPortal(
       <AnimatePresence>
         <motion.div
-          className="fixed inset-0 z-[220] flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
+          className="fixed inset-0 z-[220] flex items-center justify-center bg-black/80 p-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -170,7 +170,7 @@ export default function ProjectGallery({ images, title }: Props) {
               key={src + i}
               type="button"
               onClick={() => setActiveIndex(i)}
-              className="group relative aspect-video soft-glass overflow-hidden rounded-xl text-left focus-visible:outline-none"
+              className="group relative aspect-video surface overflow-hidden rounded-xl text-left"
               aria-label={`${t("openImage")}: ${title} ${i + 1}`}
             >
               <ImageWithFallback

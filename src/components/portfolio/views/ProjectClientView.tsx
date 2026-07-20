@@ -71,7 +71,7 @@ function SectionRenderer({ section }: { section: ProjectSection }) {
             <span className="absolute -left-8 sm:-left-10 top-5 flex h-6 w-6 sm:h-7 sm:w-7 items-center justify-center rounded-full border-2 border-primary bg-background text-[10px] sm:text-xs font-bold text-primary shadow-sm">
               {i + 1}
             </span>
-            <div className="soft-glass p-4 sm:p-5">
+            <div className="surface p-4 sm:p-5">
               <div className="flex flex-wrap items-center gap-2 mb-2">
                 <h4 className="font-semibold text-base sm:text-lg leading-snug">
                   {item.label}
@@ -91,7 +91,7 @@ function SectionRenderer({ section }: { section: ProjectSection }) {
     return (
       <div className="space-y-3">
         {section.items.map((item, i) => (
-          <div key={i} className="soft-glass p-4">
+          <div key={i} className="surface p-4">
             <div className="flex flex-wrap gap-2 mb-1.5">
               <h4 className="font-semibold text-sm">{item.label}</h4>
               {item.badge && <span className="badge">{item.badge}</span>}
@@ -107,7 +107,7 @@ function SectionRenderer({ section }: { section: ProjectSection }) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
       {section.items.map((item, i) => (
-        <div key={i} className="soft-glass p-4">
+        <div key={i} className="surface p-4">
           <div className="flex flex-wrap gap-2 mb-1.5">
             <h4 className="font-semibold text-sm">{item.label}</h4>
             {item.badge && <span className="badge">{item.badge}</span>}
@@ -171,7 +171,7 @@ export default function ProjectClientView({
         ]}
       />
       <motion.main
-        className="max-w-5xl mx-auto px-4 sm:px-6 pt-24 pb-12"
+        className="max-w-5xl mx-auto px-4 sm:px-6 pt-24 pb-16"
         initial={reduceMotion ? false : { opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: reduceMotion ? 0.01 : 0.35 }}
@@ -260,7 +260,7 @@ export default function ProjectClientView({
               )}
             </div>
           </div>
-          <div className="relative aspect-video soft-glass overflow-hidden rounded-xl">
+          <div className="relative aspect-video surface overflow-hidden rounded-xl">
             <ImageWithFallback
               src={project.thumbnail}
               alt={project.title}
@@ -295,7 +295,7 @@ export default function ProjectClientView({
             <p className="section-label mb-2">{t("impact")}</p>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2.5">
               {project.impact.map((m) => (
-                <div key={m.label} className="soft-glass p-3.5">
+                <div key={m.label} className="surface p-3.5">
                   <p className="text-lg sm:text-xl font-semibold leading-snug">
                     {m.value}
                   </p>
@@ -359,7 +359,7 @@ export default function ProjectClientView({
             {previousProject ? (
               <Link
                 href={`/project/${previousProject.id}`}
-                className="soft-glass p-4 hover:border-primary/40 transition-colors group"
+                className="surface p-4 hover:border-foreground/20 transition-colors group"
               >
                 <p className="text-[11px] uppercase tracking-wider text-muted-foreground font-semibold mb-1 inline-flex items-center gap-1">
                   <ArrowLeft className="w-3 h-3" aria-hidden />
@@ -375,7 +375,7 @@ export default function ProjectClientView({
             {nextProject ? (
               <Link
                 href={`/project/${nextProject.id}`}
-                className="soft-glass p-4 hover:border-primary/40 transition-colors group text-right sm:justify-self-end w-full"
+                className="surface p-4 hover:border-foreground/20 transition-colors group text-right sm:justify-self-end w-full"
               >
                 <p className="text-[11px] uppercase tracking-wider text-muted-foreground font-semibold mb-1 inline-flex items-center gap-1 justify-end w-full">
                   {t("nextProject")}
@@ -403,7 +403,7 @@ function Meta({
   value: string;
 }) {
   return (
-    <div className="soft-glass p-3 space-y-1">
+    <div className="surface p-3 space-y-1">
       <div className="flex items-center gap-1.5 text-muted-foreground text-[10px] uppercase tracking-wider font-semibold">
         <Icon className="w-3 h-3" aria-hidden />
         {label}

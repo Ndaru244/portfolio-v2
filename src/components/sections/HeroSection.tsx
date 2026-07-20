@@ -19,18 +19,18 @@ export default function HeroSection({ profile }: Props) {
   const [resumeOpen, setResumeOpen] = useState(false);
 
   return (
-    <section id="hero" className="pt-4">
+    <section id="hero" className="pt-2">
       <motion.div
-        initial={reduceMotion ? false : { opacity: 0, y: 28 }}
+        initial={reduceMotion ? false : { opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
-          duration: reduceMotion ? 0.01 : 0.7,
+          duration: reduceMotion ? 0.01 : 0.55,
           ease: [0.22, 1, 0.36, 1],
         }}
-        className="max-w-3xl space-y-6"
+        className="max-w-3xl space-y-5"
       >
         <div className="flex items-start gap-4 sm:gap-5">
-          <div className="relative w-16 h-16 sm:w-20 sm:h-20 shrink-0 soft-glass overflow-hidden rounded-2xl">
+          <div className="relative w-16 h-16 sm:w-20 sm:h-20 shrink-0 surface overflow-hidden rounded-2xl">
             <ImageWithFallback
               src={profile.avatar_url}
               alt={profile.name}
@@ -41,17 +41,17 @@ export default function HeroSection({ profile }: Props) {
               fallbackText="Avatar"
             />
           </div>
-          <div className="min-w-0 flex-1 space-y-3">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight leading-[1.05]">
+          <div className="min-w-0 flex-1 space-y-2 sm:space-y-3 pt-0.5">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-[1.1]">
               {profile.name}
             </h1>
-            <p className="text-lg sm:text-xl text-muted-foreground font-medium">
+            <p className="text-base sm:text-lg text-muted-foreground font-medium">
               {profile.role}
             </p>
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2.5">
           <span className="badge">{profile.status}</span>
           <p className="text-sm text-muted-foreground inline-flex items-center gap-1.5">
             <MapPin className="w-3.5 h-3.5 shrink-0" aria-hidden />

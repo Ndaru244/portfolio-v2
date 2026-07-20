@@ -31,6 +31,8 @@ firestore-debug.log*
 *.pem
 *credentials*.json
 *serviceAccount*.json
+*firebase-adminsdk*.json
+/secrets/
 
 # 5. OS & IDE
 .DS_Store

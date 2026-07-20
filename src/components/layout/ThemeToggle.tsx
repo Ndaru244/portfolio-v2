@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Moon, Sun, Monitor, Check } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useLanguage } from "./LanguageProvider";
@@ -9,9 +9,11 @@ import { useLanguage } from "./LanguageProvider";
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   const { t } = useLanguage();
+  const reduceMotion = useReducedMotion();
   const [isOpen, setIsOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const menuId = "theme-menu";
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -22,16 +24,26 @@ export default function ThemeToggle() {
     if (!isOpen) return;
 
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsOpen(false);
+    };
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
   }, [isOpen]);
 
-  if (!mounted) return <div className="w-9 h-9" />;
+  if (!mounted) return <div className="h-10 w-10" aria-hidden />;
 
   const options = [
     { id: "light", label: t("themeLight"), icon: Sun },
@@ -41,53 +53,59 @@ export default function ThemeToggle() {
 
   return (
     <div className="relative" ref={dropdownRef}>
-      <motion.button
+      <button
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
-        whileTap={{ scale: 0.95 }}
-        className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-foreground shadow-sm transition-all hover:border-primary hover:text-primary"
+        className="inline-flex h-10 w-10 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         aria-label={t("toggleTheme")}
+        aria-expanded={isOpen}
+        aria-haspopup="listbox"
+        aria-controls={menuId}
       >
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.div
-            key={theme}
-            initial={{ y: 10, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -10, opacity: 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            {theme === "dark" && <Moon className="h-4 w-4" />}
-            {theme === "light" && <Sun className="h-4 w-4" />}
-            {theme === "system" && <Monitor className="h-4 w-4" />}
-          </motion.div>
-        </AnimatePresence>
-      </motion.button>
+        {theme === "dark" && <Moon className="h-4 w-4" aria-hidden />}
+        {theme === "light" && <Sun className="h-4 w-4" aria-hidden />}
+        {theme === "system" && <Monitor className="h-4 w-4" aria-hidden />}
+      </button>
 
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 10, scale: 0.95 }}
-            animate={{ opacity: 1, y: 5, scale: 1 }}
-            exit={{ opacity: 0, y: 10, scale: 0.95 }}
-            className="absolute right-0 top-full z-[100] mt-2 min-w-[140px] overflow-hidden rounded-xl border border-border bg-card/80 p-1 shadow-xl backdrop-blur-xl"
+            id={menuId}
+            role="listbox"
+            aria-label={t("toggleTheme")}
+            initial={
+              reduceMotion ? { opacity: 0 } : { opacity: 0, y: 6, scale: 0.98 }
+            }
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={
+              reduceMotion ? { opacity: 0 } : { opacity: 0, y: 6, scale: 0.98 }
+            }
+            transition={{ duration: reduceMotion ? 0.01 : 0.15 }}
+            className="absolute right-0 top-full z-[100] mt-2 min-w-[10rem] overflow-hidden rounded-xl border border-border bg-card p-1 shadow-md"
           >
             {options.map((opt) => (
               <button
                 key={opt.id}
+                type="button"
+                role="option"
+                aria-selected={theme === opt.id}
                 onClick={() => {
                   setTheme(opt.id);
                   setIsOpen(false);
                 }}
-                className={`flex w-full items-center justify-between gap-3 px-3 py-2 text-left text-xs font-medium transition-colors hover:bg-primary/10 hover:text-primary rounded-lg ${
+                className={`flex w-full items-center justify-between gap-3 rounded-lg px-3 py-2.5 text-left text-sm font-medium transition-colors hover:bg-muted ${
                   theme === opt.id
-                    ? "bg-primary/5 text-primary"
+                    ? "text-foreground"
                     : "text-muted-foreground"
                 }`}
               >
-                <div className="flex items-center gap-2">
-                  <opt.icon className="h-3.5 w-3.5" />
+                <span className="flex items-center gap-2">
+                  <opt.icon className="h-3.5 w-3.5" aria-hidden />
                   {opt.label}
-                </div>
-                {theme === opt.id && <Check className="h-3 w-3" />}
+                </span>
+                {theme === opt.id && (
+                  <Check className="h-3.5 w-3.5" aria-hidden />
+                )}
               </button>
             ))}
           </motion.div>

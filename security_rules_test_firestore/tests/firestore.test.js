@@ -44,15 +44,6 @@ function fireCmsDb() {
     .firestore();
 }
 
-function ownerDb() {
-  return testEnv
-    .authenticatedContext("owner", {
-      email: "ndarulanggeng110@gmail.com",
-      email_verified: true,
-    })
-    .firestore();
-}
-
 function plainAuthDb() {
   return testEnv.authenticatedContext("regular-user").firestore();
 }
@@ -106,9 +97,15 @@ describe("public portfolio collections", () => {
     );
   });
 
-  test("verified owner email can write portfolio docs", async () => {
-    await assertSucceeds(
-      ownerDb().doc("projects/p-owner").set({ title: "Owner", order: 1 }),
+  test("verified owner email cannot write without fireCMSUser", async () => {
+    const ownerDb = testEnv
+      .authenticatedContext("owner", {
+        email: "ndarulanggeng110@gmail.com",
+        email_verified: true,
+      })
+      .firestore();
+    await assertFails(
+      ownerDb.doc("projects/p-owner").set({ title: "Owner", order: 1 }),
     );
   });
 
