@@ -92,7 +92,7 @@ export const EXPERIENCE_DATA: {
       role: "Frontend Engineer",
       period: "Jan 2026 - Apr 2026",
       description:
-        "Built ArCore frontend modules for mining/offshore operations (Next.js, React, TypeScript): Data Offshore reporting, Production & Cost, and Timesheet & Equipment interfaces with Redux Toolkit and interactive dashboards.",
+        "As Frontend Engineer at PT Tarung Bersama Teknologi (IT vendor/consultant), built ArCore frontend modules for client Arsari Tambang: Data Offshore, Production & Cost, and Timesheet & Equipment UIs (Next.js, React, TypeScript) with Redux Toolkit and interactive dashboards.",
       type: "work",
       order: 0,
       translations: {
@@ -100,13 +100,13 @@ export const EXPERIENCE_DATA: {
           role: "Frontend Engineer",
           period: "Jan 2026 - Apr 2026",
           description:
-            "Membangun modul frontend ArCore untuk operasi mining/offshore (Next.js, React, TypeScript): UI Data Offshore, Production & Cost, serta Timesheet & Equipment dengan Redux Toolkit dan dashboard interaktif.",
+            "Sebagai Frontend Engineer di PT Tarung Bersama Teknologi (vendor/IT consultant), membangun modul frontend ArCore untuk client Arsari Tambang: UI Data Offshore, Production & Cost, serta Timesheet & Equipment (Next.js, React, TypeScript) dengan Redux Toolkit dan dashboard interaktif.",
         },
         en: {
           role: "Frontend Engineer",
           period: "Jan 2026 - Apr 2026",
           description:
-            "Built ArCore frontend modules for mining/offshore operations (Next.js, React, TypeScript): Data Offshore reporting, Production & Cost, and Timesheet & Equipment interfaces with Redux Toolkit and interactive dashboards.",
+            "As Frontend Engineer at PT Tarung Bersama Teknologi (IT vendor/consultant), built ArCore frontend modules for client Arsari Tambang: Data Offshore, Production & Cost, and Timesheet & Equipment UIs (Next.js, React, TypeScript) with Redux Toolkit and interactive dashboards.",
         },
       },
     },
@@ -360,7 +360,7 @@ export const PROJECTS_DATA: { id: string; data: Project }[] = [
       industry: "Mining / Offshore",
       platform: "Web",
       discipline: "Frontend",
-      client: "PT Tarung Bersama Teknologi",
+      client: "Arsari Tambang",
       role: "Frontend Engineer",
       status: "Completed",
       order: 0,
@@ -368,12 +368,12 @@ export const PROJECTS_DATA: { id: string; data: Project }[] = [
       overview: {
         title: "Project Overview",
         description:
-          "ArCore adalah platform operasi enterprise untuk industri pertambangan dan lepas pantai. Kontribusi frontend: membangun antarmuka modul Data Offshore, Production & Cost, serta Timesheet & Equipment dengan Next.js 16, React 19, dan TypeScript.",
+          "ArCore adalah platform operasi enterprise untuk client Arsari Tambang, dikerjakan melalui PT Tarung Bersama Teknologi sebagai vendor/IT consultant. Kontribusi frontend: antarmuka modul Data Offshore, Production & Cost, serta Timesheet & Equipment dengan Next.js 16, React 19, dan TypeScript.",
       },
       problem:
-        "Pengguna operasi membutuhkan antarmuka yang konsisten dan mudah digunakan untuk pelaporan lapangan, biaya, dan peralatan lintas banyak halaman modul.",
+        "Pengguna operasi di client membutuhkan antarmuka yang konsisten dan mudah digunakan untuk pelaporan lapangan, biaya, dan peralatan lintas banyak halaman modul.",
       research:
-        "Pemetaan kebutuhan UI bersama stakeholder untuk alur form, tabel, filter, dan dashboard pada modul Data Offshore, Production & Cost, dan Equipment Timesheet.",
+        "Pemetaan kebutuhan UI bersama Tim Tarung dan stakeholder client untuk alur form, tabel, filter, dan dashboard pada modul Data Offshore, Production & Cost, dan Equipment Timesheet.",
       constraints:
         "Banyak modul UI dalam satu aplikasi enterprise, state lintas halaman yang kompleks, serta kebutuhan komponen tabel/form/chart yang reusable.",
       solution:
@@ -697,7 +697,7 @@ export const PROJECTS_DATA: { id: string; data: Project }[] = [
       industry: "Technology",
       platform: "Web",
       discipline: "UI/UX",
-      client: "PT Solvera Global Teknologi",
+      client: "Solvera Global Teknologi",
       role: "UI/UX Designer",
       status: "Completed",
       order: 3,
@@ -786,7 +786,7 @@ export const PROJECTS_DATA: { id: string; data: Project }[] = [
       industry: "Outdoor / Tourism",
       platform: "Mobile",
       discipline: "UI/UX",
-      client: "PT Bhinneka Alam Nusantara",
+      client: "Bhinneka Alam Nusantara",
       role: "UI/UX Designer",
       status: "Completed",
       order: 4,
@@ -1112,16 +1112,17 @@ const PROJECT_EN_TRANSLATIONS: Record<string, ProjectTranslation> = {
     industry: "Mining / Offshore",
     platform: "Web",
     discipline: "Frontend",
+    client: "Arsari Tambang",
     status: "Completed",
     overview: {
       title: "Project Overview",
       description:
-        "ArCore is an enterprise operations platform for mining and offshore teams. Frontend contribution focused on building UI for Data Offshore, Production & Cost, and Timesheet & Equipment modules with Next.js 16, React 19, and TypeScript.",
+        "ArCore is an enterprise operations platform for client Arsari Tambang, delivered through PT Tarung Bersama Teknologi as IT vendor/consultant. Frontend contribution: UI for Data Offshore, Production & Cost, and Timesheet & Equipment with Next.js 16, React 19, and TypeScript.",
     },
     problem:
-      "Operations users needed consistent, easy-to-use interfaces for field reporting, cost views, and equipment workflows across many module pages.",
+      "Client operations users needed consistent, easy-to-use interfaces for field reporting, cost views, and equipment workflows across many module pages.",
     research:
-      "Mapped UI requirements with stakeholders for forms, tables, filters, and dashboards across Data Offshore, Production & Cost, and Equipment Timesheet.",
+      "Mapped UI requirements with the Tarung team and client stakeholders for forms, tables, filters, and dashboards across Data Offshore, Production & Cost, and Equipment Timesheet.",
     constraints:
       "Many UI modules in one enterprise app, complex cross-page state, and a need for reusable table, form, and chart components.",
     solution:
