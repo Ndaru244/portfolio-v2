@@ -92,7 +92,7 @@ export const EXPERIENCE_DATA: {
       role: "Frontend Engineer",
       period: "Jan 2026 - Apr 2026",
       description:
-        "Built frontend modules for ArCore, an enterprise Mining & Offshore Operations Management platform using Next.js 16, React 19, and TypeScript. Delivered Data Offshore reporting, Production & Cost, and Timesheet & Equipment interfaces with Redux Toolkit and interactive dashboards.",
+        "Built ArCore frontend modules for mining/offshore operations (Next.js, React, TypeScript): Data Offshore reporting, Production & Cost, and Timesheet & Equipment interfaces with Redux Toolkit and interactive dashboards.",
       type: "work",
       order: 0,
       translations: {
@@ -100,13 +100,13 @@ export const EXPERIENCE_DATA: {
           role: "Frontend Engineer",
           period: "Jan 2026 - Apr 2026",
           description:
-            "Membangun modul frontend ArCore, platform operasi mining & offshore berbasis Next.js 16, React 19, dan TypeScript. Mengembangkan UI Data Offshore, Production & Cost, serta Timesheet & Equipment dengan Redux Toolkit dan dashboard interaktif.",
+            "Membangun modul frontend ArCore untuk operasi mining/offshore (Next.js, React, TypeScript): UI Data Offshore, Production & Cost, serta Timesheet & Equipment dengan Redux Toolkit dan dashboard interaktif.",
         },
         en: {
           role: "Frontend Engineer",
           period: "Jan 2026 - Apr 2026",
           description:
-            "Built frontend modules for ArCore, an enterprise Mining & Offshore Operations Management platform using Next.js 16, React 19, and TypeScript. Delivered Data Offshore reporting, Production & Cost, and Timesheet & Equipment interfaces with Redux Toolkit and interactive dashboards.",
+            "Built ArCore frontend modules for mining/offshore operations (Next.js, React, TypeScript): Data Offshore reporting, Production & Cost, and Timesheet & Equipment interfaces with Redux Toolkit and interactive dashboards.",
         },
       },
     },
@@ -116,23 +116,23 @@ export const EXPERIENCE_DATA: {
     data: {
       company: "SDN Sunter Agung 12 PG",
       role: "Web Developer",
-      period: "Des 2025 - Jan 2026",
+      period: "Des 2025 - Feb 2026",
       description:
-        "Engineered an integrated school information system (Sadulas) featuring a public portal and a secure admin dashboard. Developed scalable modules for dynamic content management, digital letter processing, and student record tracking (Klapper), significantly optimizing administrative workflows and reducing cognitive load for staff.",
+        "Built Sadulas, an integrated school information system with a public portal, admin dashboard, digital correspondence, and student records. Extended the platform with E-Absensi (Jan–Feb 2026), an offline-first attendance module with RBAC and printable PDF reports.",
       type: "Contract",
       order: 1,
       translations: {
         id: {
           role: "Web Developer",
-          period: "Des 2025 - Jan 2026",
+          period: "Des 2025 - Feb 2026",
           description:
-            "Mengembangkan sistem informasi sekolah terintegrasi Sadulas yang mencakup portal publik, dashboard admin, manajemen surat digital, dan arsip data siswa untuk menyederhanakan alur kerja staf.",
+            "Mengembangkan Sadulas, sistem informasi sekolah terintegrasi dengan portal publik, dashboard admin, surat digital, dan arsip siswa. Memperluas platform dengan E-Absensi (Jan–Feb 2026), modul absensi offline-first ber-RBAC dan laporan PDF siap cetak.",
         },
         en: {
           role: "Web Developer",
-          period: "Dec 2025 - Jan 2026",
+          period: "Dec 2025 - Feb 2026",
           description:
-            "Engineered Sadulas, an integrated school information system with a public portal, secure admin dashboard, digital correspondence, and student records to streamline staff workflows.",
+            "Built Sadulas, an integrated school information system with a public portal, admin dashboard, digital correspondence, and student records. Extended the platform with E-Absensi (Jan–Feb 2026), an offline-first attendance module with RBAC and printable PDF reports.",
         },
       },
     },
@@ -390,7 +390,7 @@ export const PROJECTS_DATA: { id: string; data: Project }[] = [
         { label: "UI Modules", value: "Offshore, Cost, Equipment" },
         { label: "Stack", value: "Next.js + Redux Toolkit" },
       ],
-      duration: "4 Months",
+      duration: "Jan 2026 - Apr 2026",
       team: { size: 4, role: "Frontend Engineer" },
       links: {
         live: null,
@@ -461,6 +461,117 @@ export const PROJECTS_DATA: { id: string; data: Project }[] = [
     },
   },
   {
+    id: "e-absensi",
+    data: {
+      id: "e-absensi",
+      title: "E-Absensi",
+      industry: "Education",
+      platform: "Web",
+      discipline: "Fullstack",
+      client: "SDN Sunter Agung 12 PG",
+      role: "Web Developer",
+      status: "Completed",
+      order: 1,
+      featured: true,
+      overview: {
+        title: "Project Overview",
+        description:
+          "E-Absensi adalah ekstensi/modul tambahan Sadulas untuk digitalisasi absensi siswa di SDN Sunter Agung 12 PG (Jan–Feb 2026). Dibangun dengan pendekatan Offline-First, RBAC, dan ekspor laporan PDF resmi siap cetak.",
+      },
+      problem:
+        "Pendataan dan rekap kehadiran siswa masih rentan terhadap jaringan tidak stabil, proses manual yang lambat, serta risiko manipulasi data setelah rekap selesai.",
+      research:
+        "Pemetaan alur guru, admin, dan kepala sekolah untuk input harian, penguncian rekap, hak akses per kelas, serta kebutuhan laporan PDF ber-kop surat resmi.",
+      constraints:
+        "Harus tetap usable offline, ringan tanpa framework berat, multi-role, dan siap production di Firebase Hosting.",
+      solution:
+        "Membangun aplikasi absensi web Offline-First dengan draf LocalStorage, sync queue + DLQ, RBAC bertingkat, statistik Chart.js, dan generator PDF (jsPDF) untuk laporan harian/bulanan.",
+      engineeringDecision:
+        "Vanilla JS modular + Tailwind CSS local build untuk footprint ringan; Firebase Auth/Firestore untuk auth dan data real-time; Service Worker + BroadcastChannel untuk keandalan offline dan multi-tab.",
+      responsibilities:
+        "Product/UI flows, offline sync architecture, RBAC, modul guru/admin, dan generator laporan PDF.",
+      challenges:
+        "Menjamin data absensi tidak hilang saat offline dan tetap konsisten setelah sync, termasuk isolasi kegagalan lewat Dead Letter Queue.",
+      lessonsLearned:
+        "Offline-first dan penguncian rekap lebih krusial daripada fitur visual tambahan untuk sistem absensi sekolah.",
+      impact: [
+        { label: "Reliability", value: "Offline-first attendance sync" },
+        { label: "Reporting", value: "Print-ready PDF exports" },
+      ],
+      duration: "Jan 2026 - Feb 2026",
+      team: { size: 1, role: "Solo Fullstack" },
+      links: {
+        live: "https://absensi-internal.web.app/",
+        github: "https://github.com/Ndaru244/sistem-absensi-firebase",
+        figma: null,
+      },
+      sections: [
+        {
+          id: "key-modules",
+          title: "Key Modules",
+          type: "list",
+          layout: "grid",
+          items: [
+            {
+              label: "Daily Attendance",
+              value:
+                "Input kehadiran per kelas (Hadir/Sakit/Izin/Alpa), auto-save draf, dan penguncian rekap untuk mencegah perubahan retrospektif.",
+            },
+            {
+              label: "RBAC Access",
+              value:
+                "Peran Super Admin, Admin/Guru Piket, Guru, dan Viewer dengan otorisasi kelas melalui kelas_ids serta verifikasi user baru.",
+            },
+            {
+              label: "PDF Reports",
+              value:
+                "Laporan harian dan rekap bulanan via jsPDF/AutoTable dengan kop surat dinamis dan kolom tanda tangan Kepala Sekolah.",
+            },
+          ],
+        },
+        {
+          id: "tech-architecture",
+          title: "Architecture",
+          type: "grid",
+          layout: "grid",
+          items: [
+            {
+              label: "Frontend",
+              value:
+                "• HTML5 + Vanilla JS (ES6 modular)\n• Tailwind CSS (local build)\n• Lucide Icons + Chart.js",
+            },
+            {
+              label: "Data & Auth",
+              value:
+                "• Firebase Auth (Google + Email/Password)\n• Cloud Firestore\n• Firebase Storage / Hosting",
+            },
+            {
+              label: "Offline Reliability",
+              value:
+                "• LocalStorage drafts\n• Sync Queue + DLQ (retry 3x)\n• Service Worker + BroadcastChannel",
+            },
+          ],
+        },
+      ],
+      techStack: [
+        tech("Firebase", "firebase"),
+        tech("Firestore", "firestore"),
+        tech("JavaScript", "javascript"),
+        tech("Tailwind CSS", "tailwind"),
+        tech("Chart.js", "chartjs"),
+        tech("jsPDF", "jspdf"),
+      ],
+      thumbnail: "/assets/img/preview/E-Absensi-Login.webp",
+      gallery: [
+        "/assets/img/preview/E-Absensi-Login.webp",
+        "/assets/img/preview/E-Absensi-Dashboard.webp",
+        "/assets/img/preview/E-Absensi-Attendance.webp",
+        "/assets/img/preview/E-Absensi-Monthly.webp",
+        "/assets/img/preview/E-Absensi-Admin.webp",
+      ],
+    },
+  },
+  {
     id: "sadulas",
     data: {
       id: "sadulas",
@@ -471,12 +582,12 @@ export const PROJECTS_DATA: { id: string; data: Project }[] = [
       client: "SDN Sunter Agung 12 PG",
       role: "Web Developer",
       status: "Completed",
-      order: 1,
+      order: 2,
       featured: true,
       overview: {
         title: "Executive Summary",
         description:
-          "Sadulas adalah sistem informasi sekolah terintegrasi yang mencakup portal publik dan dashboard admin. Platform ini dirancang untuk mendigitalkan manajemen konten, persuratan administrasi, dan arsip data induk siswa (Klapper), sehingga mengurangi beban kognitif staf dan mengoptimalkan efisiensi operasional harian.",
+          "Sadulas adalah sistem informasi sekolah terintegrasi yang mencakup portal publik dan dashboard admin untuk manajemen konten, surat, dan arsip siswa (Klapper). Platform kemudian diperluas dengan modul E-Absensi untuk absensi digital offline-first.",
       },
       problem:
         "Staf sekolah mengelola konten website, surat, dan data siswa melalui proses manual yang tersebar, sehingga pencarian data lambat dan risiko kesalahan tinggi.",
@@ -498,7 +609,7 @@ export const PROJECTS_DATA: { id: string; data: Project }[] = [
         { label: "Workflow", value: "Digitalized letter & student records" },
         { label: "Ops", value: "Single dashboard for staff" },
       ],
-      duration: "2 Months",
+      duration: "Dec 2025 - Jan 2026",
       team: { size: 1, role: "Solo Fullstack" },
       links: {
         live: "https://sdnsunteragung12pg.sch.id/",
@@ -589,7 +700,7 @@ export const PROJECTS_DATA: { id: string; data: Project }[] = [
       client: "PT Solvera Global Teknologi",
       role: "UI/UX Designer",
       status: "Completed",
-      order: 2,
+      order: 3,
       featured: true,
       overview: {
         title: "Project Overview",
@@ -616,7 +727,7 @@ export const PROJECTS_DATA: { id: string; data: Project }[] = [
         { label: "Identity", value: "Modernized corporate UI" },
         { label: "Handoff", value: "Complete Figma style guide" },
       ],
-      duration: "3 Months",
+      duration: "Oct 2025 - Dec 2025",
       team: { size: 2, role: "UI/UX Designer" },
       links: {
         live: "https://solvera.id",
@@ -678,7 +789,7 @@ export const PROJECTS_DATA: { id: string; data: Project }[] = [
       client: "PT Bhinneka Alam Nusantara",
       role: "UI/UX Designer",
       status: "Completed",
-      order: 3,
+      order: 4,
       featured: true,
       overview: {
         title: "Executive Summary",
@@ -705,7 +816,7 @@ export const PROJECTS_DATA: { id: string; data: Project }[] = [
         { label: "Usability", value: "25% better task completion" },
         { label: "System", value: "Scalable design system" },
       ],
-      duration: "24 Months",
+      duration: "Sep 2022 - Oct 2024",
       team: { size: 4, role: "UI/UX Designer" },
       links: { live: null, github: null, figma: null },
       sections: [
@@ -760,7 +871,7 @@ export const PROJECTS_DATA: { id: string; data: Project }[] = [
       client: "Omhut Parkopi",
       role: "Web Developer",
       status: "Completed",
-      order: 4,
+      order: 5,
       featured: true,
       overview: {
         title: "Project Context",
@@ -841,8 +952,8 @@ export const PROJECTS_DATA: { id: string; data: Project }[] = [
       client: "Crooked Indonesia",
       role: "Web Developer",
       status: "Archived",
-      order: 5,
-      featured: false,
+      order: 6,
+      featured: true,
       overview: {
         title: "Project Overview",
         description:
@@ -865,7 +976,7 @@ export const PROJECTS_DATA: { id: string; data: Project }[] = [
         { label: "Uptime", value: "Zero critical downtime" },
         { label: "Duration", value: "6 Months contract" },
       ],
-      duration: "6 Months",
+      duration: "Mar 2022 - Aug 2022",
       team: { size: 3, role: "Web Developer Intern" },
       links: {
         github: "https://github.com/Ndaru244/crooked",
@@ -922,7 +1033,7 @@ export const PROJECTS_DATA: { id: string; data: Project }[] = [
       client: "PPOB & Counter Owners",
       role: "Lead Developer & UI/UX Designer",
       status: "Live",
-      order: 6,
+      order: 7,
       featured: true,
       overview: {
         title: "Project Overview",
@@ -1027,7 +1138,7 @@ const PROJECT_EN_TRANSLATIONS: Record<string, ProjectTranslation> = {
       { label: "UI Modules", value: "Offshore, Cost, Equipment" },
       { label: "Stack", value: "Next.js + Redux Toolkit" },
     ],
-    duration: "4 Months",
+    duration: "Jan 2026 - Apr 2026",
     team: { size: 4, role: "Frontend Engineer" },
     sections: [
       {
@@ -1076,6 +1187,84 @@ const PROJECT_EN_TRANSLATIONS: Record<string, ProjectTranslation> = {
       },
     ],
   },
+  "e-absensi": {
+    industry: "Education",
+    platform: "Web",
+    discipline: "Full-stack",
+    status: "Completed",
+    overview: {
+      title: "Project Overview",
+      description:
+        "E-Absensi is an extension module of Sadulas that digitizes student attendance for SDN Sunter Agung 12 PG (Jan–Feb 2026), with an offline-first approach, RBAC, and print-ready PDF reports.",
+    },
+    problem:
+      "Attendance recording and monthly summaries were fragile on unstable networks, slow when done manually, and vulnerable to edits after lock.",
+    research:
+      "Mapped teacher, admin, and principal workflows for daily input, attendance locking, class-scoped permissions, and official letterheaded PDF reports.",
+    constraints:
+      "Must work offline, stay lightweight without a heavy framework, support multiple roles, and ship to Firebase Hosting.",
+    solution:
+      "Shipped an offline-first web attendance app with LocalStorage drafts, sync queue + DLQ, multi-tier RBAC, Chart.js stats, and jsPDF daily/monthly reports.",
+    engineeringDecision:
+      "Used modular Vanilla JS with a local Tailwind build for a small footprint, Firebase Auth/Firestore for realtime data, and Service Worker + BroadcastChannel for offline and multi-tab reliability.",
+    responsibilities:
+      "Product/UI flows, offline sync architecture, RBAC, teacher/admin modules, and PDF report generation.",
+    challenges:
+      "Keeping attendance data durable while offline and consistent after sync, including failure isolation through a Dead Letter Queue.",
+    lessonsLearned:
+      "Offline-first design and attendance locking matter more than extra visuals for school attendance systems.",
+    impact: [
+      { label: "Reliability", value: "Offline-first attendance sync" },
+      { label: "Reporting", value: "Print-ready PDF exports" },
+    ],
+    duration: "Jan 2026 - Feb 2026",
+    team: { size: 1, role: "Solo Full-stack Developer" },
+    sections: [
+      {
+        id: "key-modules",
+        title: "Key Modules",
+        type: "list",
+        layout: "grid",
+        items: [
+          {
+            label: "Daily Attendance",
+            value:
+              "Per-class attendance input, realtime draft autosave, and lock controls to prevent retrospective edits.",
+          },
+          {
+            label: "RBAC Access",
+            value:
+              "Super Admin, Admin/Duty Teacher, Teacher, and Viewer roles with class-scoped access via kelas_ids.",
+          },
+          {
+            label: "PDF Reports",
+            value:
+              "Daily and monthly PDF reports via jsPDF/AutoTable with dynamic letterhead and principal signature fields.",
+          },
+        ],
+      },
+      {
+        id: "tech-architecture",
+        title: "Architecture",
+        type: "grid",
+        layout: "grid",
+        items: [
+          {
+            label: "Frontend",
+            value: "HTML5, modular Vanilla JS, Tailwind CSS, Lucide Icons, and Chart.js.",
+          },
+          {
+            label: "Data & Auth",
+            value: "Firebase Auth, Cloud Firestore, Storage, and Hosting.",
+          },
+          {
+            label: "Offline Reliability",
+            value: "LocalStorage drafts, Sync Queue + DLQ, Service Worker, and BroadcastChannel.",
+          },
+        ],
+      },
+    ],
+  },
   sadulas: {
     industry: "Education",
     platform: "Web",
@@ -1084,7 +1273,7 @@ const PROJECT_EN_TRANSLATIONS: Record<string, ProjectTranslation> = {
     overview: {
       title: "Executive Summary",
       description:
-        "Sadulas is an integrated school information system combining a public portal and an admin dashboard. It digitizes content management, administrative correspondence, and student master records to streamline daily operations.",
+        "Sadulas is an integrated school information system with a public portal and admin dashboard for content, correspondence, and student records. The platform was later extended with E-Absensi for offline-first digital attendance.",
     },
     problem:
       "School staff managed website content, correspondence, and student records through disconnected manual processes, making retrieval slow and error-prone.",
@@ -1106,7 +1295,7 @@ const PROJECT_EN_TRANSLATIONS: Record<string, ProjectTranslation> = {
       { label: "Workflow", value: "Digitized records" },
       { label: "Operations", value: "One staff dashboard" },
     ],
-    duration: "2 Months",
+    duration: "Dec 2025 - Jan 2026",
     team: { size: 1, role: "Solo Full-stack Developer" },
     sections: [
       {
@@ -1188,7 +1377,7 @@ const PROJECT_EN_TRANSLATIONS: Record<string, ProjectTranslation> = {
       { label: "Identity", value: "Modern corporate UI" },
       { label: "Handoff", value: "Documented design system" },
     ],
-    duration: "3 Months",
+    duration: "Oct 2025 - Dec 2025",
     sections: [
       {
         id: "design-process",
@@ -1245,7 +1434,7 @@ const PROJECT_EN_TRANSLATIONS: Record<string, ProjectTranslation> = {
       { label: "Usability", value: "25% better task completion" },
       { label: "System", value: "Scalable design system" },
     ],
-    duration: "24 Months",
+    duration: "Sep 2022 - Oct 2024",
     sections: [
       {
         id: "roadmap",
@@ -1351,7 +1540,7 @@ const PROJECT_EN_TRANSLATIONS: Record<string, ProjectTranslation> = {
       { label: "Uptime", value: "Zero critical downtime" },
       { label: "Duration", value: "6-month contract" },
     ],
-    duration: "6 Months",
+    duration: "Mar 2022 - Aug 2022",
     sections: [
       {
         id: "highlights",

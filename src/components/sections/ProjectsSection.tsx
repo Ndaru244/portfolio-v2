@@ -14,15 +14,14 @@ interface Props {
 export default function ProjectsSection({ projects }: Props) {
   const { t } = useLanguage();
   const reduceMotion = useReducedMotion();
-  const featured = projects.filter((p) => p.featured !== false).slice(0, 6);
-  if (!featured.length) return null;
+  if (!projects.length) return null;
 
   return (
     <section id="projects" className="section-spacing">
       <p className="section-label mb-3">{t("featuredProjects")}</p>
       <h2 className="section-title mb-8">{t("projectsTitle")}</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6">
-        {featured.map((project, i) => (
+        {projects.map((project, i) => (
           <motion.article
             key={project.id}
             initial={reduceMotion ? false : { opacity: 0, y: 20 }}
@@ -44,6 +43,7 @@ export default function ProjectsSection({ projects }: Props) {
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                   sizes="(max-width: 768px) 100vw, 50vw"
+                  priority={i === 0}
                   fallbackText="Project"
                 />
               </div>
