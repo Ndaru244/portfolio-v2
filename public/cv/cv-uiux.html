@@ -1,0 +1,700 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Ndaru L Santosa — UI/UX Designer</title>
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap");
+
+            :root {
+                --ink: #0c1f1c;
+                --ink-soft: #134e4a;
+                --accent: #2dd4bf;
+                --accent-strong: #0f766e;
+                --sidebar-text: #ccfbf1;
+                --sidebar-muted: #99f6e4;
+                --sidebar-line: #1e3a36;
+                --text: #334155;
+                --text-soft: #475569;
+                --muted: #64748b;
+                --line: #e2e8f0;
+                --card: #f0fdfa;
+                --tag-bg: rgba(45, 212, 191, 0.14);
+                --tag-border: rgba(45, 212, 191, 0.28);
+            }
+
+            @page {
+                size: A4;
+                margin: 0;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            html,
+            body {
+                width: 210mm;
+                height: 297mm;
+            }
+
+            body {
+                font-family:
+                    "Plus Jakarta Sans",
+                    -apple-system,
+                    BlinkMacSystemFont,
+                    sans-serif;
+                color: var(--text);
+                font-size: 8.5pt;
+                line-height: 1.45;
+                background: #fff;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .page {
+                width: 210mm;
+                height: 297mm;
+                margin: 0 auto;
+                background: #fff;
+                overflow: hidden;
+                display: flex;
+            }
+
+            .sidebar {
+                width: 70mm;
+                background: var(--ink);
+                color: var(--sidebar-text);
+                padding: 22px 16px;
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .profile {
+                text-align: center;
+            }
+
+            .avatar {
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                object-fit: cover;
+                border: 2px solid var(--sidebar-line);
+                margin-bottom: 8px;
+                background: var(--ink-soft);
+            }
+
+            .profile-name {
+                font-size: 13.5pt;
+                font-weight: 800;
+                color: #f8fafc;
+                letter-spacing: -0.5px;
+                line-height: 1.15;
+            }
+
+            .profile-role {
+                font-size: 7.5pt;
+                font-weight: 600;
+                color: var(--accent);
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                margin-top: 3px;
+            }
+
+            .profile-location {
+                font-size: 7.5pt;
+                color: var(--sidebar-muted);
+                margin-top: 4px;
+            }
+
+            .sidebar-section {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .sidebar-title {
+                font-size: 7.5pt;
+                font-weight: 700;
+                color: #f8fafc;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                padding-bottom: 4px;
+                border-bottom: 1px solid var(--sidebar-line);
+            }
+
+            .contact-item {
+                font-size: 7.5pt;
+                color: var(--sidebar-muted);
+                line-height: 1.35;
+            }
+
+            .contact-item strong {
+                display: block;
+                color: #e2e8f0;
+                font-size: 7pt;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                margin-bottom: 1px;
+            }
+
+            .contact-item a {
+                color: var(--sidebar-muted);
+                text-decoration: none;
+            }
+
+            .edu-school {
+                font-weight: 700;
+                color: #e2e8f0;
+                font-size: 8.5pt;
+            }
+
+            .edu-detail {
+                font-size: 7.5pt;
+                color: var(--sidebar-muted);
+                margin-top: 1px;
+            }
+
+            .edu-gpa {
+                font-size: 7.5pt;
+                color: var(--accent);
+                font-weight: 600;
+                margin-top: 2px;
+            }
+
+            .skill-tag {
+                display: inline-block;
+                background: var(--tag-bg);
+                color: var(--accent);
+                font-size: 7pt;
+                font-weight: 600;
+                padding: 2px 6px;
+                border-radius: 3px;
+                margin: 0 3px 3px 0;
+                border: 1px solid var(--tag-border);
+            }
+
+            .skill-group {
+                margin-bottom: 2px;
+            }
+
+            .skill-group-label {
+                font-size: 7pt;
+                font-weight: 700;
+                color: #5eead4;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                margin-bottom: 3px;
+                margin-top: 5px;
+                opacity: 0.7;
+            }
+
+            .skill-group-label:first-child {
+                margin-top: 0;
+            }
+
+            .main {
+                flex: 1;
+                padding: 22px 20px;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .main-header {
+                border-bottom: 2px solid var(--ink);
+                padding-bottom: 8px;
+            }
+
+            .main-name {
+                font-size: 21pt;
+                font-weight: 800;
+                color: var(--ink);
+                letter-spacing: -1px;
+                line-height: 1.1;
+            }
+
+            .main-role {
+                font-size: 9pt;
+                font-weight: 600;
+                color: var(--accent-strong);
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                margin-top: 3px;
+            }
+
+            .bio {
+                font-size: 8.5pt;
+                color: var(--text-soft);
+                line-height: 1.5;
+            }
+
+            .portfolio-pill {
+                display: inline-flex;
+                align-items: center;
+                gap: 4px;
+                background: var(--ink);
+                color: #fff;
+                font-size: 7.5pt;
+                font-weight: 600;
+                padding: 4px 10px;
+                border-radius: 20px;
+                text-decoration: none;
+                margin-top: 6px;
+            }
+
+            .section-title {
+                font-size: 10pt;
+                font-weight: 800;
+                color: var(--ink);
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                margin-bottom: 1px;
+            }
+
+            .section-title::after {
+                content: "";
+                flex: 1;
+                height: 1.5px;
+                background: var(--line);
+                min-width: 20px;
+            }
+
+            .section {
+                display: flex;
+                flex-direction: column;
+                gap: 7px;
+            }
+
+            .item {
+                display: flex;
+                flex-direction: column;
+                gap: 1px;
+            }
+
+            .item-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: baseline;
+                gap: 6px;
+            }
+
+            .item-company {
+                font-weight: 700;
+                font-size: 9.5pt;
+                color: #1e293b;
+            }
+
+            .item-date {
+                font-size: 7pt;
+                color: var(--muted);
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                white-space: nowrap;
+            }
+
+            .item-role {
+                font-size: 8.5pt;
+                font-weight: 600;
+                color: var(--accent-strong);
+            }
+
+            .item-role .tag {
+                font-size: 7pt;
+                color: var(--muted);
+                font-weight: 500;
+                margin-left: 3px;
+            }
+
+            .item-desc {
+                font-size: 8.5pt;
+                color: var(--text-soft);
+                line-height: 1.4;
+            }
+
+            .projects-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+
+            .project-card {
+                background: var(--card);
+                border: 1px solid #ccfbf1;
+                border-radius: 5px;
+                padding: 9px;
+                display: flex;
+                flex-direction: column;
+                gap: 3px;
+            }
+
+            .project-title {
+                font-weight: 700;
+                font-size: 9pt;
+                color: #1e293b;
+            }
+
+            .project-meta {
+                font-size: 7pt;
+                color: var(--muted);
+                font-weight: 500;
+            }
+
+            .project-desc {
+                font-size: 8pt;
+                color: var(--text-soft);
+                line-height: 1.35;
+            }
+
+            .project-tags {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 2px;
+                margin-top: 2px;
+            }
+
+            .project-tag {
+                font-size: 6.5pt;
+                background: #ccfbf1;
+                color: var(--accent-strong);
+                padding: 1px 5px;
+                border-radius: 3px;
+                font-weight: 500;
+            }
+
+            .divider {
+                height: 1px;
+                background: var(--line);
+            }
+
+
+            .print-bar {
+                position: fixed;
+                top: 12px;
+                right: 12px;
+                z-index: 50;
+                display: flex;
+                gap: 8px;
+            }
+
+            .print-btn {
+                appearance: none;
+                border: 0;
+                border-radius: 999px;
+                background: #0c1f1c;
+                color: #fff;
+                font: 600 12px/1 "Plus Jakarta Sans", sans-serif;
+                padding: 10px 14px;
+                cursor: pointer;
+                box-shadow: 0 8px 24px rgba(15, 23, 42, 0.18);
+            }
+
+            .print-btn.secondary {
+                background: #fff;
+                color: #0c1f1c;
+                border: 1px solid #ccfbf1;
+            }
+
+            @media print {
+                .print-bar {
+                    display: none !important;
+                }
+
+                html,
+                body,
+                .page {
+                    width: 210mm;
+                    height: 297mm;
+                    margin: 0;
+                    overflow: hidden;
+                }
+            }
+        </style>
+        <base target="_blank" />
+    </head>
+    <body>
+
+        <div class="print-bar">
+            <button type="button" class="print-btn secondary" onclick="window.close()">Close</button>
+            <button type="button" class="print-btn" onclick="window.print()">Save as PDF</button>
+        </div>
+
+        <div class="page">
+            <aside class="sidebar">
+                <div class="profile">
+                    <img
+                        src="https://ndaru-portfolio.web.app/assets/img/My-Avatar.webp"
+                        alt="Ndaru L Santosa"
+                        class="avatar"
+                    />
+                    <div class="profile-name">Ndaru L<br />Santosa</div>
+                    <div class="profile-role">UI/UX Designer</div>
+                    <div class="profile-location">Tangerang, Indonesia</div>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Contact</div>
+                    <div class="contact-item">
+                        <strong>Portfolio</strong>
+                        <a href="https://ndaru-portfolio.web.app/"
+                            >ndaru-portfolio.web.app</a
+                        >
+                    </div>
+                    <div class="contact-item">
+                        <strong>Dribbble</strong>
+                        <a href="https://dribbble.com/ndaru244"
+                            >dribbble.com/ndaru244</a
+                        >
+                    </div>
+                    <div class="contact-item">
+                        <strong>LinkedIn</strong>
+                        <a
+                            href="https://linkedin.com/in/ndaru-langgeng-santosa-2b926b1a6/"
+                            >linkedin.com/in/ndaru-langgeng-santosa</a
+                        >
+                    </div>
+                    <div class="contact-item">
+                        <strong>GitHub</strong>
+                        <a href="https://github.com/Ndaru244"
+                            >github.com/Ndaru244</a
+                        >
+                    </div>
+                    <div class="contact-item">
+                        <strong>Email</strong>
+                        ndarulanggeng110@gmail.com
+                    </div>
+                    <div class="contact-item">
+                        <strong>Phone</strong>
+                        +62 856 9378 4773
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Education</div>
+                    <div class="edu-school">Esa Unggul University</div>
+                    <div class="edu-detail">S1 Information Systems</div>
+                    <div class="edu-gpa">
+                        2019 — 2024 &bull; GPA 3.56 / 4.00
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Skills</div>
+                    <div class="skill-group">
+                        <div class="skill-group-label">UX</div>
+                        <span class="skill-tag">Prototyping</span>
+                        <span class="skill-tag">Wireframing</span>
+                        <span class="skill-tag">User Research</span>
+                        <span class="skill-tag">Usability Testing</span>
+                    </div>
+                    <div class="skill-group">
+                        <div class="skill-group-label">Design</div>
+                        <span class="skill-tag">Figma</span>
+                        <span class="skill-tag">UI Design</span>
+                        <span class="skill-tag">Design System</span>
+                        <span class="skill-tag">Interaction Design</span>
+                    </div>
+                    <div class="skill-group">
+                        <div class="skill-group-label">Tech</div>
+                        <span class="skill-tag">HTML/CSS</span>
+                        <span class="skill-tag">Next.js</span>
+                        <span class="skill-tag">PHP</span>
+                        <span class="skill-tag">CodeIgniter</span>
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">Flutter</span>
+                    </div>
+                </div>
+            </aside>
+
+            <main class="main">
+                <div class="main-header">
+                    <div class="main-name">Ndaru L Santosa</div>
+                    <div class="main-role">
+                        UI/UX Designer &amp; Software Engineer
+                    </div>
+                </div>
+
+                <div class="bio">
+                    I bridge user-centered design and robust software
+                    engineering. With a full-stack background, I create
+                    intuitive interfaces grounded in research and optimized for
+                    performance, then turn them into scalable products.
+                    <a
+                        href="https://ndaru-portfolio.web.app/"
+                        class="portfolio-pill"
+                        >View Portfolio &rarr;</a
+                    >
+                </div>
+
+                <div class="section">
+                    <div class="section-title">Experience</div>
+
+
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-company"
+                                >PT Tarung Bersama Teknologi</span
+                            >
+                            <span class="item-date">Jan 2026 — Apr 2026</span>
+                        </div>
+                        <div class="item-role">
+                            Frontend Engineer
+                            <span class="tag">&bull; Full-time</span>
+                        </div>
+                        <p class="item-desc">
+                            Addressed fragmented operational workflows in
+                            mining/offshore by building clearer UI modules for
+                            offshore reporting, production cost, and equipment
+                            timesheets (Next.js, React, TypeScript).
+                        </p>
+                    </div>
+
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-company"
+                                >SDN Sunter Agung 12 PG</span
+                            >
+                            <span class="item-date">Dec 2025 — Jan 2026</span>
+                        </div>
+                        <div class="item-role">
+                            Web Developer
+                            <span class="tag">&bull; Contract</span>
+                        </div>
+                        <p class="item-desc">
+                            Engineered Sadulas, an integrated school information
+                            system with a public portal, secure admin dashboard,
+                            digital correspondence, and student records to
+                            streamline staff workflows.
+                        </p>
+                    </div>
+
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-company"
+                                >PT Solvera Global Teknologi</span
+                            >
+                            <span class="item-date">Oct 2025 — Dec 2025</span>
+                        </div>
+                        <div class="item-role">
+                            UI/UX Designer
+                            <span class="tag">&bull; Internship</span>
+                        </div>
+                        <p class="item-desc">
+                            Redesigned Solvera.id's corporate website,
+                            modernizing its visual identity, mobile
+                            responsiveness, and information architecture to
+                            improve engagement.
+                        </p>
+                    </div>
+
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-company"
+                                >PT Bhinneka Alam Nusantara</span
+                            >
+                            <span class="item-date">Sep 2022 — Oct 2024</span>
+                        </div>
+                        <div class="item-role">
+                            UI/UX Designer
+                            <span class="tag">&bull; Full-time</span>
+                        </div>
+                        <p class="item-desc">
+                            Designed mobile UI patterns, interactive prototypes,
+                            and usability tests that improved task completion by
+                            25%, while leading design-system scalability.
+                        </p>
+                    </div>
+
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-company">Crooked Indonesia</span>
+                            <span class="item-date">Mar 2022 — Aug 2022</span>
+                        </div>
+                        <div class="item-role">
+                            Web Developer Intern
+                            <span class="tag">&bull; Internship</span>
+                        </div>
+                        <p class="item-desc">
+                            Developed a responsive catalog website with PHP,
+                            CodeIgniter, and Bootstrap, maintaining zero
+                            critical downtime throughout the six-month contract.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="section">
+                    <div class="section-title">Selected Case Studies</div>
+                    <div class="projects-grid">
+                        <div class="project-card">
+                            <div class="project-title">SIALAM App</div>
+                            <div class="project-meta">
+                                PT Bhinneka Alam Nusantara &bull; Mobile &bull;
+                                UI/UX
+                            </div>
+                            <p class="project-desc">
+                                SIALAM simplifies mountain-climbing registration
+                                for hikers and operators. Users can create teams
+                                and invite verified members without repeatedly
+                                entering personal data.
+                            </p>
+                            <div class="project-tags">
+                                <span class="project-tag">Figma</span>
+                                <span class="project-tag">Design System</span>
+                                <span class="project-tag">Prototyping</span>
+                                <span class="project-tag">Mobile Apps</span>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-title">
+                                Solvera Corporate Revamp
+                            </div>
+                            <div class="project-meta">
+                                PT Solvera Global Teknologi &bull; Web &bull;
+                                UI/UX
+                            </div>
+                            <p class="project-desc">
+                                A corporate website transformation aligning
+                                Solvera.id's digital identity with its position
+                                as a global technology partner through UI
+                                auditing, a new visual language, and clearer
+                                information architecture.
+                            </p>
+                            <div class="project-tags">
+                                <span class="project-tag">Figma</span>
+                                <span class="project-tag">Design System</span>
+                                <span class="project-tag">Prototyping</span>
+                                <span class="project-tag"
+                                    >Heuristic Evaluation</span
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    
+        <script>
+            (function () {
+                var params = new URLSearchParams(window.location.search);
+                if (params.get("print") !== "1") return;
+                window.addEventListener("load", function () {
+                    setTimeout(function () {
+                        window.print();
+                    }, 250);
+                });
+            })();
+        </script>
+
+    </body>
+</html>

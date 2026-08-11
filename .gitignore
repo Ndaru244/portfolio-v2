@@ -54,3 +54,4 @@ firestore-debug.log*
 # 7. LOCAL-ONLY CMS (not part of public static site)
 /src/app/admin/
 /src/.admin-temp/
+.cursor

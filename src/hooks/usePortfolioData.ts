@@ -61,9 +61,9 @@ function getSeedPortfolioData(): PortfolioData {
       ...skill,
       id: `skill-${index}`,
     })),
-    experience: EXPERIENCE_DATA.map((item, index) => ({
-      ...item,
-      id: `exp-${index}`,
+    experience: EXPERIENCE_DATA.map((item) => ({
+      id: item.id,
+      ...item.data,
     })),
     certificates: CERTIFICATES_DATA.map((item, index) => ({
       ...item,

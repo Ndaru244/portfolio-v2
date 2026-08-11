@@ -15,12 +15,12 @@ interface Props {
 const resumes = [
   {
     key: "uiux" as const,
-    href: "/cv-ui.pdf",
+    href: "/cv/cv-uiux.html?print=1",
     icon: Palette,
   },
   {
     key: "softwareEngineer" as const,
-    href: "/cv-dev.pdf",
+    href: "/cv/cv-dev.html?print=1",
     icon: Code2,
   },
 ];

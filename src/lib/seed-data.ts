@@ -81,86 +81,127 @@ export const SKILLS_DATA: Omit<Skill, "id">[] = [
   { name: "Flutter", category: "tech", order: 6 },
 ];
 
-export const EXPERIENCE_DATA: Omit<Experience, "id">[] = [
+export const EXPERIENCE_DATA: {
+  id: string;
+  data: Omit<Experience, "id">;
+}[] = [
   {
-    company: "SDN Sunter Agung 12 PG",
-    role: "Web Developer",
-    period: "Des 2025 - Jan 2026",
-    description:
-      "Engineered an integrated school information system (Sadulas) featuring a public portal and a secure admin dashboard. Developed scalable modules for dynamic content management, digital letter processing, and student record tracking (Klapper), significantly optimizing administrative workflows and reducing cognitive load for staff.",
-    type: "Contract",
-    order: 0,
-    translations: {
-      id: {
-        role: "Web Developer",
-        period: "Des 2025 - Jan 2026",
-        description:
-          "Mengembangkan sistem informasi sekolah terintegrasi Sadulas yang mencakup portal publik, dashboard admin, manajemen surat digital, dan arsip data siswa untuk menyederhanakan alur kerja staf.",
-      },
-      en: {
-        role: "Web Developer",
-        period: "Dec 2025 - Jan 2026",
-        description:
-          "Engineered Sadulas, an integrated school information system with a public portal, secure admin dashboard, digital correspondence, and student records to streamline staff workflows.",
+    id: "tarung-bersama-teknologi",
+    data: {
+      company: "PT Tarung Bersama Teknologi",
+      role: "Frontend Engineer",
+      period: "Jan 2026 - Apr 2026",
+      description:
+        "Built frontend modules for ArCore, an enterprise Mining & Offshore Operations Management platform using Next.js 16, React 19, and TypeScript. Delivered Data Offshore reporting, Production & Cost, and Timesheet & Equipment interfaces with Redux Toolkit and interactive dashboards.",
+      type: "work",
+      order: 0,
+      translations: {
+        id: {
+          role: "Frontend Engineer",
+          period: "Jan 2026 - Apr 2026",
+          description:
+            "Membangun modul frontend ArCore, platform operasi mining & offshore berbasis Next.js 16, React 19, dan TypeScript. Mengembangkan UI Data Offshore, Production & Cost, serta Timesheet & Equipment dengan Redux Toolkit dan dashboard interaktif.",
+        },
+        en: {
+          role: "Frontend Engineer",
+          period: "Jan 2026 - Apr 2026",
+          description:
+            "Built frontend modules for ArCore, an enterprise Mining & Offshore Operations Management platform using Next.js 16, React 19, and TypeScript. Delivered Data Offshore reporting, Production & Cost, and Timesheet & Equipment interfaces with Redux Toolkit and interactive dashboards.",
+        },
       },
     },
   },
   {
-    company: "PT. Solvera Global Teknologi",
-    role: "UI/UX Designer",
-    period: "Oct 2025 - Dec 2025",
-    description:
-      "Executed a comprehensive revamp of the solvera.id corporate website. Modernized the visual identity, optimized mobile responsiveness, and improved information architecture to enhance user engagement and site performance.",
-    type: "work",
-    order: 1,
-    translations: {
-      id: {
-        description:
-          "Merancang ulang website korporat Solvera.id, memodernisasi identitas visual, responsivitas mobile, dan arsitektur informasi untuk meningkatkan engagement.",
-      },
-      en: {
-        description:
-          "Redesigned Solvera.id's corporate website, modernizing its visual identity, mobile responsiveness, and information architecture to improve engagement.",
-      },
-    },
-  },
-  {
-    company: "PT. Bhinneka Alam Nusantara",
-    role: "UI/UX Designer",
-    period: "Sep 2022 - Oct 2024",
-    description:
-      "Designed mobile UI patterns, created interactive prototypes, and conducted usability testing which improved task completion by 25%. Led the design system scalability.",
-    type: "work",
-    order: 2,
-    translations: {
-      id: {
-        description:
-          "Merancang pola UI mobile, prototype interaktif, dan usability testing yang meningkatkan penyelesaian tugas sebesar 25%, sekaligus memimpin skalabilitas design system.",
-      },
-      en: {
-        description:
-          "Designed mobile UI patterns, interactive prototypes, and usability tests that improved task completion by 25%, while leading design-system scalability.",
+    id: "sdn-sunter-agung-12",
+    data: {
+      company: "SDN Sunter Agung 12 PG",
+      role: "Web Developer",
+      period: "Des 2025 - Jan 2026",
+      description:
+        "Engineered an integrated school information system (Sadulas) featuring a public portal and a secure admin dashboard. Developed scalable modules for dynamic content management, digital letter processing, and student record tracking (Klapper), significantly optimizing administrative workflows and reducing cognitive load for staff.",
+      type: "Contract",
+      order: 1,
+      translations: {
+        id: {
+          role: "Web Developer",
+          period: "Des 2025 - Jan 2026",
+          description:
+            "Mengembangkan sistem informasi sekolah terintegrasi Sadulas yang mencakup portal publik, dashboard admin, manajemen surat digital, dan arsip data siswa untuk menyederhanakan alur kerja staf.",
+        },
+        en: {
+          role: "Web Developer",
+          period: "Dec 2025 - Jan 2026",
+          description:
+            "Engineered Sadulas, an integrated school information system with a public portal, secure admin dashboard, digital correspondence, and student records to streamline staff workflows.",
+        },
       },
     },
   },
   {
-    company: "Crooked Indonesia",
-    role: "Web Developer Intern",
-    period: "Mar 2022 - Aug 2022",
-    description:
-      "Developed responsive catalog website using PHP (CodeIgniter) and Bootstrap. Zero critical downtime during the 6-month contract.",
-    type: "internship",
-    order: 3,
-    translations: {
-      id: {
-        period: "Mar 2022 - Agu 2022",
-        description:
-          "Mengembangkan website katalog responsif dengan PHP, CodeIgniter, dan Bootstrap tanpa downtime kritis selama kontrak enam bulan.",
+    id: "solvera-global-teknologi",
+    data: {
+      company: "PT Solvera Global Teknologi",
+      role: "UI/UX Designer",
+      period: "Oct 2025 - Dec 2025",
+      description:
+        "Executed a comprehensive revamp of the solvera.id corporate website. Modernized the visual identity, optimized mobile responsiveness, and improved information architecture to enhance user engagement and site performance.",
+      type: "internship",
+      order: 2,
+      translations: {
+        id: {
+          description:
+            "Merancang ulang website korporat Solvera.id, memodernisasi identitas visual, responsivitas mobile, dan arsitektur informasi untuk meningkatkan engagement.",
+        },
+        en: {
+          description:
+            "Redesigned Solvera.id's corporate website, modernizing its visual identity, mobile responsiveness, and information architecture to improve engagement.",
+        },
       },
-      en: {
-        period: "Mar 2022 - Aug 2022",
-        description:
-          "Developed a responsive catalog website with PHP, CodeIgniter, and Bootstrap, maintaining zero critical downtime throughout the six-month contract.",
+    },
+  },
+  {
+    id: "bhinneka-alam-nusantara",
+    data: {
+      company: "PT Bhinneka Alam Nusantara",
+      role: "UI/UX Designer",
+      period: "Sep 2022 - Oct 2024",
+      description:
+        "Designed mobile UI patterns, created interactive prototypes, and conducted usability testing which improved task completion by 25%. Led the design system scalability.",
+      type: "work",
+      order: 3,
+      translations: {
+        id: {
+          description:
+            "Merancang pola UI mobile, prototype interaktif, dan usability testing yang meningkatkan penyelesaian tugas sebesar 25%, sekaligus memimpin skalabilitas design system.",
+        },
+        en: {
+          description:
+            "Designed mobile UI patterns, interactive prototypes, and usability tests that improved task completion by 25%, while leading design-system scalability.",
+        },
+      },
+    },
+  },
+  {
+    id: "crooked-indonesia",
+    data: {
+      company: "Crooked Indonesia",
+      role: "Web Developer Intern",
+      period: "Mar 2022 - Aug 2022",
+      description:
+        "Developed responsive catalog website using PHP (CodeIgniter) and Bootstrap. Zero critical downtime during the 6-month contract.",
+      type: "internship",
+      order: 4,
+      translations: {
+        id: {
+          period: "Mar 2022 - Agu 2022",
+          description:
+            "Mengembangkan website katalog responsif dengan PHP, CodeIgniter, dan Bootstrap tanpa downtime kritis selama kontrak enam bulan.",
+        },
+        en: {
+          period: "Mar 2022 - Aug 2022",
+          description:
+            "Developed a responsive catalog website with PHP, CodeIgniter, and Bootstrap, maintaining zero critical downtime throughout the six-month contract.",
+        },
       },
     },
   },
@@ -168,24 +209,14 @@ export const EXPERIENCE_DATA: Omit<Experience, "id">[] = [
 
 export const CERTIFICATES_DATA: Omit<Certificate, "id">[] = [
   {
-    title: "Google UX Design Certificate",
-    issuer: "Coursera / Google",
+    title: "Test Layout",
+    issuer: "Test / Test",
     date: "2023",
     credentialUrl: "https://coursera.org",
     order: 0,
     translations: {
-      id: { title: "Sertifikat Google UX Design" },
-      en: { title: "Google UX Design Certificate" },
-    },
-  },
-  {
-    title: "Responsive Web Design",
-    issuer: "freeCodeCamp",
-    date: "2022",
-    order: 1,
-    translations: {
-      id: { title: "Desain Web Responsif" },
-      en: { title: "Responsive Web Design" },
+      id: { title: "Test Layout" },
+      en: { title: "Test Layout" },
     },
   },
 ];
@@ -209,7 +240,7 @@ export const TESTIMONIALS_DATA: Omit<Testimonial, "id">[] = [
   {
     name: "Product Stakeholder",
     role: "Project Lead",
-    company: "PT. Bhinneka Alam Nusantara",
+    company: "PT Bhinneka Alam Nusantara",
     quote:
       "Ndaru delivered clear design systems and prototypes that made engineering handoff significantly faster.",
     order: 0,
@@ -218,10 +249,10 @@ export const TESTIMONIALS_DATA: Omit<Testimonial, "id">[] = [
 
 export const BLOGS_DATA: Omit<BlogPost, "id">[] = [
   {
-    title: "Designing for Administrative Workflows",
-    slug: "designing-for-administrative-workflows",
-    excerpt: "Lessons from building school information systems with real staff constraints.",
-    content: "Draft post — manage via CMS. Public blog routes arrive in a later phase.",
+    title: "Draft post",
+    slug: "draft-post",
+    excerpt: "",
+    content: "",
     published: false,
     order: 0,
   },
@@ -230,7 +261,7 @@ export const BLOGS_DATA: Omit<BlogPost, "id">[] = [
 export const MEDIA_DATA: Omit<MediaItem, "id">[] = [
   {
     name: "Portfolio OG Image",
-    url: "/assets/img/preview/preview.webp",
+    url: "",
     type: "image",
     alt: "Portfolio preview",
   },
@@ -245,25 +276,25 @@ export const MEDIA_DATA: Omit<MediaItem, "id">[] = [
 export const NAVIGATION_DATA: Navigation = {
   items: [
     {
-      id: "projects",
-      label: "Projects",
-      href: "#projects",
-      order: 0,
-      translations: { id: { label: "Proyek" }, en: { label: "Projects" } },
-    },
-    {
       id: "about",
       label: "About",
       href: "#about",
-      order: 1,
+      order: 0,
       translations: { id: { label: "Tentang" }, en: { label: "About" } },
     },
     {
       id: "experience",
       label: "Experience",
       href: "#experience",
-      order: 2,
+      order: 1,
       translations: { id: { label: "Pengalaman" }, en: { label: "Experience" } },
+    },
+    {
+      id: "projects",
+      label: "Projects",
+      href: "#projects",
+      order: 2,
+      translations: { id: { label: "Proyek" }, en: { label: "Projects" } },
     },
     {
       id: "skills",
@@ -285,7 +316,7 @@ export const NAVIGATION_DATA: Navigation = {
 export const SETTINGS_DATA: Settings = {
   siteUrl: "https://ndaru-portfolio.web.app",
   defaultTheme: "dark",
-  showCertificates: true,
+  showCertificates: false,
   showTechStack: true,
   showTestimonials: false,
   contactEmail: "mailto:ndarulanggeng110@gmail.com",
@@ -302,7 +333,7 @@ export const SEO_DATA: SeoConfig = {
     "Web Developer Indonesia",
     "Next.js Portfolio",
   ],
-  ogImage: "/assets/img/preview/preview.webp",
+  ogImage: "",
   canonicalBase: "https://ndaru-portfolio.web.app",
   twitterHandle: "@ndaruls",
   locale: "id_ID",
@@ -310,17 +341,125 @@ export const SEO_DATA: SeoConfig = {
 
 export const RESUME_DATA: Resume = {
   options: [
-    { id: "uiux", label: "UI/UX Designer", url: "/cv-ui.pdf" },
+    { id: "uiux", label: "UI/UX Designer", url: "/cv/cv-uiux.html?print=1" },
     {
       id: "software-engineer",
       label: "Software Engineer",
-      url: "/cv-dev.pdf",
+      url: "/cv/cv-dev.html?print=1",
     },
   ],
-  updatedAt: "2026-01-01",
+  updatedAt: "2026-08-11",
 };
 
 export const PROJECTS_DATA: { id: string; data: Project }[] = [
+  {
+    id: "arcore",
+    data: {
+      id: "arcore",
+      title: "ArCore",
+      industry: "Mining / Offshore",
+      platform: "Web",
+      discipline: "Frontend",
+      client: "PT Tarung Bersama Teknologi",
+      role: "Frontend Engineer",
+      status: "Completed",
+      order: 0,
+      featured: true,
+      overview: {
+        title: "Project Overview",
+        description:
+          "ArCore adalah platform operasi enterprise untuk industri pertambangan dan lepas pantai. Kontribusi frontend: membangun antarmuka modul Data Offshore, Production & Cost, serta Timesheet & Equipment dengan Next.js 16, React 19, dan TypeScript.",
+      },
+      problem:
+        "Pengguna operasi membutuhkan antarmuka yang konsisten dan mudah digunakan untuk pelaporan lapangan, biaya, dan peralatan lintas banyak halaman modul.",
+      research:
+        "Pemetaan kebutuhan UI bersama stakeholder untuk alur form, tabel, filter, dan dashboard pada modul Data Offshore, Production & Cost, dan Equipment Timesheet.",
+      constraints:
+        "Banyak modul UI dalam satu aplikasi enterprise, state lintas halaman yang kompleks, serta kebutuhan komponen tabel/form/chart yang reusable.",
+      solution:
+        "Membangun frontend enterprise Next.js 16 dengan komponen UI modular, state management Redux Toolkit, serta dashboard visualisasi interaktif untuk modul operasional utama.",
+      engineeringDecision:
+        "Next.js App Router + Redux Toolkit untuk state UI global, Axios untuk pemanggilan data, dan ApexCharts/ECharts untuk visualisasi dashboard.",
+      responsibilities:
+        "Frontend engineering: page/module UI, komponen tabel & form, state management, dan dashboard visualisasi.",
+      challenges:
+        "Menjaga konsistensi UX dan performa UI saat banyak alur operasional digabung dalam satu aplikasi frontend.",
+      lessonsLearned:
+        "Struktur modul UI yang jelas lebih berdampak daripada menambah ornamen visual di aplikasi enterprise.",
+      impact: [
+        { label: "UI Modules", value: "Offshore, Cost, Equipment" },
+        { label: "Stack", value: "Next.js + Redux Toolkit" },
+      ],
+      duration: "4 Months",
+      team: { size: 4, role: "Frontend Engineer" },
+      links: {
+        live: null,
+        github: null,
+        figma: null,
+      },
+      sections: [
+        {
+          id: "key-modules",
+          title: "Frontend Modules",
+          type: "list",
+          layout: "grid",
+          items: [
+            {
+              label: "Data Offshore UI",
+              value:
+                "Antarmuka form dan pelaporan LKH, LKS, dan LPS: input koordinat, cuaca, dan data kapal untuk tim maritime/survey.",
+            },
+            {
+              label: "Production & Cost UI",
+              value:
+                "Halaman monitoring produksi dan biaya: tabel throughput, konsumsi BBM/listrik, penyesuaian kurs, serta tampilan cost code.",
+            },
+            {
+              label: "Timesheet & Equipment UI",
+              value:
+                "Antarmuka timesheet operator dan status alat berat, termasuk tampilan downtime berdasarkan reason code & equipment group.",
+            },
+          ],
+        },
+        {
+          id: "tech-architecture",
+          title: "Frontend Architecture",
+          type: "grid",
+          layout: "grid",
+          items: [
+            {
+              label: "Core Stack",
+              value:
+                "• Next.js 16 (App Router)\n• React 19\n• TypeScript",
+            },
+            {
+              label: "UI State & Data Fetching",
+              value:
+                "• Redux Toolkit / Persist\n• Axios\n• TanStack Table",
+            },
+            {
+              label: "UI & Visualization",
+              value:
+                "• Bootstrap 5 / Reactstrap\n• ApexCharts / ECharts\n• Remix Icons / Feather Icons",
+            },
+          ],
+        },
+      ],
+      techStack: [
+        tech("Next.js", "nextjs"),
+        tech("React", "react"),
+        tech("TypeScript", "typescript"),
+        tech("Redux Toolkit", "redux"),
+        tech("Bootstrap", "bootstrap"),
+        tech("ApexCharts", "apexcharts"),
+      ],
+      thumbnail: "/assets/img/preview/Arcore-Login.webp",
+      gallery: [
+        "/assets/img/preview/Arcore-Login.webp",
+        "/assets/img/preview/Arcore-Dashboard.webp",
+      ],
+    },
+  },
   {
     id: "sadulas",
     data: {
@@ -332,7 +471,7 @@ export const PROJECTS_DATA: { id: string; data: Project }[] = [
       client: "SDN Sunter Agung 12 PG",
       role: "Web Developer",
       status: "Completed",
-      order: 0,
+      order: 1,
       featured: true,
       overview: {
         title: "Executive Summary",
@@ -450,7 +589,7 @@ export const PROJECTS_DATA: { id: string; data: Project }[] = [
       client: "PT Solvera Global Teknologi",
       role: "UI/UX Designer",
       status: "Completed",
-      order: 1,
+      order: 2,
       featured: true,
       overview: {
         title: "Project Overview",
@@ -536,10 +675,10 @@ export const PROJECTS_DATA: { id: string; data: Project }[] = [
       industry: "Outdoor / Tourism",
       platform: "Mobile",
       discipline: "UI/UX",
-      client: "PT. Bhinneka Alam Nusantara",
+      client: "PT Bhinneka Alam Nusantara",
       role: "UI/UX Designer",
       status: "Completed",
-      order: 2,
+      order: 3,
       featured: true,
       overview: {
         title: "Executive Summary",
@@ -621,7 +760,7 @@ export const PROJECTS_DATA: { id: string; data: Project }[] = [
       client: "Omhut Parkopi",
       role: "Web Developer",
       status: "Completed",
-      order: 3,
+      order: 4,
       featured: true,
       overview: {
         title: "Project Context",
@@ -702,7 +841,7 @@ export const PROJECTS_DATA: { id: string; data: Project }[] = [
       client: "Crooked Indonesia",
       role: "Web Developer",
       status: "Archived",
-      order: 4,
+      order: 5,
       featured: false,
       overview: {
         title: "Project Overview",
@@ -783,7 +922,7 @@ export const PROJECTS_DATA: { id: string; data: Project }[] = [
       client: "PPOB & Counter Owners",
       role: "Lead Developer & UI/UX Designer",
       status: "Live",
-      order: 5,
+      order: 6,
       featured: true,
       overview: {
         title: "Project Overview",
@@ -858,6 +997,85 @@ export const PROJECTS_DATA: { id: string; data: Project }[] = [
 ];
 
 const PROJECT_EN_TRANSLATIONS: Record<string, ProjectTranslation> = {
+  arcore: {
+    industry: "Mining / Offshore",
+    platform: "Web",
+    discipline: "Frontend",
+    status: "Completed",
+    overview: {
+      title: "Project Overview",
+      description:
+        "ArCore is an enterprise operations platform for mining and offshore teams. Frontend contribution focused on building UI for Data Offshore, Production & Cost, and Timesheet & Equipment modules with Next.js 16, React 19, and TypeScript.",
+    },
+    problem:
+      "Operations users needed consistent, easy-to-use interfaces for field reporting, cost views, and equipment workflows across many module pages.",
+    research:
+      "Mapped UI requirements with stakeholders for forms, tables, filters, and dashboards across Data Offshore, Production & Cost, and Equipment Timesheet.",
+    constraints:
+      "Many UI modules in one enterprise app, complex cross-page state, and a need for reusable table, form, and chart components.",
+    solution:
+      "Built a Next.js 16 enterprise frontend with modular UI components, Redux Toolkit state management, and interactive visualization dashboards for core operational modules.",
+    engineeringDecision:
+      "Used Next.js App Router with Redux Toolkit for global UI state, Axios for data fetching, and ApexCharts/ECharts for dashboard visualization.",
+    responsibilities:
+      "Frontend engineering for module pages, table and form components, state management, and dashboard visualization.",
+    challenges:
+      "Keeping UX consistency and UI performance while combining many operational flows in one frontend application.",
+    lessonsLearned:
+      "Clear UI module structure has more impact than visual extras in enterprise frontend delivery.",
+    impact: [
+      { label: "UI Modules", value: "Offshore, Cost, Equipment" },
+      { label: "Stack", value: "Next.js + Redux Toolkit" },
+    ],
+    duration: "4 Months",
+    team: { size: 4, role: "Frontend Engineer" },
+    sections: [
+      {
+        id: "key-modules",
+        title: "Frontend Modules",
+        type: "list",
+        layout: "grid",
+        items: [
+          {
+            label: "Data Offshore UI",
+            value:
+              "Forms and reporting UI for LKH, LKS, and LPS, including coordinates, weather, and vessel fields for maritime/survey teams.",
+          },
+          {
+            label: "Production & Cost UI",
+            value:
+              "Monitoring pages for production and cost: throughput tables, fuel/electricity usage, currency adjustments, and cost-code views.",
+          },
+          {
+            label: "Timesheet & Equipment UI",
+            value:
+              "Operator timesheet and heavy-equipment status interfaces, including downtime views by reason code and equipment group.",
+          },
+        ],
+      },
+      {
+        id: "tech-architecture",
+        title: "Frontend Architecture",
+        type: "grid",
+        layout: "grid",
+        items: [
+          {
+            label: "Core Stack",
+            value: "Next.js 16 (App Router), React 19, and TypeScript.",
+          },
+          {
+            label: "UI State & Data Fetching",
+            value: "Redux Toolkit/Persist, Axios, and TanStack Table.",
+          },
+          {
+            label: "UI & Visualization",
+            value:
+              "Bootstrap 5/Reactstrap, ApexCharts/ECharts, and Remix/Feather icons.",
+          },
+        ],
+      },
+    ],
+  },
   sadulas: {
     industry: "Education",
     platform: "Web",
