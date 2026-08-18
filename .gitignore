@@ -38,7 +38,8 @@ firestore-debug.log*
 .DS_Store
 .vscode/
 .idea/
-.cursor/settings.json
+.cursor
+.zcode//settings.json
 *.suo
 *.ntvs
 *.njsproj
@@ -55,3 +56,4 @@ firestore-debug.log*
 /src/app/admin/
 /src/.admin-temp/
 .cursor
+.zcode/
